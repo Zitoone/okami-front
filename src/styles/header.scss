@@ -1,0 +1,110 @@
+@use './variables' as *;
+
+header {
+    width: 100%;  
+    background-color: $white;
+    position: sticky;
+    box-shadow: $box-shadow;
+    .container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $padding;
+
+
+
+  top: 0;
+  z-index: 1000;}
+
+  img {
+    height: 50px;
+  }
+
+  .navbar {
+    display: block;
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      gap: 2em;
+      font-weight: 600;
+      color: $brown;
+      margin: 0;
+      padding: 0;
+    }
+
+    li a.active {
+      color: $green;
+    }
+  }
+
+  .language-switcher {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      line-height: 0;
+      cursor: pointer;
+    }
+  }
+
+  .burger {
+    display: none;
+    cursor: pointer;
+  }
+}
+
+//Resposive design
+@media (max-width: $breakpoint-tablet) {
+  header {
+    justify-content: space-between;
+
+    .navbar {
+      display: none;
+      position: absolute;
+      top: 80px;
+      right: 0;
+      background: $white;
+      padding: 20px;
+      text-align: center;
+      z-index: 1001;
+
+      ul {
+        flex-direction: column;
+      }
+
+      &.open {
+        display: block !important;
+      }
+    }
+
+    .burger {
+      display: block;
+      color: $yellow;
+      font-size: 25px;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  header {
+    padding: 10px;
+
+    img {
+      height: 40px;
+    }
+
+    .language-switcher {
+      flex-direction: row;
+      gap: 5px;
+    }
+    .buyTickets {
+      display: none;
+    }
+  }
+}

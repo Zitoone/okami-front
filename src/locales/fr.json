@@ -1,7 +1,37 @@
 {
-  "welcome": "Bienvenue au festival OKAMI",
+  "header": "Bienvenue au festival OKAMI",
   "menu": {
     "home": "Accueil",
-    "about": "À propos"
+    "program": "Programmation",
+    "participate": "Participer",
+    "faq": "Infos pratiques",
+    "souvenir": "Souvenirs",
+    "contact": "Contact"
+  },
+  "btnTickets": "Acheter des billets",
+  "home": {
+  "title": "OKAMI Festival 2026 – Accueil",
+  "description": "Bienvenue sur le site officiel du Festival OKAMI 2026 à Saint Christaud du 10 au 14 Juin. Découvrez tous son univers, son programme et ses activités.",
+  "keywords": "OKAMI Festival 2026, accueil, programme, artistes, concerts, Saint Christaud",
+  "ogTitle": "OKAMI Festival 2026 – Accueil",
+  "ogDescription": "Toutes les infos pour profiter pleinement du Festival OKAMI 2026 du 10 au 14 Juin à Saint Christaud !"
+  },
+  "artistForm": {
+  "intro": "Nous sommes ravis de vous accueillir pour l'édition OKAMI 2026 ! Merci de remplir ce formulaire avec attention afin de pouvoir vous accueillir dans les meilleures conditions. Pour toute question complémentaire, n'hésitez pas à nous contacter : booking@okamifestival.com",
+  "title": "Formulaire Artiste",
+  "lastName": "Nom",
+  "firstName": "Prénom",
+  "email": "Email",
+  "phone": "Téléphone",
+  "projectName": "Nom du projet",
+  "invitName": "Nom sur l'invitation",
+  "infoRun": "Informations sur le déroulé",
+  "setupTimeInMin": "Temps d'installation (minutes)",
+  "soundcheck": "Besoin de balance son",
+  "record": "Enregistrement prévu",
+  "setup": "Backline / setup",
+  "artistComments": "Commentaires",
+  "pics": "Lien photo",
+  "submit": "Envoyer"
   }
 }

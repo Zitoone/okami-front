@@ -1,0 +1,19 @@
+# Exemple de fichier, a re définir plus tard
+
+# Autoriser tous les robots à explorer le site
+User-agent: *
+
+# Bloquer les zones techniques (non utiles pour Google)
+Disallow: /admin/
+Disallow: /back-office/
+Disallow: /api/
+
+# Autoriser les sections importantes
+Allow: /programme/
+Allow: /artistes/
+Allow: /billetterie/
+Allow: /faq/
+Allow: /contact/
+
+# Indiquer le plan du site (à générer automatiquement)
+Sitemap: https://okamifestival.com/sitemap.xml

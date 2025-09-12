@@ -1,0 +1,56 @@
+@use './variables' as *;
+
+body {
+  margin: 0;
+  font-family: $main-font;
+}
+main {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $padding;
+}
+a {
+  color: $brown;
+  text-decoration: none;
+  transition: color $transition-duration;
+  &:hover {
+    color: $green;
+  }
+}
+.btn {
+  font-family: $main-font;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: $border-radius;
+  padding: 10px 10px;
+  background-color: $yellow;
+  color: $white;
+  box-shadow: $box-shadow;
+  transition: background-color $transition-duration, box-shadow $transition-duration;
+  &:hover {
+    background-color: $green;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $title-font;
+  margin-top: 0;
+}
+p {
+  line-height: $base-line-height;
+}
+span {
+  color: red;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.container {
+  max-width: $max-width;
+  margin: auto;
+  padding: 0 $padding;
+}
