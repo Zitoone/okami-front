@@ -4,17 +4,14 @@ import { FaFacebook, FaInstagramSquare } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 
 function Footer(){
-    const { t} = useTranslation()
+    const {t} = useTranslation()
 
     return(
         <footer>
             <div className='container'>
                 <Link to="/"><img src='/logo.png' alt="Logo Okami festival" /></Link>
                 <div>
-                    <ul>
-                        <li><Link to="/legal-notice">{t("footer.legal")}</Link></li>
-                        <li><Link to="/privacy-policy">{t("footer.privacy")}</Link></li>
-                    </ul>
+                    <Link to="/legal">{t("footer.link")}</Link>
                     <p>© OKAMI Festival</p>
                 </div>
 

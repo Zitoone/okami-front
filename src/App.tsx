@@ -1,5 +1,6 @@
 import {Routes, Route} from 'react-router-dom'
 import Home from './pages/Home.tsx'
+import Legal from './pages/legal.tsx'
 /* import NotFound from './pages/NotFound.tsx' */
 
 import ArtistForm from './pages/formArtist.tsx'
@@ -10,7 +11,7 @@ function App(){
     <Routes>
     <Route path='/' element={<Home />} />
 {/*     <Route path='*' element={<NotFound />} /> */}
-
+    <Route path='/legal' element={<Legal />} />
     <Route path='/artist-form' element={<ArtistForm />} />
     </Routes>
   )

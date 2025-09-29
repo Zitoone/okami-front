@@ -2,8 +2,7 @@
 
 header,footer {
     width: 100%;  
-    background-color: $white;
-    position: sticky;
+    background-color: $white;   
     box-shadow: $box-shadow;
     .container{
   display: flex;
@@ -14,7 +13,9 @@ header,footer {
 }
 header{
   top: 0;
-  z-index: 1000;}
+  z-index: 1000;
+  position: sticky;
+}
 
   img {
     height: 50px;
@@ -59,14 +60,9 @@ header{
   }
 
 
-footer{
-  ul{
-    list-style: none;
-    display: flex;
-    gap: 2em;
-  }
+footer>div{
+      justify-self: center;
   p{
-    justify-self: center;
     color: $brown;
   }
   .social{

@@ -8,10 +8,41 @@
     "souvenir": "Souvenirs",
     "contact": "Contact"
   },
-  "footer": {
-    "legal": "Legal notice",
-    "privacy": "Privacy policy"
-  },
+  "footer.link": "Legal notice & privacy policy",
+"legal": {
+  "title": "Legal Notice & Privacy Policy – OKAMI Festival",
+  "siteEdit": "Site Editor",
+  "association": "Association",
+  "name": "Attrape rêve (French law 1901)",
+  "address": "Address: Lautignac, France",
+  "email": "Email: info@okamifestival.com",
+  "phone": "Phone: +33 6 63 01 21 08",
+  "siret": "SIRET: 91298256800012",
+
+  "publicationDirector": "Publication Director",
+  "hosting": "Hosting",
+  "hostName": "?",
+
+  "intellectualPropertyTitle": "Intellectual Property",
+  "intellectualPropertyContent": "All content on this site – texts, images, logos, videos, design and code – is the property of the association Attrape rêve. ⚠️ Please do not copy or use this content without our written permission.",
+
+  "personalDataTitle": "Personal Data",
+  "personalDataSubtitle": "GDPR",
+  "personalDataContent1": "The information provided is used solely to respond to your requests.",
+  "personalDataContent2": "No data is sold or shared with third parties.",
+  "personalDataContent3": "Retention period: up to 3 years after the last interaction.",
+  
+  "cookiesTitle": "Cookies",
+  "cookiesContent1": "Used to improve navigation and measure audience. You can disable them in your browser settings.",
+  "cookiesContent2": "Your rights: access, modify, or delete your data.",
+
+  "responsibilityTitle": "Responsibility",
+  "responsibilityContent": "We do our best to ensure the site is reliable and up to date, but we cannot guarantee it is perfect at all times. Links to other sites are provided for information only, and the association is not responsible for their content.",
+
+  "contactTitle": "Contact",
+  "contactContent": "For any legal questions or regarding the protection of your personal data, please contact olivia@okamifestival.com"
+},
+
   "btnTickets": "Buy Tickets",
   "home": {
     "title": "OKAMI Festival 2026 – Home",

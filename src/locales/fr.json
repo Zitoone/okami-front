@@ -8,9 +8,38 @@
     "souvenir": "Souvenirs",
     "contact": "Contact"
   },
-  "footer": {
-    "legal": "Mentions légales",
-    "privacy": "Politique de confidentialité"
+  "footer.link": "Mentions légales & confidentialité",
+  "legal": {
+    "title": "Mentions légales & Politique de confidentialité – OKAMI Festival",
+    "siteEdit": "Éditeur du site",
+    "association": " Association",
+    "name": "Attrape rêve (loi 1901)",
+    "address": "Adresse : Lautignac, France",
+    "email": "Email : info@okamifestival.com",
+    "phone": "Téléphone : +33 6 63 01 21 08",
+    "siret": "SIRET : 91298256800012 ",
+
+    "publicationDirector": "Directrice de la publication",
+    "hosting": "Hébergement",
+    "hostName": "?",
+    
+    "intellectualPropertyTitle": "Propriété intellectuelle",
+    "intellectualPropertyContent": "Tout le contenu du site – textes, images, logo, vidéos, design et code – est la propriété de l’association Attrape rêve. ⚠️ Merci de ne pas copier ou utiliser ces contenus sans notre autorisation écrite.",
+
+    "personalDataTitle": "Données personnelles",
+    "personalDataSubtitle": "RGPD",
+    "personalDataContent1": "Les informations fournies sont utilisées uniquement pour répondre à vos demandes",
+    "personalDataContent2": "Aucune donnée n’est vendue ni partagée avec des tiers.",
+    "personalDataContent3": "Durée de conservation : jusqu’à 3 ans après la dernière interaction.",
+    "cookiesTitle": "Cookies",
+    "cookiesContent1":"Utilisés pour améliorer la navigation et mesurer l’audience. Vous pouvez les désactiver dans les paramètres de votre navigateur.",
+    "cookiesContent2":"Vos droits : accès, modification, suppression de vos données.",
+
+    "responsibilityTitle": "Responsabilité",
+    "responsibilityContent": "Nous faisons notre maximum pour que le site soit fiable et à jour, mais nous ne pouvons pas garantir que tout soit parfait en permanence. Les liens vers d’autres sites sont fournis à titre informatif et l’association n’est pas responsable de leur contenu.",
+
+    "contactTitle": "Contact",
+    "contactContent": "Pour toute question légale ou concernant la protection de vos données personnelles, contactez olivia@okamifestival.com"
   },
   "btnTickets": "Acheter des billets",
   "home": {
