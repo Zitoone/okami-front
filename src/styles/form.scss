@@ -1,0 +1,35 @@
+@use './variables' as *;
+
+.all-forms{
+    max-width: $max-width;
+    text-align: center;
+    margin: 0 auto;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 900px;
+    justify-self: center;   
+    width: 100%;
+}
+form > div{
+    width: 100%;
+    padding:  0 2em;
+}
+form > div > input,
+form > div > textarea{
+    width: 100%;
+    padding: 1em;
+    font-size: 1rem;
+    text-align: center;
+}
+.form-btn{
+    align-self: center;
+}
+
+.form-success-msg{
+    color: $green;
+    font-size: 30px;
+    padding: 50px;
+}

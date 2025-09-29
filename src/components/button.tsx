@@ -7,6 +7,7 @@ type ButtonProps = {
   href?: string         // lien externe
   type?: 'button' | 'submit' | 'reset'
   className?: string    // optionnel, pour ajouter des classes CSS
+  onClick?: (e:React.MouseEvent<HTMLButtonElement>)=> void
 }
 
 const Button: FC<ButtonProps> = ({
@@ -15,19 +16,24 @@ const Button: FC<ButtonProps> = ({
   href,
   type = 'button',
   className = '',
+  onClick
 }) => {
   const navigate = useNavigate()
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
     if (to) {
       navigate(to)
     } else if (href) {
       window.open(href, '_blank') // ouvre le lien externe dans un nouvel onglet
     }
-    }
+
+    if (onClick) onClick(e)
+}
 
   return (
-    <button type={type} onClick={handleClick} className={className}>
+    <button type={type} onClick={type === "button" ? handleClick : undefined} className={className}>
       {children}
     </button>
   )

@@ -8,6 +8,10 @@
     "souvenir": "Souvenirs",
     "contact": "Contact"
   },
+  "footer": {
+    "legal": "Legal notice",
+    "privacy": "Privacy policy"
+  },
   "btnTickets": "Buy Tickets",
   "home": {
     "title": "OKAMI Festival 2026 – Home",
@@ -33,5 +37,6 @@
     "artistComments": "Comments",
     "pics": "Photo Link",
     "submit": "Submit"
-  }
+  },
+  "form.successMsg":"Form successfully submitted, thank you!"
 }

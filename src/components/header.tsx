@@ -3,7 +3,7 @@ import { TiThMenu } from "react-icons/ti";
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import ReactCountryFlag from "react-country-flag"
-import Button from "./button"
+import Button from "./Button"
 
 function Header() {
   const { t, i18n } = useTranslation()
@@ -48,7 +48,7 @@ function Header() {
   return (
     <header>
       <div className="container">
-      <Link to="/"><img src="/logo.png" alt="Logo Okami festival" /></Link>
+        <Link to="/"><img src="/logo.png" alt="Logo Okami festival" /></Link>
 
       <div className="burger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <TiThMenu />
@@ -64,7 +64,7 @@ function Header() {
         </ul>
       </nav> 
 
-      <Button href="https://www.helloasso.com/associations/attrape-reve-31/formulaires/1" className="btn buyTickets">
+      <Button href="https://tinyurl.com/mrz6jv8v" className="btn buyTickets">
         {t("btnTickets")}
       </Button>
 

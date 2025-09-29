@@ -1,6 +1,6 @@
 @use './variables' as *;
 
-header {
+header,footer {
     width: 100%;  
     background-color: $white;
     position: sticky;
@@ -10,9 +10,9 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: $padding;
-
-
-
+  }
+}
+header{
   top: 0;
   z-index: 1000;}
 
@@ -57,6 +57,26 @@ header {
     display: none;
     cursor: pointer;
   }
+
+
+footer{
+  ul{
+    list-style: none;
+    display: flex;
+    gap: 2em;
+  }
+  p{
+    justify-self: center;
+    color: $brown;
+  }
+  .social{
+    display: flex;
+    gap: 1em;
+    a{
+      font-size: xx-large;
+      color: $yellow;
+    }
+  }
 }
 
 //Resposive design
@@ -92,19 +112,28 @@ header {
 }
 
 @media (max-width: $breakpoint-mobile) {
-  header {
+  header,footer {
     padding: 10px;
 
     img {
       height: 40px;
     }
-
-    .language-switcher {
-      flex-direction: row;
-      gap: 5px;
-    }
-    .buyTickets {
-      display: none;
-    }
   }
+  header .language-switcher {
+    flex-direction: row;
+    gap: 5px;
+  }
+  .buyTickets {
+    display: none;
+  }
+  footer{
+    padding: 0;
+    .container{
+      flex-direction: column;
+    }
+    ul{
+      text-align: center;
+    }
 }
+}
+

@@ -8,30 +8,35 @@
     "souvenir": "Souvenirs",
     "contact": "Contact"
   },
+  "footer": {
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité"
+  },
   "btnTickets": "Acheter des billets",
   "home": {
   "title": "OKAMI Festival 2026 – Accueil",
-  "description": "Bienvenue sur le site officiel du Festival OKAMI 2026 à Saint Christaud du 10 au 14 Juin. Découvrez tous son univers, son programme et ses activités.",
+  "description": "Bienvenue sur le site officiel du Festival OKAMI 2026 à Saint Christaud du 10 au 14 Juin. Découvrez tout son univers, son programme et ses activités.",
   "keywords": "OKAMI Festival 2026, accueil, programme, artistes, concerts, Saint Christaud",
   "ogTitle": "OKAMI Festival 2026 – Accueil",
   "ogDescription": "Toutes les infos pour profiter pleinement du Festival OKAMI 2026 du 10 au 14 Juin à Saint Christaud !"
   },
   "artistForm": {
-  "intro": "Nous sommes ravis de vous accueillir pour l'édition OKAMI 2026 ! Merci de remplir ce formulaire avec attention afin de pouvoir vous accueillir dans les meilleures conditions. Pour toute question complémentaire, n'hésitez pas à nous contacter : booking@okamifestival.com",
+  "intro": "Nous sommes ravis de vous retrouver pour l'édition OKAMI 2026 ! Merci de remplir ce formulaire avec attention afin de pouvoir vous accueillir dans les meilleures conditions. Pour toute question complémentaire, n'hésitez pas à nous contacter : booking@okamifestival.com",
   "title": "Formulaire Artiste",
   "lastName": "Nom",
   "firstName": "Prénom",
   "email": "Email",
-  "phone": "Téléphone",
+  "phone": "Numéro de téléphone",
   "projectName": "Nom du projet",
-  "invitName": "Nom sur l'invitation",
-  "infoRun": "Informations sur le déroulé",
-  "setupTimeInMin": "Temps d'installation (minutes)",
-  "soundcheck": "Besoin de balance son",
-  "record": "Enregistrement prévu",
-  "setup": "Backline / setup",
-  "artistComments": "Commentaires",
-  "pics": "Lien photo",
+  "invitName": "Nom de ton invité (1 invité / personne)",
+  "infoRun": "As-tu besoin d’un run ? Si oui, détaille ici tes besoins. Ces informations pourront être transmises ultérieurement si nécessaire",
+  "setupTimeInMin": "Combien de temps d'installation en minutes te faut-il ?",
+  "soundcheck": "As-tu besoin de faire des balances? Si oui, combien de temps?",
+  "record": "Es-tu d'accord pour que ton set/live soit enregistré ?",
+  "setup": "De quel matériel disposes-tu?",
+  "artistComments": "Un commentaire à ajouter?",
+  "pics": "As-tu un lien vers une photo que nous pourrons utiliser pour la promotion ?",
   "submit": "Envoyer"
-  }
+  },
+  "form.successMsg":"Formulaire envoyé avec succès, merci!"
 }
