@@ -1,0 +1,24 @@
+// Cette page mènera aux différentes routes selon le type dintervenants à l'aide de boutons
+import Button from "../../components/Button"
+
+const Dashboard: React.FC = () =>{
+/* const token = localStorage.getItem('authToken') */
+    return(
+        <main>
+            <h1>Bienvenue sur le tableau de bord administrateur</h1>
+
+            <div>
+                <Button type="button" className="btn" to="/admin/artists"> Artistes </Button>
+                <Button type="button" className="btn" to="/admin/artist"> Bénévoles </Button>
+                <Button type="button" className="btn" to="/admin/artist"> Stands </Button>
+                <Button type="button" className="btn" to="/admin/artist"> PSH </Button>
+                <Button type="button" className="btn" to="/admin/artist"> Prestataires </Button>
+
+            </div>
+        </main>
+    )
+
+
+
+}
+export default Dashboard

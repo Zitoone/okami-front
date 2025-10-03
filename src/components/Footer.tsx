@@ -10,7 +10,7 @@ function Footer(){
         <footer>
             <div className='container'>
                 <Link to="/"><img src='/logo.png' alt="Logo Okami festival" /></Link>
-                <div>
+                <div className='legal'>
                     <Link to="/legal">{t("footer.link")}</Link>
                     <p>© OKAMI Festival</p>
                 </div>

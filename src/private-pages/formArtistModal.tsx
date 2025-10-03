@@ -1,4 +1,4 @@
-
+// Page créee avec modale de confirmation lorsque le form est envoyé, a supprimer
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Button from '../components/Button'

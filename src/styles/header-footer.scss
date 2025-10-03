@@ -60,8 +60,10 @@ header{
   }
 
 
-footer>div{
-      justify-self: center;
+footer {
+  .legal{
+      justify-items: center;
+  }
   p{
     color: $brown;
   }
