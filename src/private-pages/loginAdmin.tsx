@@ -33,9 +33,9 @@ const LoginForm: React.FC = () =>{
             if(res.token){
                 localStorage.setItem("authToken", res.token)
                 console.log("connexion OK")
-                window.location.href = '/dashboardAdmin' 
+                window.location.href = '/admin/dashboard' 
                 setError('')
-                //Emmene sur le futur tableau de bord admin
+                //Emmene sur le  tableau de bord admin
             }
 
         } catch (error) {

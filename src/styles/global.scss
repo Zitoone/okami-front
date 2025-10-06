@@ -58,6 +58,28 @@ label {
   padding: 0 $padding;
 }
 
+th, td {
+    border: 1px solid black;
+    padding: 15px;
+    
+}
+table{
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-collapse: collapse;
+
+}
+th{
+  border: 1px solid $green;
+  position: sticky;
+}
+tr{
+  cursor: pointer;
+}
+.details{
+  background-color: $yellow;
+}
 //Legal notice
 /* #legalNotice{
   background-color: $yellow;

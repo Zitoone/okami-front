@@ -1,0 +1,46 @@
+
+
+
+        <tbody>
+            {artists.map((artist) => (
+              <>
+                <tr key={artist._id} onClick= {() => toggleDetails(artist._id)}>
+                  <td>{artist.personalInfo.projectName} </td>
+                  <td>{artist.personalInfo.lastName}</td>
+                  <td>{artist.personalInfo.firstName}</td>
+                  <td>{artist.personalInfo.email}</td>
+                  <td>{artist.personalInfo.phone}</td>
+                  <td>{artist.adminInfo.nbOfPerson}</td>
+                  <td>{artist.adminInfo.stage}</td>
+                  <td>{artist.adminInfo.gigDateTime}</td>
+                  <td>{artist.adminInfo.bookingFee}</td>
+                </tr>
+
+              {selectedArtist === artist._id && (
+                <tr>
+                    <td>
+                      <div>
+                      <h2>Détails</h2>
+                    {/* <p><strong>Nom complet :</strong> {artist.personalInfo.lastName} {artist.personalInfo.firstName}</p> */}
+                    {/* <p><strong>Email :</strong> {artist.personalInfo.email}</p> */}
+                    {/* <p><strong>Téléphone :</strong> {artist.personalInfo.phone}</p> */}
+                    {/* <p><strong>Nb de personnes :</strong> {artist.adminInfo.nbOfPerson}</p> */}
+                    {/* <p><strong>Scène :</strong> {artist.adminInfo.stage}</p> */}
+                    {/* <p><strong>Date et heure de jeu :</strong> {new Date(artist.adminInfo.gigDateTime).toLocaleString()}</p> */}
+                    <p><strong>Cachet :</strong> {artist.adminInfo.bookingFee}</p>
+                    <p><strong>Frais déplacement :</strong> {artist.adminInfo.travelExpense}</p>
+                    <p><strong>Total :</strong> {artist.adminInfo.totalFees}</p>
+                    <p><strong>Contrat :</strong> {artist.adminInfo.contract ? "Oui" : "Non"}</p>
+                    <p><strong>Facture :</strong> {artist.adminInfo.invoice ? "Oui" : "Non"}</p>
+                    <p><strong>Feuille de route :</strong> {artist.adminInfo.roadMap ? "Oui" : "Non"}</p>
+                    <p><strong>Infos paiement :</strong> {artist.adminInfo.paiementInfo}</p>
+                    <p><strong>Commentaire artiste :</strong> {artist.personalInfo.artistComments}</p>
+                    <p><strong>Commentaire admin :</strong> {artist.adminInfo.specialInfo}</p>
+                    <button onClick={() => setSelectedArtist(null)}>Fermer</button>
+                    </div>
+                  </td>
+                </tr>
+              )}
+              </>
+            ))}
+        </tbody>

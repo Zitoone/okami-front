@@ -18,7 +18,5 @@ const Dashboard: React.FC = () =>{
         </main>
     )
 
-
-
 }
 export default Dashboard
