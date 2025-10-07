@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Button from "./button"
 
 export type CollapseProps={
     title: string,
@@ -11,9 +12,9 @@ const Collapse = ({title, children }:CollapseProps) => {
   return (
     <div className="collapse">
         <span>
-            <h4>{title}</h4>
-            <button className="collapse-button" onClick={() => setIsCollapsed(!isCollapsed)}>
-            {isCollapsed ? " ↑" : "↓"}</button>
+            <h2 onClick={() => setIsCollapsed(!isCollapsed)}>{title}</h2>
+            <button className="collapse-button btn" onClick={() => setIsCollapsed(!isCollapsed)}>
+            {isCollapsed ? "▲" : "▼"}</button>
         </span>
         {isCollapsed &&(      
             <div className="collapse-content">

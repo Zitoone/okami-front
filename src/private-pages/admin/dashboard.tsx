@@ -1,10 +1,10 @@
 // Cette page mènera aux différentes routes selon le type dintervenants à l'aide de boutons
-import Button from "../../components/Button"
+import Button from "../../components/button"
 
 const Dashboard: React.FC = () =>{
 /* const token = localStorage.getItem('authToken') */
     return(
-        <main>
+        <main className="dashboard-page">
             <h1>Bienvenue sur le tableau de bord administrateur</h1>
 
             <div>
