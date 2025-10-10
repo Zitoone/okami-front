@@ -2,7 +2,9 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Button from '../components/Button'
-import { BsHandThumbsUpFill } from 'react-icons/bs'
+import Modal from '../components/Modal'
+import { useNavigate } from 'react-router-dom'
+
 
 export type PersonalInfo ={
   lastName: string,
@@ -39,7 +41,9 @@ const ArtistForm: React.FC=()=>{
         pics: ""
         })
     
-    const [submitted, setSubmitted]=useState(false)
+    const [modal, setModal]=useState(false)
+
+    const navigate = useNavigate()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
@@ -50,15 +54,16 @@ const ArtistForm: React.FC=()=>{
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const res=await fetch("http://localhost:3000/api/artists", {
+            const res=await fetch(`${import.meta.env.VITE_APP_API_URL}artists/form`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ personalInfo: formData })
             })
-            const data=await res.json()
-            console.log("✅ Artiste ajouté :", data)
+            if(!res.ok) throw new Error("Impossible d'ajouter l'artiste")
+/*             const data=await res.json()
+            console.log("✅ Artiste ajouté :", data) */
 
-            setSubmitted(true)
+            setModal(true)
 /*             setFormData({
                 lastName: "",
                 firstName: "",
@@ -74,7 +79,8 @@ const ArtistForm: React.FC=()=>{
                 artistComments: "",
                 pics: ""
             }) */
-        } catch (error) { console.error("❌ Erreur :", error)            
+        } catch (error) { 
+            console.error("❌ Erreur :", error)            
         }
     }
     return(
@@ -83,13 +89,15 @@ const ArtistForm: React.FC=()=>{
                 <h1>{t("artistForm.title")}</h1>
                 <p>{t("artistForm.intro")}</p>
 
-                {submitted?(
+{/*                 {submitted?(
                     <div className="form-success-msg">
                         <BsHandThumbsUpFill />
                         <p>{t("form.successMsg")}</p>
                     </div>
-                ):(
+                ):( */}
+                
                     <form onSubmit={handleSubmit} className='artist-form'>
+                        
                         <div>
                             <label>{t("artistForm.lastName")} <span>*</span></label>
                             <input name="lastName" value={formData.lastName} onChange={handleChange} required />
@@ -127,7 +135,7 @@ const ArtistForm: React.FC=()=>{
 
                         <div>
                         <label>{t("artistForm.setupTimeInMin")}</label>
-                        <input type="number" name="setupTimeInMin" value={formData.setupTimeInMin} onChange={handleChange} />
+                        <input type="number" min={0} max={100} name="setupTimeInMin" value={formData.setupTimeInMin} onChange={handleChange} />
                         </div>
 
                         <div>
@@ -156,8 +164,19 @@ const ArtistForm: React.FC=()=>{
                         </div>
 
                         <Button type="submit" className="btn form-btn">{t("artistForm.submit")} </Button>
+
+                        {modal && (
+                            <Modal
+                                text= {t("form.successMsg")}
+                                type="success"
+                                onClose={()=>{
+                                setModal(false)
+                                navigate('/')
+                    }} />
+                        )}
+                    
                     </form>
-                )}
+               {/*  )} */}
             </div>
 
         </main>
@@ -165,3 +184,6 @@ const ArtistForm: React.FC=()=>{
 }
 
 export default ArtistForm
+
+//TODO: Faire un composant pour div : input + label
+// Utiliser un map sur formData

@@ -1,5 +1,5 @@
 // Cette page mènera aux différentes routes selon le type dintervenants à l'aide de boutons
-import Button from "../../components/button"
+import Button from "../../components/Button"
 
 const Dashboard: React.FC = () =>{
 /* const token = localStorage.getItem('authToken') */
@@ -20,3 +20,5 @@ const Dashboard: React.FC = () =>{
 
 }
 export default Dashboard
+
+//TODO: Mettre en place Zustand pour green IT et limité les appels API

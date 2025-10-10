@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
-import Button from "../../components/button"
+import Button from "../../components/Button"
+
+
+// Définition du type ArtistProps:
+// Permet de typer les données des artistes (leurs infos personnelles d'un coté et les infos saisies par les admin) afin de décrire la structure exacte des données telles qu'elles sont reçues depuis l'API.
 
 type ArtistProps = {
   _id: string
@@ -39,45 +43,87 @@ type ArtistProps = {
 }
 
 export default function ArtistPage() {
-  const [artists, setArtists] = useState<ArtistProps[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [selectedArtist, setSelectedArtist] = useState<ArtistProps | null>(null)
+  //Gestion des états avec useState ou chacune de ces variables représente une donnée qui sera dynamique:
+  const [artists, setArtists] = useState<ArtistProps[]>([]) //Liste complète des artiste récupéré depuis le back
+  const [loading, setLoading] = useState(true) //Indicateur de chargement pendant la récupération des données
+  const [error, setError] = useState<string | null>(null) // Afficher un message d'erreur si besoin
+  const [selectedArtist, setSelectedArtist] = useState<ArtistProps | null>(null) // Contient l'artiste sélectionné par son id
 
-  const token = localStorage.getItem("authToken")
+  const token = localStorage.getItem("authToken") //Récupération du token pour accèder à cette page
 
+//Fonction pour récupérer tous les artistes depuis l'API
   const fetchArtists = async () => {
-    try {
+    try { 
       setLoading(true)
-      const req = await fetch("http://localhost:3000/api/admin/artists", {
+      const req = await fetch(`${import.meta.env.VITE_APP_API_URL}artists`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, //Sécurisation par le token
         },
       })
       if (!req.ok) throw new Error("Erreur lors du chargement des artistes")
       const datas: ArtistProps[] = await req.json()
-      setArtists(datas)
+      datas.sort((a,b)=>{ // Méthode .sort pour trier les nom d'artistes par ordre alphabétique qu'il soit écrit en MAJ ou en min
+        if(a===b){
+          return 0
+        }
+        return a.personalInfo.projectName.toLowerCase() < b.personalInfo.projectName.toLowerCase() ? -1 :1
+      })
+      setArtists(datas) //Si succès: Le tableau des artistes (qui contient les élément du type ArtistProps n'est plus vide mais peuplé par les données de l'API 
     } catch (error) {
-      setError(error.message)
+      const err = error as Error
+      setError(err.message)
     } finally {
       setLoading(false)
     }
   }
 
+  //Fonction pour supprimer l'artiste sélectionné (par son ID)
+  const deleteArtist = async (id: string) => {
+    if(!window.confirm("Tu veux vraiment supprimer cet artiste de la base de données ?")) return //On lance une fonction native windows.confirm qui ouvre une fenetre de confirmation qui retournera false (car on inverse la valeur) si l'utilisateur clic sur confirmer
+
+    try {
+      const req = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/${id}`,{
+        method: "DELETE",
+        headers:{
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      if (!req.ok) throw new Error("Erreur sur la suppression de l'artiste")
+
+      // Mise a jour de l'état local de setArtists aprés la suppression.
+      // prev pour le state précédent donc la liste avant la supression
+      //.filter crée et retourne un nouveau tableau d'artistes sans celui qui a l'id selectionné
+      setArtists((prev) => prev.filter((artist) => artist._id !== id))
+    setSelectedArtist(null)
+    alert("Artiste supprimé avec succès ✅") //Faire une modale
+    } catch (error) {
+      const err = error as Error
+      setError(err.message)
+    }
+  }
+
+  // Utilisation de useEffect qui permet d'exécuter le fetchartist() une seule fois après le premier l'affichage du composant. La requête ne se lance donc pas à chaque rendu
   useEffect(() => {
     fetchArtists()
   }, [])
 
+  //Gestion des affichages si la page est en cours de chargement ou si il y a une erreur
   if (loading) return <p>Chargement des artistes en cours…</p>
   if (error) return <p style={{ color: "red" }}>{error}</p>
 
+  //On retourne le rendu s'il n'y a pas d'erreur
   return (
     <main className="artist-page table-page">
       <h1>Artistes 2026</h1>
 
+      <Button to={("/admin/artists/new")} className="btn add-btn">+ Ajouter un artiste</Button>
+
+
+{/* Tableau listant tous les artistes */}
       <div className="table-list">
-        <table>
+        <table> 
           <thead>
             <tr>
               <th>Projet</th>
@@ -95,7 +141,7 @@ export default function ArtistPage() {
             {artists.map((artist) => (
               <tr
                 key={artist._id}
-                onClick={() => setSelectedArtist(artist)}
+                onClick={() => setSelectedArtist(artist)} //Ouvre le panneau latéral si on clic sur la ligne
                 className="clickable-row"
               >
                 <td><strong>{artist.personalInfo.projectName}</strong></td>
@@ -113,16 +159,19 @@ export default function ArtistPage() {
         </table>
       </div>
 
+{/* Affichage conditionnel pour le panneau latéral qui donne les infos sur l'artiste sélectionné */}
       {selectedArtist && (
         <>
-          <div className="overlay" onClick={() => setSelectedArtist(null)} />
+          <div className="overlay" onClick={() => setSelectedArtist(null)} />  {/* Permet de fermer le panneau latéral si on clic dedans et de remettre l'état de l'artiste sélectionné à nul */}
           <aside className="side-panel">
             <h2>{selectedArtist.personalInfo.projectName}</h2>
               <div className="tableBtns">
+                {/* Boutons pour modifier ou supprimer l'artiste */}
               <Button type="button" className="btn" to={`/admin/artist-edit/${selectedArtist._id}`}>Modifier</Button>
 
-              <Button type="button"  className="btn btn-delete">Supprimer</Button>
+              <Button type="button"  className="btn btn-delete" onClick={() => deleteArtist(selectedArtist._id)}>Supprimer</Button> {/* Fonction de rappel qui sera déclenchée au clic */}
               </div>
+              {/* Liste des infos détaillés de l'artiste sélectionné */}
             <p><strong>Cachet :</strong> {selectedArtist.adminInfo.bookingFee} €</p>
             <p><strong>Frais déplacement :</strong> {selectedArtist.adminInfo.travelExpense} €</p>
             <p><strong>Nom invité :</strong>{selectedArtist.personalInfo.invitName}</p>
@@ -143,8 +192,8 @@ export default function ArtistPage() {
             <p><strong>Lien photo :</strong> {selectedArtist.personalInfo.pics}</p>
             <p><strong>Commentaire artiste :</strong> {selectedArtist.personalInfo.artistComments}</p>
             
-            
-            <Button onClick={() => setSelectedArtist(null)} className="btn">Fermer</Button>
+            {/* Bouton pour fermer qui ré initialise l'artiste sélectionné a nul */}
+            <Button onClick={() => setSelectedArtist(null)} className="btn">Fermer</Button> 
           </aside>
         </>
       )}

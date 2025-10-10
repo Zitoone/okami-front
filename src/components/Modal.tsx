@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import Button from './Button'
-
+import { useTranslation } from 'react-i18next'
 
 type ModalProps={
     text: string
@@ -9,6 +9,8 @@ type ModalProps={
 }
 
 const Modal: FC<ModalProps>=({text,type="success", onClose})=>{
+    const {t} = useTranslation()
+
     let className='modal'
     if(type==="success") className += " success"
     if(type==="error") className +=" error"
@@ -16,7 +18,9 @@ const Modal: FC<ModalProps>=({text,type="success", onClose})=>{
         <div className='modal-container'>
             <div className={className}>
                 <p>{text}</p>
-                <Button onClick={onClose}>Fermer</Button>
+                <Button
+                className='btn'
+                onClick={onClose}>{t("modale.close")}</Button>
             </div>
         </div>   
     )

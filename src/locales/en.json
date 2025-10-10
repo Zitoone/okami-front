@@ -69,5 +69,6 @@
     "pics": "Photo Link",
     "submit": "Submit"
   },
-  "form.successMsg":"Form successfully submitted, thank you!"
+  "form.successMsg":"🩷 Form successfully submitted, thank you! 💚",
+  "modale.close": "Close"
 }

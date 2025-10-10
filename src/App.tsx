@@ -8,6 +8,7 @@ import LoginForm from './private-pages/loginAdmin.tsx'
 import Dashboard from './private-pages/admin/dashboard.tsx'
 import ArtistPage from './private-pages/admin/artists.tsx'
 import ArtistEdit from './private-pages/admin/artistEdit.tsx'
+import ArtistNew from './private-pages/admin/artistNew.tsx'
 
 function App(){
   return(
@@ -23,6 +24,7 @@ function App(){
     <Route path='/admin/dashboard' element={<Dashboard/>} />
     <Route path='/admin/artists' element={<ArtistPage />} />
     <Route path='/admin/artist-edit/:id' element={<ArtistEdit />} />
+    <Route path='/admin/artists/new' element={<ArtistNew />} />
     
     </Routes>
   )

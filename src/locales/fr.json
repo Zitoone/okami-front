@@ -67,5 +67,6 @@
   "pics": "As-tu un lien vers une photo que nous pourrons utiliser pour la promotion ?",
   "submit": "Envoyer"
   },
-  "form.successMsg":"Formulaire envoyé avec succès, merci!"
+  "form.successMsg":"🩷 Formulaire envoyé avec succès, merci! 💚",
+  "modale.close": "Fermer"
 }
