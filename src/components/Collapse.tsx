@@ -6,13 +6,13 @@ export type CollapseProps={
 }
 
 const Collapse = ({title, children }:CollapseProps) => {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+    const [isCollapsed, setIsCollapsed] = useState(false)
 
-  return (
+    return (
     <div className="collapse">
         <span>
             <h2 onClick={() => setIsCollapsed(!isCollapsed)}>{title}</h2>
-            <button className="collapse-button btn" onClick={() => setIsCollapsed(!isCollapsed)}>
+            <button type='button' className="collapse-button btn" onClick={() => setIsCollapsed(!isCollapsed)}>
             {isCollapsed ? "▲" : "▼"}</button>
         </span>
         {isCollapsed &&(      
@@ -21,6 +21,6 @@ const Collapse = ({title, children }:CollapseProps) => {
             </div>
         )}
     </div>
-  )
+    )
 }
 export default Collapse

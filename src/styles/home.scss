@@ -1,0 +1,88 @@
+@use './variables' as *;
+
+//Général
+h2,p{
+    color: $white;
+    text-align: center;
+}
+
+#main-home{
+    background: radial-gradient(circle at center, #028a92 0%, #01484d 70%);
+}
+.hero{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem;
+    h2{
+        text-align: left;
+    }
+}
+.hero-img{
+  flex: 1;
+  background: url('/public/imgHero.png') no-repeat center center;
+  background-size: contain;
+  /* height: 100%; */
+  min-height: 400px;
+  
+}
+.hero-text{
+    flex: 1;
+    margin-left: 2rem;
+    color: $white;
+}
+
+
+//Section 2 video
+#after-movie{
+    padding: 4rem;
+
+}
+.video-container {
+    max-width: 1000px;
+    margin: auto;
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: $border-radius;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+//Section 3 Espaces
+#spaces{
+    max-width: 1200px;
+    margin: auto;
+    padding: 50px;
+    color: $white;
+    span{       
+        font-size: xx-large;
+    }
+
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+    border: 1px solid black;
+    padding: 1rem;
+}
+.spaces-card{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    align-items: stretch;
+    padding: 1rem;
+}

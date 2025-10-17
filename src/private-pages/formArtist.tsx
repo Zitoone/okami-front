@@ -7,19 +7,21 @@ import { useNavigate } from 'react-router-dom'
 
 
 export type PersonalInfo ={
-  lastName: string,
-  firstName: string,
-  email: string,
-  phone: string,
-  projectName: string,
-  invitName?: string,
-  infoRun?: string,
-  setupTimeInMin?: number | string,
-  soundcheck?: string,
-  record?: string,
-  setup?: string,
-  artistComments?: string,
-  pics?: string,
+    lastName: string,
+    firstName: string,
+    email: string,
+    phone: string,
+    projectName: string,
+    invitName?: string,
+    infoRun?: string,
+    setupTimeInMin?: number | string,
+    soundcheck?: string,
+    record?: string,
+    setup?: string,
+    artistComments?: string,
+    pics?: string,
+    socials?: string,
+    promoText?: string
 }
 
 const ArtistForm: React.FC=()=>{
@@ -38,9 +40,11 @@ const ArtistForm: React.FC=()=>{
         record: "",
         setup: "",
         artistComments: "",
-        pics: ""
+        socials: "",
+        promoText: ""
         })
     
+    const [file, setFile] = useState<File | null>(null)
     const [modal, setModal]=useState(false)
 
     const navigate = useNavigate()
@@ -53,38 +57,28 @@ const ArtistForm: React.FC=()=>{
     }
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+
+        const upload = new FormData()       
+        if(file){
+            upload.append('pics', file)
+        }
+        upload.append('personalInfo', JSON.stringify(formData))
+
         try {
             const res=await fetch(`${import.meta.env.VITE_APP_API_URL}artists/form`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ personalInfo: formData })
+                body: upload
             })
             if(!res.ok) throw new Error("Impossible d'ajouter l'artiste")
-/*             const data=await res.json()
-            console.log("✅ Artiste ajouté :", data) */
 
             setModal(true)
-/*             setFormData({
-                lastName: "",
-                firstName: "",
-                email: "",
-                phone: "",
-                projectName: "",
-                invitName: "",
-                infoRun: "",
-                setupTimeInMin: "",
-                soundcheck: "",
-                record: "",
-                setup: "",
-                artistComments: "",
-                pics: ""
-            }) */
+
         } catch (error) { 
             console.error("❌ Erreur :", error)            
         }
     }
     return(
-        <main>
+        <main className='form'>
             <div className='all-forms'>
                 <h1>{t("artistForm.title")}</h1>
                 <p>{t("artistForm.intro")}</p>
@@ -96,7 +90,7 @@ const ArtistForm: React.FC=()=>{
                     </div>
                 ):( */}
                 
-                    <form onSubmit={handleSubmit} className='artist-form'>
+                    <form onSubmit={handleSubmit} className='artist-form' action="artist-pics" method='post' encType="multipart/form-data">
                         
                         <div>
                             <label>{t("artistForm.lastName")} <span>*</span></label>
@@ -160,7 +154,21 @@ const ArtistForm: React.FC=()=>{
 
                         <div>
                             <label>{t("artistForm.pics")}</label>
-                            <input type="text" name="pics" value={formData.pics} onChange={handleChange} />
+                            <input type="file" name="pics" onChange={(e) => {
+                                if (e.target.files &&  e.target.files.length > 0){
+                                    setFile(e.target.files[0])
+                                }
+                            }} className='pics-file'/>
+                        </div>
+
+                        <div>
+                            <label>{t("artistForm.socials")}</label>
+                            <input type='text' name='socials' placeholder='https://soundcloud.com/xxx , https://instagram.com/xxx' value={formData.socials} onChange={handleChange}></input>
+                        </div>
+
+                        <div>
+                            <label>{t("artistForm.promoText")}</label>
+                            <textarea name='promoText' value={formData.promoText} onChange={handleChange}></textarea>
                         </div>
 
                         <Button type="submit" className="btn form-btn">{t("artistForm.submit")} </Button>

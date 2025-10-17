@@ -7,7 +7,7 @@ import ArtistForm from './private-pages/formArtist.tsx'
 import LoginForm from './private-pages/loginAdmin.tsx'
 import Dashboard from './private-pages/admin/dashboard.tsx'
 import ArtistPage from './private-pages/admin/artists.tsx'
-import ArtistEdit from './private-pages/admin/artistEdit.tsx'
+import ArtistEdit from './private-pages/admin/artistEdit.jsx'
 import ArtistNew from './private-pages/admin/artistNew.tsx'
 
 function App(){

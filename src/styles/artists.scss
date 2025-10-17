@@ -1,8 +1,10 @@
 @use './variables' as *;
 
-.artist-form span {
+.artist-form{
+  color: $blue;
+span {
   color: red;
-}
+}}
 
 //Page liste des artistes
 .table-page {
@@ -82,7 +84,11 @@ th, td {
 
 //Page edit
 .artist-edit{
+  background-color: $white;
     h1{
         padding-top: 2rem;
+    }
+    a, h2{
+      color: $blue;
     }
 }

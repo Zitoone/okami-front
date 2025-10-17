@@ -7,17 +7,21 @@ body {
   margin: 0;
   font-family: $main-font;
 }
-main {
-  max-width: $max-width;
+.form {
+/*   max-width: $max-width; */
   margin: 0 auto;
   padding: $padding;
+/*   background-color: $white; */
+  h1, h2, p{
+    color: $blue;
+  }
 }
 a {
-  color: $brown;
+  color: $white;
   text-decoration: none;
   transition: color $transition-duration;
   &:hover {
-    color: $green;
+    color: $yellow2;
   }
 }
 .btn {
@@ -33,8 +37,9 @@ a {
   box-shadow: $box-shadow;
   transition: background-color $transition-duration, box-shadow $transition-duration;
   &:hover {
-    background-color: $green;
+    background-color: $white;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    color: $yellow;
   }
 }
 .btn-delete{

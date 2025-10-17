@@ -15,30 +15,35 @@ type ArtistProps = {
     projectName: string
     invitName: string
     infoRun: string
-    setupTimeInMin: number
-    soundcheck: number
+    setupTimeInMin: string
+    soundcheck: string
     record: string
     setup: string
     artistComments: string
     pics: string
   }
   adminInfo: {
-    nbOfPerson: number
+    nbOfPerson: string
     stage: string
     gigDateTime: string
     soundcheckDayTime: string
     arrivedRun: string
     departRun: string
     accomodation: string
-    bookingFee: number
-    travelExpense: number
-    totalFees: number
-    contract: boolean
-    invoice: boolean
-    roadMap: boolean
+    bookingFee: string
+    travelExpense: string
+    totalFees: string
+    contract: string
+    invoice: string
+    roadMap: string
     paiementInfo: string
-    sacemForm: boolean
+    sacemForm: string
     specialInfo: string
+  }
+  promo: {
+    descriptionFr: string
+    descriptionEng: string
+    style: string
   }
 }
 
@@ -144,15 +149,15 @@ export default function ArtistPage() {
                 onClick={() => setSelectedArtist(artist)} //Ouvre le panneau latéral si on clic sur la ligne
                 className="clickable-row"
               >
-                <td><strong>{artist.personalInfo.projectName}</strong></td>
-                <td>{artist.personalInfo.lastName}</td>
-                <td>{artist.personalInfo.firstName}</td>
-                <td>{artist.personalInfo.email}</td>
-                <td>{artist.personalInfo.phone}</td>
-                <td>{artist.adminInfo.nbOfPerson}</td>
-                <td>{artist.adminInfo.stage}</td>
-                <td>{artist.adminInfo.gigDateTime}</td>
-                <td>{artist.adminInfo.totalFees} €</td>
+                <td><strong>{artist.personalInfo?.projectName || "-"}</strong></td>
+                <td>{artist.personalInfo?.lastName || "-"}</td>
+                <td>{artist.personalInfo?.firstName || "-"}</td>
+                <td>{artist.personalInfo?.email || "-"}</td>
+                <td>{artist.personalInfo?.phone || "-"}</td>
+                <td>{artist.adminInfo?.nbOfPerson || "-"}</td>
+                <td>{artist.adminInfo?.stage || "-"}</td>
+                <td>{artist.adminInfo?.gigDateTime || "-"}</td>
+                <td>{artist.adminInfo?.totalFees || "-"} €</td>
               </tr>
             ))}
           </tbody>
@@ -172,26 +177,26 @@ export default function ArtistPage() {
               <Button type="button"  className="btn btn-delete" onClick={() => deleteArtist(selectedArtist._id)}>Supprimer</Button> {/* Fonction de rappel qui sera déclenchée au clic */}
               </div>
               {/* Liste des infos détaillés de l'artiste sélectionné */}
-            <p><strong>Cachet :</strong> {selectedArtist.adminInfo.bookingFee} €</p>
-            <p><strong>Frais déplacement :</strong> {selectedArtist.adminInfo.travelExpense} €</p>
-            <p><strong>Nom invité :</strong>{selectedArtist.personalInfo.invitName}</p>
-            <p><strong>Run arrivée :</strong>{selectedArtist.adminInfo.arrivedRun}</p>
-            <p><strong>Run départ :</strong>{selectedArtist.adminInfo.departRun}</p>
-            <p><strong>Logement :</strong>{selectedArtist.adminInfo.accomodation}</p>
-            <p><strong>Contrat :</strong> {selectedArtist.adminInfo.contract ? "Oui" : "Non"}</p>
-            <p><strong>Facture :</strong> {selectedArtist.adminInfo.invoice ? "Oui" : "Non"}</p>
-            <p><strong>Feuille de route :</strong> {selectedArtist.adminInfo.roadMap ? "Oui" : "Non"}</p>
-            <p><strong>Infos paiement :</strong> {selectedArtist.adminInfo.paiementInfo}</p>
-            <p><strong>Commentaire admin :</strong> {selectedArtist.adminInfo.specialInfo}</p>
-            <p><strong>Fiche Sacem :</strong> {selectedArtist.adminInfo.sacemForm ? "Oui" : "Non"}</p>
-            <p><strong>Matériel Setup :</strong> {selectedArtist.personalInfo.setup}</p>
-            <p><strong>Temps Setup (en min) :</strong> {selectedArtist.personalInfo.setupTimeInMin}</p>
-            <p><strong>Soundcheck :</strong> {selectedArtist.personalInfo.soundcheck}</p>
-            <p><strong>Soundcheck date et heure:</strong> {selectedArtist.adminInfo.soundcheckDayTime}</p>
-            <p><strong>Accord pour enregistrer la prestation :</strong> {selectedArtist.personalInfo.record}</p>
-            <p><strong>Lien photo :</strong> {selectedArtist.personalInfo.pics}</p>
-            <p><strong>Commentaire artiste :</strong> {selectedArtist.personalInfo.artistComments}</p>
-            
+            <p><strong>Cachet :</strong> {selectedArtist.adminInfo?.bookingFee || "-" } €</p>
+            <p><strong>Frais déplacement :</strong> {selectedArtist.adminInfo?.travelExpense || "-"} €</p>
+            <p><strong>Nom invité :</strong>{selectedArtist.personalInfo?.invitName || "-"}</p>
+            <p><strong>Run arrivée :</strong>{selectedArtist.adminInfo?.arrivedRun || "-"}</p>
+            <p><strong>Run départ :</strong>{selectedArtist.adminInfo?.departRun || "-"}</p>
+            <p><strong>Logement :</strong>{selectedArtist.adminInfo?.accomodation || "-"}</p>
+            <p><strong>Contrat :</strong> {selectedArtist.adminInfo?.contract || "-"}</p>
+            <p><strong>Facture :</strong> {selectedArtist.adminInfo?.invoice || "-"}</p>
+            <p><strong>Feuille de route :</strong> {selectedArtist.adminInfo?.roadMap || "-"}</p>
+            <p><strong>Infos paiement :</strong> {selectedArtist.adminInfo?.paiementInfo || "-"}</p>
+            <p><strong>Commentaire admin :</strong> {selectedArtist.adminInfo?.specialInfo || "-"}</p>
+            <p><strong>Fiche Sacem :</strong> {selectedArtist.adminInfo?.sacemForm || "-"}</p>
+            <p><strong>Matériel Setup :</strong> {selectedArtist.personalInfo?.setup || "-"}</p>
+            <p><strong>Temps Setup (en min) :</strong> {selectedArtist.personalInfo?.setupTimeInMin || "-"}</p>
+            <p><strong>Soundcheck :</strong> {selectedArtist.personalInfo?.soundcheck || "-"}</p>
+            <p><strong>Soundcheck date et heure:</strong> {selectedArtist.adminInfo?.soundcheckDayTime || "-"}</p>
+            <p><strong>Accord pour enregistrer la prestation :</strong> {selectedArtist.personalInfo?.record || "-"}</p>
+{/*             <p><strong>Lien photo :</strong> {selectedArtist.personalInfo.pics}</p> */}
+            <p><strong>Style :</strong> {selectedArtist.promo?.style || "-"}</p>
+
             {/* Bouton pour fermer qui ré initialise l'artiste sélectionné a nul */}
             <Button onClick={() => setSelectedArtist(null)} className="btn">Fermer</Button> 
           </aside>

@@ -14,7 +14,7 @@
   "siteEdit": "Site Editor",
   "association": "Association",
   "name": "Attrape rêve (French law 1901)",
-  "address": "Address: Lautignac, France",
+  "address": "Address: 31370 Lautignac, France",
   "email": "Email: info@okamifestival.com",
   "phone": "Phone: +33 6 63 01 21 08",
   "siret": "SIRET: 91298256800012",
@@ -28,9 +28,10 @@
 
   "personalDataTitle": "Personal Data",
   "personalDataSubtitle": "GDPR",
-  "personalDataContent1": "The information provided is used solely to respond to your requests.",
-  "personalDataContent2": "No data is sold or shared with third parties.",
-  "personalDataContent3": "Retention period: up to 3 years after the last interaction.",
+  "personalDataContent1": "The only form available on this website is a contact form.",
+  "personalDataContent2": "The information submitted through this form is used solely to respond to the user's request and is neither stored nor reused for any other purpose.",
+  "personalDataContent3": "No personal data is kept beyond the time required to process the request.",
+
   
   "cookiesTitle": "Cookies",
   "cookiesContent1": "Used to improve navigation and measure audience. You can disable them in your browser settings.",
@@ -67,6 +68,8 @@
     "setup": "Backline / Setup",
     "artistComments": "Comments",
     "pics": "Photo Link",
+    "socials": "Links to your social media",
+    "promoText": "Add here the presentation text that will be used for promotion",
     "submit": "Submit"
   },
   "form.successMsg":"🩷 Form successfully submitted, thank you! 💚",
