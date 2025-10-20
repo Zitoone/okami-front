@@ -7,9 +7,26 @@ $yellow2: #ff9c00;
 $white: #EFE5D2;
 $blue: #01484d;
 
-$main-font: 'Livvic', sans-serif;
-/* KG second chances */
-$title-font: 'Audiowide', cursive;
+
+
+/* $main-font: 'Livvic', sans-serif; */
+@font-face {
+  font-family: 'KG Second Chances Solid';
+  src: url('/fonts/KGSecondChancesSolid.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+$font:'KG Second Chances Solid', sans-serif;
+
+@font-face {
+  font-family: 'KG Second Chances Sketch';
+  src: url('/fonts/KGSecondChancesSketch.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* $fontSketch:'KG Second Chances Sketch', sans-serif; */
+
+$title-font: KG Second Chances Sketch, sans-serif;
 $base-font-size: 16px;
 $base-line-height: 1.5;
 $border-radius: 20px;

@@ -1,12 +1,21 @@
 @use './variables' as *;
 
+.artist-edit, .artist-page, .artist-new{
+  background-color: $white;
+    h1{
+        padding-top: 2rem;
+    }
+    a, h1, h2, .table-list{
+      color: $blue;
+    }
+}
+
 .artist-form{
   color: $blue;
 span {
   color: red;
 }}
 
-//Page liste des artistes
 .table-page {
   position: relative;
   padding: 1rem;
@@ -15,11 +24,13 @@ span {
 .table-list {
   overflow-x: auto;
   max-width: 100%;
+  padding: $padding;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  text-align-last: center;
 }
 
 th, td {
@@ -59,6 +70,11 @@ th, td {
   padding: 1.5rem;
   overflow-y: auto;
   animation: slideIn 0.3s ease forwards;
+  p{
+    color: $blue;
+    text-align: justify;
+  }
+  
 }
 .tableBtns{
   display: flex;
@@ -82,13 +98,4 @@ th, td {
   }
 }
 
-//Page edit
-.artist-edit{
-  background-color: $white;
-    h1{
-        padding-top: 2rem;
-    }
-    a, h2{
-      color: $blue;
-    }
-}
+

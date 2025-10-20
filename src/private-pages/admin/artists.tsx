@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import Button from "../../components/Button"
+import { Link } from "react-router-dom"
+import { FaArrowCircleLeft } from "react-icons/fa"
 
 
 // Définition du type ArtistProps:
@@ -21,6 +23,8 @@ type ArtistProps = {
     setup: string
     artistComments: string
     pics: string
+    socials: string
+    promoText: string
   }
   adminInfo: {
     nbOfPerson: string
@@ -39,8 +43,6 @@ type ArtistProps = {
     paiementInfo: string
     sacemForm: string
     specialInfo: string
-  }
-  promo: {
     descriptionFr: string
     descriptionEng: string
     style: string
@@ -121,6 +123,8 @@ export default function ArtistPage() {
   //On retourne le rendu s'il n'y a pas d'erreur
   return (
     <main className="artist-page table-page">
+      <div className="main-wrap">
+      <Link to="/admin/dashboard"><FaArrowCircleLeft /> Retour sur le dashboad Admin</Link>
       <h1>Artistes 2026</h1>
 
       <Button to={("/admin/artists/new")} className="btn add-btn">+ Ajouter un artiste</Button>
@@ -131,13 +135,13 @@ export default function ArtistPage() {
         <table> 
           <thead>
             <tr>
-              <th>Projet</th>
-              <th>Nom</th>
-              <th>Prénom</th>
-              <th>Email</th>
-              <th>Tel</th>
+              <th>PROJET</th>
+              <th>NOM</th>
+              <th>PRÉNOM</th>
+              <th>EMAIL</th>
+              <th>TEL</th>
               <th>Nb de pers</th>
-              <th>Scène</th>
+              <th>SCÈNE</th>
               <th>Date/heure de jeu</th>
               <th>TOTAL TTC</th>
             </tr>
@@ -177,6 +181,7 @@ export default function ArtistPage() {
               <Button type="button"  className="btn btn-delete" onClick={() => deleteArtist(selectedArtist._id)}>Supprimer</Button> {/* Fonction de rappel qui sera déclenchée au clic */}
               </div>
               {/* Liste des infos détaillés de l'artiste sélectionné */}
+            <p><strong>Infos admin </strong>{selectedArtist.adminInfo?.specialInfo || "-"}</p>
             <p><strong>Cachet :</strong> {selectedArtist.adminInfo?.bookingFee || "-" } €</p>
             <p><strong>Frais déplacement :</strong> {selectedArtist.adminInfo?.travelExpense || "-"} €</p>
             <p><strong>Nom invité :</strong>{selectedArtist.personalInfo?.invitName || "-"}</p>
@@ -187,21 +192,29 @@ export default function ArtistPage() {
             <p><strong>Facture :</strong> {selectedArtist.adminInfo?.invoice || "-"}</p>
             <p><strong>Feuille de route :</strong> {selectedArtist.adminInfo?.roadMap || "-"}</p>
             <p><strong>Infos paiement :</strong> {selectedArtist.adminInfo?.paiementInfo || "-"}</p>
-            <p><strong>Commentaire admin :</strong> {selectedArtist.adminInfo?.specialInfo || "-"}</p>
             <p><strong>Fiche Sacem :</strong> {selectedArtist.adminInfo?.sacemForm || "-"}</p>
             <p><strong>Matériel Setup :</strong> {selectedArtist.personalInfo?.setup || "-"}</p>
-            <p><strong>Temps Setup (en min) :</strong> {selectedArtist.personalInfo?.setupTimeInMin || "-"}</p>
-            <p><strong>Soundcheck :</strong> {selectedArtist.personalInfo?.soundcheck || "-"}</p>
+            <p><strong>Temps Setup :</strong> {selectedArtist.personalInfo?.setupTimeInMin || "-"}</p>
             <p><strong>Soundcheck date et heure:</strong> {selectedArtist.adminInfo?.soundcheckDayTime || "-"}</p>
             <p><strong>Accord pour enregistrer la prestation :</strong> {selectedArtist.personalInfo?.record || "-"}</p>
 {/*             <p><strong>Lien photo :</strong> {selectedArtist.personalInfo.pics}</p> */}
-            <p><strong>Style :</strong> {selectedArtist.promo?.style || "-"}</p>
+            <p><strong>Style :</strong> {selectedArtist.adminInfo?.style || "-"}</p>
+            <p><strong>Réseaux sociaux :</strong> {selectedArtist.personalInfo?.socials || "-"}</p>
+{/*             <p><strong>Promo FR :</strong>{selectedArtist.adminInfo?.descriptionFr || "-"}</p>
+            <p><strong>Promo ENG :</strong>{selectedArtist.adminInfo?.descriptionEng || "-"}</p> */}
+
+            <p><strong>Nom invité :</strong> {selectedArtist.personalInfo?.invitName || "-"}</p>           
+            <p><strong>Demande runs artiste :</strong> {selectedArtist.personalInfo?.infoRun || "-"}</p>
+            <p><strong>Soundcheck :</strong> {selectedArtist.personalInfo?.soundcheck || "-"}</p>
+            <p><strong>Commentaire artiste :</strong> {selectedArtist.personalInfo?.artistComments || "-"}</p>
+            <p><strong>Texte promo artiste :</strong> {selectedArtist.personalInfo?.promoText || "-"}</p>
 
             {/* Bouton pour fermer qui ré initialise l'artiste sélectionné a nul */}
             <Button onClick={() => setSelectedArtist(null)} className="btn">Fermer</Button> 
           </aside>
         </>
       )}
+      </div>
     </main>
   )
 }

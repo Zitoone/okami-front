@@ -5,14 +5,16 @@ const Dashboard: React.FC = () =>{
 /* const token = localStorage.getItem('authToken') */
     return(
         <main className="dashboard-page">
-            <h1>Bienvenue sur le tableau de bord administrateur</h1>
+            <div className="main-wrap">
+                <h1>Bienvenue sur le tableau de bord administrateur</h1>
 
-            <div>
-                <Button type="button" className="btn" to="/admin/artists"> Artistes </Button>
-                <Button type="button" className="btn" to="/admin/artist"> Bénévoles </Button>
-                <Button type="button" className="btn" to="/admin/artist"> Stands </Button>
-                <Button type="button" className="btn" to="/admin/artist"> PSH </Button>
-                <Button type="button" className="btn" to="/admin/artist"> Prestataires </Button>
+                <div>
+                    <Button type="button" className="btn" to="/admin/artists"> Artistes </Button>
+                    <Button type="button" className="btn" to="/admin/artist"> Bénévoles </Button>
+                    <Button type="button" className="btn" to="/admin/artist"> Stands </Button>
+                    <Button type="button" className="btn" to="/admin/artist"> PSH </Button>
+                    <Button type="button" className="btn" to="/admin/artist"> Prestataires </Button>
+                </div>
 
             </div>
         </main>
@@ -22,3 +24,4 @@ const Dashboard: React.FC = () =>{
 export default Dashboard
 
 //TODO: Mettre en place Zustand pour green IT et limité les appels API
+//TODO: Faire système de déconnexion

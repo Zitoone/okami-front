@@ -2,6 +2,8 @@ import { useState } from "react"
 import Button from "../../components/Button"
 import { useNavigate } from "react-router-dom"
 import Modal from "../../components/Modal"
+import { Link } from "react-router-dom"
+import { FaArrowCircleLeft } from "react-icons/fa"
 
 type ArtistProps ={
     personalInfo: {
@@ -65,45 +67,48 @@ export default function ArtistNew() {
     }
 
     return(
-        <main>
-            <h1>Ajout d'un nouvel artiste pour Okami 2026</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nom du projet</label>
-                    <input name="projectName" value={formData.personalInfo.projectName} onChange={handleChange} />
-                </div>
+        <main className="artist-new">
+            <div className="main-wrap">
+                <Link to="/admin/artists"><FaArrowCircleLeft /> Retour sur le tableau des artistes</Link>
+                <h1>Ajout d'un nouvel artiste pour Okami 2026</h1>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label>Nom du projet</label>
+                        <input name="projectName" value={formData.personalInfo.projectName} onChange={handleChange} />
+                    </div>
 
-                <div>
-                    <label>Nom</label>
-                    <input name="lastName" value={formData.personalInfo.lastName} onChange={handleChange}/>
-                </div>
+                    <div>
+                        <label>Nom</label>
+                        <input name="lastName" value={formData.personalInfo.lastName} onChange={handleChange}/>
+                    </div>
 
-                <div>
-                    <label>Prénom</label>
-                    <input name="firstName" value={formData.personalInfo.firstName} onChange={handleChange} />
-                </div>
+                    <div>
+                        <label>Prénom</label>
+                        <input name="firstName" value={formData.personalInfo.firstName} onChange={handleChange} />
+                    </div>
 
-                <div>
-                    <label>Email</label>
-                    <input type="email" name="email" value={formData.personalInfo.email} onChange={handleChange} />
-                </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="email" name="email" value={formData.personalInfo.email} onChange={handleChange} />
+                    </div>
 
-                <Button type="submit" className="btn form-btn">Envoyer</Button>
-                
-                {modal && (
-                    <Modal
-                    text="🩷 Artiste ajouté avec succès 💚 "
-                    type="success"
-                    onClose={()=>{
-                        setModal(false)
-                        navigate(-1)
-                    }}
-                    />
-                )}
-                
-                
-            </form>   
+                    <Button type="submit" className="btn form-btn">Envoyer</Button>
+                    
+                    {modal && (
+                        <Modal
+                        text="🩷 Artiste ajouté avec succès 💚 "
+                        type="success"
+                        onClose={()=>{
+                            setModal(false)
+                            navigate(-1)
+                        }}
+                        />
+                    )}
+                </form>
+            </div>
         </main>
     )
 
 }
+
+//TODO: Ajouter un controle a l'envoi

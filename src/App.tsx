@@ -14,6 +14,7 @@ function App(){
   return(
     <Routes>
     <Route path='/' element={<Home />} />
+    {/* <Route path='/program' element={<Program />} /> */}
 {/*     <Route path='*' element={<NotFound />} /> */}
     <Route path='/legal' element={<Legal />} />
 

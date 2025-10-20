@@ -1,13 +1,42 @@
 import Seo from '../components/Seo'
 import Card from '../components/Card'
+import Carousel from '../components/Carousel'
 import { BsFillSpeakerFill, BsSpeaker } from "react-icons/bs"
 import { FaShieldHeart } from "react-icons/fa6"
 import { FaChild } from "react-icons/fa"
 import { TbShoppingBagHeart } from "react-icons/tb"
 import { MdNoFood } from "react-icons/md"
+import { useState, useEffect } from 'react'
 
+type Artist={
+    _id: string
+    personalInfo:{
+        projectName?: string
+        pics?: string
+        socials?: string
+    }
+    adminInfo:{
+        style?: string
+    }}
 
 const Home: React.FC=()=>{
+
+    const[artists, setArtists]=useState<Artist[]>([])
+
+    useEffect(()=>{
+        const fetchArtists=async()=>{
+        try {
+            const res = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/public`)
+            const data = await res.json()
+            setArtists(data)
+        } catch (error) {
+            console.log("Erreur lors du chargement des artistes :", error)
+        }
+    }
+        fetchArtists()
+        },[]
+    )
+
     return(
         <>
             <Seo
@@ -47,12 +76,13 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                 <section id='spaces'>
                     <h2>Explore nos espaces sacrés</h2>
                         <div className='spaces-card'>
-                    <Card url={`/program`} title='Scène DOMA' content='Viens découvrir la scène principale ' icon={<BsFillSpeakerFill />} ></Card>
-                    <Card url={`/program`} title='Scène SELVA' content="Ici l'accent sera mis sur le downtempo et la musique live " icon={<BsSpeaker />}></Card>
-                    <Card url={`/program`} title="Espace bien être" content="Un sanctuaire ton esprit, ton corps et ton âme" icon={<FaShieldHeart />}></Card>
-                    <Card url={`/program`} title="Kidzone" content="L'univers des enfants pour des aventures créatives amusantes" icon={<FaChild />}></Card>
-                    <Card url={`/program`} title="Marché artisanal" content="Artisans créatifs sélectionnés avec soin" icon={<TbShoppingBagHeart />}></Card>
-                    <Card url={`/program`} title="Bar et restauration" content="2 bars et un espace pour vous restaurer pendant toute la durée du festival" icon={<MdNoFood />}></Card>
+                    <Card url={`/program`} title='Scène DOMA' content='Viens découvrir la scène principale ' icon={<BsFillSpeakerFill />} className='space-card'></Card>
+                    <Card url={`/program`} title='Scène SELVA' content="Ici l'accent sera mis sur le downtempo et la musique live " icon={<BsSpeaker />} className='space-card'></Card>
+                    <Card url={`/program`} title="Espace bien être" content="Un sanctuaire ton esprit, ton corps et ton âme" icon={<FaShieldHeart />} className='space-card'></Card>
+                    <Card url={`/program`} title="Kidzone" content="L'univers des enfants pour des aventures créatives amusantes" icon={<FaChild />} className='space-card'></Card>
+                    <Card url={`/program`} title="Marché artisanal" content="Artisans créatifs sélectionnés avec soin" icon={<TbShoppingBagHeart />} className='space-card'></Card>
+                    <Card url={`/program`} title="Bar et restauration" content="2 bars et un espace pour vous restaurer pendant toute la durée du festival Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta tempore beatae quasi optio incidunt temporibus libero? Quos recusandae distinctio, quas cupiditate nobis rerum mollitia sunt laudantium cum nam necessitatibus corporis?" icon={<MdNoFood />} className='space-card'></Card>
+                    
 
                     </div>
                 </section>
@@ -60,6 +90,20 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                 <section id='lineup'>
                     <h2>Line Up 2026</h2>
                     <p>Programmation démentielle à venir</p>
+                    <Carousel slidesPerView={4} autoPlayDelay={3000} loop={true} showPagination={false} showNavigation={true}>
+                        {artists.map((artist)=>(
+                            <Card className={"artist-card"}
+                            key={artist._id}
+                            url={`/program`}
+                            title={artist.personalInfo?.projectName || 'Artiste'}
+                            content={artist.adminInfo?.style || ''}
+                            image={ artist.personalInfo?.pics
+    ? `${import.meta.env.VITE_APP_API_URL}${artist.personalInfo.pics}`
+    : ''}
+                            socials={artist.personalInfo?.socials}
+                            />
+                        ))}
+                    </Carousel>
 
                 </section>
 
@@ -71,10 +115,6 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                 <section>
                     <h2>Au fil des éditions</h2>
                 </section>
-
-
-
-
 
             </main>
         </>

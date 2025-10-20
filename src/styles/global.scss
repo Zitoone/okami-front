@@ -5,7 +5,7 @@
 }
 body {
   margin: 0;
-  font-family: $main-font;
+  font-family: $font;
 }
 .form {
 /*   max-width: $max-width; */
@@ -25,7 +25,7 @@ a {
   }
 }
 .btn {
-  font-family: $main-font;
+  font-family: $font;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -40,6 +40,7 @@ a {
     background-color: $white;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     color: $yellow;
+    border: 2px solid $blue;
   }
 }
 .btn-delete{
@@ -66,15 +67,27 @@ label {
   margin: auto;
   padding: 0 $padding;
 }
+.main-wrap{
+  max-width: 1200px;
+  margin: auto;
+  padding: $padding;
+}
 
 .collapse-content {
   transition: all 0.3s ease;
   padding: 10px 0;
 }
-.dashboard-page>div{
+//Page dashboard
+.dashboard-page{
+  background-color: $white;
+  color: $blue;
+  padding: $padding;
+}
+.dashboard-page>div>div{
   display: flex;
   justify-content: space-evenly;
   padding: $padding;
+  
 }
 
 //Edit
@@ -84,6 +97,9 @@ label {
 }
 
 //Modales
+.modal p{
+  color: $blue;
+}
 .modal-container{
   position: fixed;
   top: 0;
