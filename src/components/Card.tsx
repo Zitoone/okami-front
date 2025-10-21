@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import Button from '../components/Button'
 import { RiSoundcloudLine, RiInstagramFill } from "react-icons/ri"
 
 type CardProps={
@@ -8,7 +9,7 @@ type CardProps={
     icon?: React.ReactNode,
     subtitle?: string,
     image?:string,
-    content: string,
+    content?: string,
     socials?: string,
     children?: React.ReactNode,
     
@@ -37,14 +38,14 @@ const Card: React.FC<CardProps> = ({
                 {content && <p>{content}</p>}
                 <div className="card-socials">
                     {socials?.includes("soundcloud") && (
-                        <button onClick={()=>handleSocialClick(socials)}>
+                        <button onClick={()=>handleSocialClick(socials)} className="btn">
                             <RiSoundcloudLine /> 
                         </button>
                     )}
                     {socials?.includes("instagram") && (
-                        <button onClick={()=>handleSocialClick(socials)}>
+                        <Button onClick={()=>handleSocialClick(socials)} className="btn">
                             <RiInstagramFill /> 
-                        </button>
+                        </Button>
                     )}
                 </div>
 

@@ -55,7 +55,7 @@ function Header() {
       </div>
       <nav className={`navbar ${isMenuOpen ? "open" : ""}`}>
         <ul>
-          <li><NavLink to="/" onClick={toggleMenu}>{t("menu.home")}</NavLink></li>
+          {/* <li><NavLink to="/" onClick={toggleMenu}>{t("menu.home")}</NavLink></li> */}
           <li><NavLink to="/program" onClick={toggleMenu}>{t("menu.program")}</NavLink></li>
           <li><NavLink to="/participate" onClick={toggleMenu}>{t("menu.participate")}</NavLink></li>
           <li><NavLink to="/faq" onClick={toggleMenu}>{t("menu.faq")}</NavLink></li>

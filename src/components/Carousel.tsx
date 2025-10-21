@@ -6,8 +6,7 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 
 export type CarouselProps = {
-    children: React.ReactNode
-    slidesPerView?: number  
+    children: React.ReactNode 
     autoPlayDelay?: number
     loop?: boolean
     showPagination?: boolean
@@ -17,11 +16,11 @@ export type CarouselProps = {
 
 const Carousel: React.FC<CarouselProps> = ({
     children,
-    slidesPerView = 4,
     autoPlayDelay = 3000,
-    loop = true,
+    loop = false,
     showPagination = false,
     showNavigation = true,
+    
 }) => {
     
     return (
@@ -29,7 +28,7 @@ const Carousel: React.FC<CarouselProps> = ({
             <Swiper
             modules={[Autoplay, Pagination, Navigation]}
             spaceBetween={30}
-            slidesPerView={slidesPerView}
+            slidesPerView={2}
             loop={loop}
             autoplay={{
                 delay: autoPlayDelay,
@@ -37,6 +36,13 @@ const Carousel: React.FC<CarouselProps> = ({
             }}
             navigation={showNavigation}
             pagination={showPagination ? { clickable: true } : false}
+            breakpoints={{
+            1280: { slidesPerView: 4 },
+            1024: { slidesPerView: 3 },
+            768: { slidesPerView: 2 },
+            480: { slidesPerView: 1 },
+            }}
+            
             >
                 {React.Children.map(children, (child: React.ReactNode, index) => (
                     <SwiperSlide key={index}>

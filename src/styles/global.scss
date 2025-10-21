@@ -122,3 +122,23 @@ label {
   min-width: 200px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
+
+#error, #construction{
+  background-color: $white;
+  >div{
+    min-height: calc(100vh - 240px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    max-width: $max-width;
+    margin: auto;
+  }
+  h1, p, a{
+    color: $blue;
+  }
+  a:hover{
+    color: $yellow;
+  }
+}

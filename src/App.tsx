@@ -1,8 +1,14 @@
 import {Routes, Route} from 'react-router-dom'
-import Home from './publics-pages/Home.tsx'
+import Home from './publics-pages/home.tsx'
 import Legal from './publics-pages/legal.tsx'
-/* import NotFound from './pages/NotFound.tsx' */
+import NotFound from './publics-pages/notFound.tsx'
+import Program from './publics-pages/program.tsx'
+import Participate from './publics-pages/participate.tsx'
+import Informations from './publics-pages/informations.tsx'
+import Souvenirs from './publics-pages/souvenirs.tsx'
+import Contact from './publics-pages/contact.tsx'
 
+//Pages privées/formulaires
 import ArtistForm from './private-pages/formArtist.tsx'
 import LoginForm from './private-pages/loginAdmin.tsx'
 import Dashboard from './private-pages/admin/dashboard.tsx'
@@ -14,9 +20,13 @@ function App(){
   return(
     <Routes>
     <Route path='/' element={<Home />} />
-    {/* <Route path='/program' element={<Program />} /> */}
-{/*     <Route path='*' element={<NotFound />} /> */}
+    <Route path='/program' element={<Program />} />
+    <Route path='/participate' element={<Participate />} />
+    <Route path='/faq' element={<Informations />} />
+    <Route path='/souvenir' element={<Souvenirs />} />
+    <Route path='/contact' element={<Contact />} />    
     <Route path='/legal' element={<Legal />} />
+    <Route path='*' element={<NotFound />} />
 
 {/* Pages privées */}
     <Route path='/artist-form' element={<ArtistForm />} />

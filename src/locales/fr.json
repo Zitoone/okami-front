@@ -49,6 +49,14 @@
   "ogTitle": "OKAMI Festival 2026 – Accueil",
   "ogDescription": "Toutes les infos pour profiter pleinement du Festival OKAMI 2026 du 10 au 14 Juin à Saint Christaud !"
   },
+  "error.title": "404 - Portail introuvable",
+  "error.message": "Vous avez ouvert une porte vers un monde qui n’existe pas… encore.",
+  "error.homeLink": "Suivez la lumière",
+
+  "construction.title": "Les platines chauffent… ",
+  "construction.message": "Cette page est encore en construction. Reviens vite, le drop arrive.",
+  "construction.homeLink": "Retour à l'accueil",
+
   "artistForm": {
   "intro": "Nous sommes ravis de vous retrouver pour l'édition OKAMI 2026 ! Merci de remplir ce formulaire avec attention afin de pouvoir vous accueillir dans les meilleures conditions. Pour toute question complémentaire, n'hésitez pas à nous contacter : booking@okamifestival.com",
   "title": "Formulaire Artiste",
