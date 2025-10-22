@@ -13,6 +13,7 @@ import "./styles/header-footer.scss"
 import "./styles/form.scss"
 import "./styles/artists.scss"
 import "./styles/home.scss"
+import "./styles/program.scss"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

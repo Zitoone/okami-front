@@ -32,7 +32,7 @@ const Carousel: React.FC<CarouselProps> = ({
             loop={loop}
             autoplay={{
                 delay: autoPlayDelay,
-                disableOnInteraction: false,
+                disableOnInteraction: true,
             }}
             navigation={showNavigation}
             pagination={showPagination ? { clickable: true } : false}

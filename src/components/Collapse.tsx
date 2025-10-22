@@ -2,7 +2,7 @@ import { useState } from "react"
 import { FaHandPointUp } from "react-icons/fa"
 
 export type CollapseProps={
-    title: string,
+    title?: string,
     children: React.ReactNode // pour accepter tous les types
 }
 

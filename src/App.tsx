@@ -7,6 +7,7 @@ import Participate from './publics-pages/participate.tsx'
 import Informations from './publics-pages/informations.tsx'
 import Souvenirs from './publics-pages/souvenirs.tsx'
 import Contact from './publics-pages/contact.tsx'
+import MusicProgram from './publics-pages/programMusic.tsx'
 
 //Pages privées/formulaires
 import ArtistForm from './private-pages/formArtist.tsx'
@@ -21,6 +22,7 @@ function App(){
     <Routes>
     <Route path='/' element={<Home />} />
     <Route path='/program' element={<Program />} />
+      <Route path='/program/music' element={<MusicProgram />} />
     <Route path='/participate' element={<Participate />} />
     <Route path='/faq' element={<Informations />} />
     <Route path='/souvenir' element={<Souvenirs />} />
