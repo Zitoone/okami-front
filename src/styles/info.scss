@@ -1,0 +1,51 @@
+@use './variables' as *;
+
+.info-page{
+    background: $background;
+    >div{
+        max-width: $max-width;
+        margin: auto;
+        padding: 4rem 2rem;
+    }
+    h1{
+        font-size: 50px;
+        color: $yellow;
+    }
+    h2{
+        font-size: 40px;
+    }
+    #general-info{
+        img{
+        width: 30%;
+        height: auto;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow;
+        }
+
+            display: flex;
+            align-items: flex-start;
+            text-align: center;
+            padding: 50px 0;
+            
+            span{
+                padding: $padding;
+                
+
+                }
+            button{
+                display: none;
+            }
+        }
+    #faq{
+        h3{
+            color: $white;
+        }
+        p, ul, li{
+            font-family: $text-font;
+            font-weight: bold;
+            font-size: 18px;
+            color: black;
+            text-align: left;
+        }
+    }
+}

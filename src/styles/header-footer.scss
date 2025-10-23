@@ -118,7 +118,9 @@ footer {
 @media (max-width: $breakpoint-mobile) {
   header,footer {
     padding: 10px;
-
+    .buyTickets {
+      display: none;
+    }
     img {
       height: 40px;
     }
@@ -127,9 +129,7 @@ footer {
     flex-direction: row;
     gap: 5px;
   }
-  .buyTickets {
-    display: none;
-  }
+
   footer{
     padding: 0;
     .container{

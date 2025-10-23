@@ -31,8 +31,10 @@ const Card: React.FC<CardProps> = ({
 }) => {
     const [isOpen, setIsOpen] = useState(false)
 
-    const handleSocialClick = (url: string) => {
-    window.open(url, '_blank', 'noopener,noreferrer')
+    const handleSocialClick = (socials: string, type: string) => {
+        const urls = socials.split(',').map(s => s.trim())
+        const url = urls.find(u => u.includes(type))
+        if (url) window.open(url, '_blank', 'noopener,noreferrer')
     }
     const handleClick = () =>{
         if(url) return
@@ -45,7 +47,8 @@ const Card: React.FC<CardProps> = ({
     }
 
     const cardContent = (
-            <article className={`${className} ${isOpen ? "open" : ""}`} onClick={handleClick} onClick={handleClick}>
+            <article className={`${className} ${isOpen ? "open" : ""}`}
+                onClick={handleClick}>
                 {image && <img src={image} alt={title} />}
                 {icon && <span>{icon}</span>}
                 {title && <h3>{title}</h3>}
@@ -54,12 +57,14 @@ const Card: React.FC<CardProps> = ({
                 
                 <div className="card-socials">
                     {socials?.includes("soundcloud") && (
-                        <button onClick={()=>handleSocialClick(socials)} className="btn">
+                        <button onClick={(e) =>{ e.stopPropagation()
+                        handleSocialClick(socials, "soundcloud")}} className="btn">
                             <RiSoundcloudLine /> 
                         </button>
                     )}
                     {socials?.includes("instagram") && (
-                        <Button onClick={()=>handleSocialClick(socials)} className="btn">
+                        <Button onClick={(e)=> { e.stopPropagation()
+                            handleSocialClick(socials, "instagram")}} className="btn">
                             <RiInstagramFill /> 
                         </Button>
                     )}
@@ -83,4 +88,4 @@ const Card: React.FC<CardProps> = ({
         return cardContent
 }
 
-export default Card
+export default Card 

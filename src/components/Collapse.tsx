@@ -1,9 +1,9 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { FaHandPointUp } from "react-icons/fa"
 
 export type CollapseProps={
-    title?: string,
-    children: React.ReactNode // pour accepter tous les types
+    title?: React.ReactNode // pour accepter tous les types,
+    children: React.ReactNode 
 }
 
 const Collapse = ({title, children }:CollapseProps) => {
@@ -12,15 +12,15 @@ const Collapse = ({title, children }:CollapseProps) => {
     return (
     <div className="collapse">
         <span>
-            <h2 onClick={() => setIsCollapsed(!isCollapsed)}>{title}</h2>
-            <button type='button' className="collapse-button btn" onClick={() => setIsCollapsed(!isCollapsed)}>
+            <h3 onClick={() => setIsCollapsed(!isCollapsed)}>{title}</h3>
+            <button type='button' className="collapse-button" onClick={() => setIsCollapsed(!isCollapsed)}>
             {isCollapsed ? "▲" : "▼"}</button>
         </span>
         {isCollapsed &&(      
             <div className="collapse-content">
                 {children}
                 <div>
-                    <button type='button' className="collapse-button btn" onClick={()=> setIsCollapsed(false)}><FaHandPointUp /></button>
+                    <button type='button' className="btn" onClick={()=> setIsCollapsed(false)}><FaHandPointUp /></button>
                 </div>
             </div>
             

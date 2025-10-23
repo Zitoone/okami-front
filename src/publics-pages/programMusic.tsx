@@ -1,24 +1,26 @@
-import Card from "../components/Card"
 import { useState, useEffect } from "react"
+import { RiSoundcloudLine, RiInstagramFill } from "react-icons/ri"
+import Button from "../components/Button"
 
-type Artist={
+type Artist = {
     _id: string
-    personalInfo:{
+    personalInfo: {
         projectName?: string
         pics?: string
         socials?: string
     }
-    adminInfo:{
+    adminInfo: {
         style?: string
         descriptionFr?: string
-    }}
+    }
+}
 
-const MusicProgram: React.FC=() => {
-        const[artists, setArtists]=useState<Artist[]>([])
-        
-    
-        useEffect(()=>{
-            const fetchArtists=async()=>{
+const MusicProgram: React.FC = () => {
+    const [artists, setArtists] = useState<Artist[]>([])
+    const [openId, setOpenId] = useState<string | null>(null)
+
+    useEffect(() => {
+        const fetchArtists = async () => {
             try {
                 const res = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/public`)
                 const data = await res.json()
@@ -28,9 +30,17 @@ const MusicProgram: React.FC=() => {
                 console.log("Erreur lors du chargement des artistes :", error)
             }
         }
-            fetchArtists()
-            },[]
-        )
+    fetchArtists()
+    }, [])
+
+    const toggle = (id: string) => {
+        setOpenId((prev) => (prev === id ? null : id))
+    }
+    const handleSocialClick = (socials: string, type: string) => {
+        const urls = socials.split(',').map(s => s.trim())
+        const url = urls.find(u => u.includes(type))
+        if (url) window.open(url, '_blank', 'noopener,noreferrer')
+    }
 
     return (
         <main className="program-music-page">
@@ -40,27 +50,45 @@ const MusicProgram: React.FC=() => {
             </div>
 
             <div className="artist-cards">
-                {artists.map((artist)=>(
-                    <Card
-                        className="artist-card-page"
+                {artists.map((artist) => {
+                const isOpen = openId === artist._id
+                return (
+                    <article
                         key={artist._id}
-                        title={artist.personalInfo?.projectName || 'Artiste'}
-                        socials={artist.personalInfo?.socials}
-                        subtitle={artist.adminInfo?.style || ""}
-                        image={artist.personalInfo?.pics ? `${import.meta.env.VITE_APP_API_URL}${artist.personalInfo.pics}`: ''
-                        }
-                        /* isOpen={false} */
-                        children={artist.adminInfo?.descriptionFr || "Aucune  description disponible."}
-                    >
-                    </Card>
-))}
+                        className={`artist-card-page ${isOpen ? "open" : ""}`}
+                        onClick={() => toggle(artist._id)} >
+                    {!isOpen ? (
+                        <>
+                            <img
+                            src={artist.personalInfo?.pics ?`${import.meta.env.VITE_APP_API_URL}${artist.personalInfo.pics}`: ''}
+                            alt={artist.personalInfo?.projectName || 'Artiste'}/>
+                            <h3>{artist.personalInfo?.projectName || 'Artiste'}</h3>
+                            <span>{artist.adminInfo?.style || ""}</span>
+                            <div className="card-socials">
+                    {artist.personalInfo?.socials?.includes("soundcloud") &&(                       <Button onClick={(e) => { e.stopPropagation()
+                    handleSocialClick(artist.personalInfo.socials, "soundcloud")}} className="btn"><RiSoundcloudLine /> </Button>
+)}
+                    {artist.personalInfo?.socials?.includes("instagram") && (
+                        <Button onClick={(e)=> { e.stopPropagation()
+handleSocialClick(artist.personalInfo.socials, "instagram")}} className="btn"><RiInstagramFill /> 
+                        </Button>
+)}
+                </div>
+                        </>
+                    ) : (
+                        <div className="card-description">
+                            <button onClick={(e) => { e.stopPropagation(); toggle(artist._id) }}>X</button>
+                            <p>{artist.adminInfo?.descriptionFr || "Aucune description disponible."}</p>
+                        </div>
+                    )}
+                    </article>
+                )
+                })}
             </div>
-            {/* <Construction /> */}
         </main>
-                
     )
 }
 
 export default MusicProgram
 
-//TODO: const isOpen pour changer la class
+//Revoir le comportement au clik des card

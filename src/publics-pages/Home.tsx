@@ -97,7 +97,7 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                         {artists?.map((artist)=>(
                             <Card className={"artist-card"}
                             key={artist._id}
-                            url={`/program`}
+                            url={`/program/music`}
                             title={artist.personalInfo?.projectName || 'Artiste'}
                             content={artist.adminInfo?.style || ''}
                             image={ artist.personalInfo?.pics
