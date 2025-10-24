@@ -3,7 +3,7 @@ import Collapse from "../components/Collapse"
 const Informations: React.FC=()=>{
     return (
         <main className="info-page">
-            <div>
+            <div className="main-wrap">
                 <h1>Informations pratiques</h1>
                 <p>Retrouve ici toutes les infos nécessaires pour tout savoir sur l'Okami Festival. Des détails sur la réservation des billets aux activités spéciales pour les enfants, en passant par comment devenir bénévole. Si tu ne trouves pas la réponse à ta question, écris-nous, nous sommes là pour t'aider!</p>
             <section id="general-info">

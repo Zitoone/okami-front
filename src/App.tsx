@@ -5,7 +5,9 @@ import NotFound from './publics-pages/notFound.tsx'
 import Program from './publics-pages/program.tsx'
 import Participate from './publics-pages/participate.tsx'
 import Informations from './publics-pages/informations.tsx'
-import Souvenirs from './publics-pages/souvenirs.tsx'
+import Souvenirs from './publics-pages/albums.tsx'
+import Album2022 from './publics-pages/album2022.tsx'
+import Album2023 from './publics-pages/album2023.tsx'
 import Contact from './publics-pages/contact.tsx'
 import MusicProgram from './publics-pages/programMusic.tsx'
 
@@ -26,6 +28,8 @@ function App(){
     <Route path='/participate' element={<Participate />} />
     <Route path='/faq' element={<Informations />} />
     <Route path='/souvenir' element={<Souvenirs />} />
+      <Route path='/album2022' element={<Album2022 />} />
+      <Route path='/album2023' element={<Album2023 />} />
     <Route path='/contact' element={<Contact />} />    
     <Route path='/legal' element={<Legal />} />
     <Route path='*' element={<NotFound />} />

@@ -2,7 +2,6 @@
 
 //Page principale participer
 .participate-page{
-    background: $background;
     .float-text {
     font-family: $font;
     animation: floatSide 3s ease-in-out infinite;
@@ -13,19 +12,9 @@
     border-radius: $border-radius;
     box-shadow: $box-shadow;
     }
-
-    >div{
-        max-width: $max-width;
-        margin: auto;
-        padding: 4rem 2rem;
+    h2{
+        font-size: 40px;
     }
-        h1{
-            font-size: 50px;
-            color: $yellow;
-        }
-        h2{
-            font-size: 40px;
-        }
 
     }
     #volonteers, #market{

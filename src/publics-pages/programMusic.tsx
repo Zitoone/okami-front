@@ -44,10 +44,11 @@ const MusicProgram: React.FC = () => {
 
     return (
         <main className="program-music-page">
-            <div>
-                <h1>Musiciens & DJs 2026</h1>
-                <p>Découvrez la sélection éclectique d'artistes qui feront vibrer les scènes Dolma et Selva. Des rythmes envoûtants des DJs aux performances live captivantes, chaque musicien apporte une énergie unique qui promet de transformer chaque instant en une expérience inoubliable. Préparez-vous à danser, à vous émerveiller et à vous connecter à travers la musique.</p>
-            </div>
+            <div className="main-wrap">
+                <div>
+                    <h1>Musiciens & DJs 2026</h1>
+                    <p>Découvrez la sélection éclectique d'artistes qui feront vibrer les scènes Dolma et Selva. Des rythmes envoûtants des DJs aux performances live captivantes, chaque musicien apporte une énergie unique qui promet de transformer chaque instant en une expérience inoubliable. Préparez-vous à danser, à vous émerveiller et à vous connecter à travers la musique.</p>
+                </div>
 
             <div className="artist-cards">
                 {artists.map((artist) => {
@@ -84,6 +85,7 @@ handleSocialClick(artist.personalInfo.socials, "instagram")}} className="btn"><R
                     </article>
                 )
                 })}
+            </div>
             </div>
         </main>
     )

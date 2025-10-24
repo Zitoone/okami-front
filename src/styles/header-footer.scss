@@ -146,8 +146,15 @@ footer {
   padding: 50px;
   background-color: $white;
   color: $blue;
+  text-align: center;
+  p{
+    color: $blue;
+  }
 }
 #legalNotice>div{
   max-width: 1200px;
   margin: auto;
+  h2{
+  padding-top: 50px;
+  }
 }

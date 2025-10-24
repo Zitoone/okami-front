@@ -30,10 +30,9 @@ const Carousel: React.FC<CarouselProps> = ({
             spaceBetween={30}
             slidesPerView={2}
             loop={loop}
-            autoplay={{
-                delay: autoPlayDelay,
-                disableOnInteraction: true,
-            }}
+            autoplay={loop ?{ delay: autoPlayDelay, disableOnInteraction: true} : false}
+                
+    
             navigation={showNavigation}
             pagination={showPagination ? { clickable: true } : false}
             breakpoints={{

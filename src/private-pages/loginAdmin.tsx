@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react'
 import Button from '../components/Button'
+import Modal from '../components/Modal'
 
 const LoginForm: React.FC = () =>{
     const [email, setEmail] = useState('')
@@ -47,29 +48,31 @@ const LoginForm: React.FC = () =>{
 //Si reponse OK récupéré token, le stocker (local storage)
     }
     return(
-        <main>
-            <h1>Connexion privée</h1>
-            <form onSubmit={handleSubmit} className='login-form'>
-                <div>
-                    <label>Email <span>*</span></label>
-                    <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                </div>
+        <main id='login-page'>
+            <div className="main-wrap">
+                <h1>Connexion privée</h1>
+                <form onSubmit={handleSubmit} className='login-form'>
+                    <div>
+                        <label>Email <span>*</span></label>
+                        <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
 
-                <div>
-                    <label>Mot de passe <span>*</span></label>
-                    <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
+                    <div>
+                        <label>Mot de passe <span>*</span></label>
+                        <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
 
-                <Button type="submit" className="btn form-btn">Connecte moi</Button>
+                    <Button type="submit" className="btn form-btn">Connecte moi</Button>
 
-            </form>
-            {error && (
-                <div className='error-msg'>
-                    {error}
-                </div>
-            )}
+                </form>
+                {error && (
+                    <Modal text={`⛔ ${error}`} type="error" onClose={() => setError('')} />
+                )}
+            </div>
         </main>
     )
 }
 
 export default LoginForm
+
+//TODO: Vider le form si erreur de connexion

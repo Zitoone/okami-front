@@ -1,68 +1,30 @@
-//Music programm
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
 
-import Card from "../components/Card"
-import { useState, useEffect } from "react"
+// --- CONFIGURATION CLOUDINARY ---
+cloudinary.config({
+  cloud_name: 'dyjbhe4yp',
+  api_key: '426266353793268', 
+  api_secret: 'RubpVJIogM-bu7d0VOWNQt8bQNU' 
+});
 
-type Artist={
-    _id: string
-    personalInfo:{
-        projectName?: string
-        pics?: string
-        socials?: string
-    }
-    adminInfo:{
-        style?: string
-        descriptionFr?: string
-    }}
+// --- DOSSIER À RÉCUPÉRER ---
+const folder = '2023'; // Dossier Cloudinary où sont tes images
 
-const MusicProgram: React.FC=() => {
-        const[artists, setArtists]=useState<Artist[]>([])
-        
-    
-        useEffect(()=>{
-            const fetchArtists=async()=>{
-            try {
-                const res = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/public`)
-                const data = await res.json()
-                console.log("Données reçues :", data)
-                setArtists(data)
-            } catch (error) {
-                console.log("Erreur lors du chargement des artistes :", error)
-            }
-        }
-            fetchArtists()
-            },[]
-        )
+// --- RÉCUPÉRATION DES LIENS DIRECTS ---
+cloudinary.api.resources({ prefix: folder, max_results: 500 }, (error, result) => {
+  if (error) {
+    console.error("❌ Erreur Cloudinary :", error);
+    return;
+  }
 
-    return (
-        <main className="program-music-page">
-            <div>
-                <h1>Musiciens & DJs 2026</h1>
-                <p>Découvrez la sélection éclectique d'artistes qui feront vibrer les scènes Dolma et Selva. Des rythmes envoûtants des DJs aux performances live captivantes, chaque musicien apporte une énergie unique qui promet de transformer chaque instant en une expérience inoubliable. Préparez-vous à danser, à vous émerveiller et à vous connecter à travers la musique.</p>
-            </div>
+  // Récupère les URLs sécurisées de toutes les images
+  const urls = result.resources.map(r => r.secure_url);
 
-            <div className="artist-cards">
-                {artists.map((artist)=>(
-                    <Card
-                        className="artist-card-page"
-                        key={artist._id}
-                        title={artist.personalInfo?.projectName || 'Artiste'}
-                        socials={artist.personalInfo?.socials}
-                        subtitle={artist.adminInfo?.style || ""}
-                        image={artist.personalInfo?.pics ? `${import.meta.env.VITE_APP_API_URL}${artist.personalInfo.pics}`: ''
-                        }
-                        /* isOpen={false} */
-                        children={artist.adminInfo?.descriptionFr || "Aucune  description disponible."}
-                    >
-                    </Card>
-))}
-            </div>
-            {/* <Construction /> */}
-        </main>
-                
-    )
-}
+  // Prépare le JSON final
+  const albums = { "2023": urls };
 
-export default MusicProgram
-
-//TODO: const isOpen pour changer la class
+  // Écrit le fichier albums.json dans le même dossier
+  fs.writeFileSync('albums.json', JSON.stringify(albums, null, 2));
+  console.log(`✅ albums.json généré avec ${urls.length} images !`);
+});

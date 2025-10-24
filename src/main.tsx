@@ -16,6 +16,8 @@ import "./styles/home.scss"
 import "./styles/program.scss"
 import "./styles/participate.scss"
 import "./styles/info.scss"
+import "./styles/admin.scss"
+import "./styles/albums.scss"
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

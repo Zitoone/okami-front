@@ -2,64 +2,44 @@
 
 //Page principale programme
 .program-page{
-    background: $background;
-    >div{
-        max-width: $max-width;
+    .program-cards{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 50px;
+        justify-content: center;
+        max-width: 1000px;
         margin: auto;
-        padding: 4rem 2rem;
-        h1{
-            font-size: 50px;
-            color: $yellow;
-        }
+        padding: 2rem;
+        
     }
-}
-.program-cards{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 50px;
-    justify-content: center;
-    max-width: 1000px;
-    margin: auto;
-    padding: 2rem;
-    
-}
 
-.program-card{
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background: rgba(255, 255, 255, 0.05);   
-    border-radius: $border-radius;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-            &:hover {
-        color: lighten(#ffb400, 10%);
-        transform: scale(1);
-        transition: transform 0.3s ease;
-        text-shadow: 0 0 12px rgba(255, 180, 0, 1);
-        }
-    img{
-        width: 100%;
-        height: auto;
+    .program-card{
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        background: rgba(255, 255, 255, 0.05);   
         border-radius: $border-radius;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        box-shadow: $box-shadow;
-    }
-    h3{
-        text-align: center;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+                &:hover {
+            color: lighten(#ffb400, 10%);
+            transform: scale(1);
+            transition: transform 0.3s ease;
+            text-shadow: 0 0 12px rgba(255, 180, 0, 1);
+            }
+        img{
+            width: 100%;
+            height: auto;
+            border-radius: $border-radius;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            box-shadow: $box-shadow;
+        }
+        h3{
+            text-align: center;
+        }
     }
 }
 
 //Page programme musique
 .program-music-page{
-        background: $background;
-    >div{
-        max-width: $max-width;
-        margin: auto;
-        padding: 4rem 2rem;
-        h1{
-            font-size: 50px;
-            color: $yellow;
-        }
-    }
     .artist-cards{
 /*     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

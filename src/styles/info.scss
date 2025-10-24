@@ -1,16 +1,6 @@
 @use './variables' as *;
 
 .info-page{
-    background: $background;
-    >div{
-        max-width: $max-width;
-        margin: auto;
-        padding: 4rem 2rem;
-    }
-    h1{
-        font-size: 50px;
-        color: $yellow;
-    }
     h2{
         font-size: 40px;
     }

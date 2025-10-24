@@ -5,7 +5,7 @@ const Participate: React.FC=()=>{
     const { t } = useTranslation()
     return (
         <main className="participate-page">
-            <div>
+            <div className="main-wrap">
                 <h1>Participer</h1>
                 <p>Rejoignez l’aventure et apportez votre énergie au festival! Bénévoles, exposants, performers ou intervenants… chacun a sa place pour créer des moments inoubliables.</p>
 
