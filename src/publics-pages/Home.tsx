@@ -93,7 +93,7 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                     <div>
                     <h2>Line Up 2026</h2>
                     <p>Programmation démentielle à venir</p>
-                    <Carousel autoPlayDelay={3000} loop={artists.length > 2} showPagination={false} showNavigation={true}>
+                    <Carousel autoPlayDelay={3000} loop={artists.length > 2} showPagination={false} showNavigation={true} activateZoom={false}>
                         {artists?.map((artist)=>(
                             <Card className={"artist-card"}
                             key={artist._id}

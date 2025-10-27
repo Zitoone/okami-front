@@ -8,6 +8,7 @@ import Informations from './publics-pages/informations.tsx'
 import Souvenirs from './publics-pages/albums.tsx'
 import Album2022 from './publics-pages/album2022.tsx'
 import Album2023 from './publics-pages/album2023.tsx'
+import Album2024 from './publics-pages/album2024.tsx'
 import Contact from './publics-pages/contact.tsx'
 import MusicProgram from './publics-pages/programMusic.tsx'
 
@@ -30,6 +31,7 @@ function App(){
     <Route path='/souvenir' element={<Souvenirs />} />
       <Route path='/album2022' element={<Album2022 />} />
       <Route path='/album2023' element={<Album2023 />} />
+      <Route path='/album2024' element={<Album2024 />} />
     <Route path='/contact' element={<Contact />} />    
     <Route path='/legal' element={<Legal />} />
     <Route path='*' element={<NotFound />} />

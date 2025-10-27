@@ -10,16 +10,16 @@ export type CarouselProps = {
     autoPlayDelay?: number
     loop?: boolean
     showPagination?: boolean
-    showNavigation?: boolean
-    
+    showNavigation?: boolean    
 }
 
 const Carousel: React.FC<CarouselProps> = ({
     children,
     autoPlayDelay = 3000,
-    loop = false,
+    loop = true,
     showPagination = false,
     showNavigation = true,
+
     
 }) => {
     
@@ -30,9 +30,7 @@ const Carousel: React.FC<CarouselProps> = ({
             spaceBetween={30}
             slidesPerView={2}
             loop={loop}
-            autoplay={loop ?{ delay: autoPlayDelay, disableOnInteraction: true} : false}
-                
-    
+            autoplay={autoPlayDelay ? { delay: autoPlayDelay, disableOnInteraction: true} : false}
             navigation={showNavigation}
             pagination={showPagination ? { clickable: true } : false}
             breakpoints={{

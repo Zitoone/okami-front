@@ -41,12 +41,108 @@
         }
     }
 }
-    .carousel-container{
-        img{
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: $border-radius;
+
+//Styles des carousel
+.album-carousel .carousel-container{
+    position: relative;
+    z-index: 1;
+    .swiper-slide{
+        aspect-ratio: 4/3;
+        height: auto;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    img{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: $border-radius;
+    }
+}
+
+.lightbox {
+    position: fixed;
+    inset: 0; //Couvre tout le viewport
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: zoom-out;
+
+    .lightbox-content { //Contenur pour placer l'image et les fleches
+        position: relative;
+/*         display: flex;
+        align-items: center;
+        justify-content: center; */
+
+    img {
+        max-width: 90vw; //90% max de l'écran
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 8px;
+        cursor: default;
+        display: block;
+    }
+
+    .lightbox-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);// Centrer verticalement
+        background: rgba(0,0,0,0.5); 
+        color: white;
+        border: none;
+        font-size: 2rem;
+        padding: 0.3rem 0.6rem;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+
+        &:hover {
+            transform: translateY(-50%) scale(1.2);
         }
     }
+
+    .prev { left: -40px; }  // distance par rapport à l'image
+    .next { right: -40px; }
+
+    @media (max-width: 768px) { //Fleches se rapprochent de l'image et boutons + petits
+        .prev { left: -20px; }
+        .next { right: -20px; }
+        .lightbox-btn { font-size: 1.5rem; padding: 0.2rem 0.4rem; }
+    }
+
+    @media (max-width: 480px) {
+        .prev { left: -10px; }
+        .next { right: -10px; }
+        .lightbox-btn { font-size: 1.2rem; padding: 0.15rem 0.3rem; }
+    }
+    }
+}
+
+//Albums sans carousel
+.album{
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, 250px);   
+    gap: 20px;
+    max-width: $max-width;
+    margin: auto;
+    justify-content: center;
+    img{
+        object-fit: cover;
+        width: 250px;
+        height: 250px;
+    }
+}
+.load-more{
+    text-align: center;
+    padding: $padding;
+}
+
+
+
+
+
+
 

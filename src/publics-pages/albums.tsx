@@ -24,7 +24,7 @@ const Souvenirs: React.FC=()=>{
                     ></Card>
 
                     <Card 
-                        url={""} 
+                        url={"/album2024"} 
                         title="2024" 
                         image="/love2024.jpeg"
                         className="souvenir-card"
@@ -32,7 +32,7 @@ const Souvenirs: React.FC=()=>{
                     ></Card>
 
                     <Card 
-                        url={""} 
+                        url={"/album2025"} 
                         title="2025" 
                         image="/doma.jpg"
                         className="souvenir-card"
