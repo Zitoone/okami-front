@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Carousel from "../components/Carousel"
 import albums from "../data/albums.json"
 
@@ -10,17 +10,31 @@ const Album2023: React.FC = () => {
     setSelectedIndex(index)
     }
 
-    const handlePrev = (e: React.MouseEvent) => {
-        e.stopPropagation()
+    const handlePrev = (e?: React.MouseEvent) => {
+        e?.stopPropagation?.()
         if (selectedIndex === null) return
         setSelectedIndex((selectedIndex - 1 + images.length) % images.length)
     }
 
-    const handleNext = (e: React.MouseEvent) => {
-        e.stopPropagation()
+    const handleNext = (e?: React.MouseEvent) => {
+        e?.stopPropagation?.()
         if (selectedIndex === null) return
         setSelectedIndex((selectedIndex + 1) % images.length)
     }
+useEffect(() => {
+        if (selectedIndex === null) return // lightbox fermée
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowLeft") handlePrev()
+            else if (e.key === "ArrowRight") handleNext()
+            else if (e.key === "Escape") setSelectedIndex(null)
+        }
+
+        window.addEventListener("keydown", handleKeyDown)
+        return () => window.removeEventListener("keydown", handleKeyDown)
+    }, [selectedIndex])
+
+
 
     return (
     <main className="souvenirs-page">
@@ -49,9 +63,9 @@ const Album2023: React.FC = () => {
         {selectedIndex !== null && (
             <div className="lightbox" onClick={() => setSelectedIndex(null)}>
                 <div className="lightbox-content" onClick={(e)=> e.stopPropagation()}>
-                <button className="lightbox-btn prev" onClick={handlePrev}>‹</button>
-                <img src={images[selectedIndex]} alt={`Photo ${selectedIndex + 1}`} />
-                <button className="lightbox-btn next" onClick={handleNext}>›</button>
+                    <button className="lightbox-btn prev" onClick={handlePrev}>‹</button>
+                    <img src={images[selectedIndex]} alt={`Photo ${selectedIndex + 1}`} />
+                    <button className="lightbox-btn next" onClick={handleNext}>›</button>
                 </div>
             </div>
         )}

@@ -128,7 +128,7 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                     <div />
                     <span>
                     <p>Revivez les moments forts des précédentes éditions à travers nos aftermovies et galeries photos.</p>
-                    <Button to="/editions" className="btn">Flashback en images</Button>
+                    <Button to="/souvenir" className="btn">Flashback en images</Button>
                     </span>
                 </section>
 

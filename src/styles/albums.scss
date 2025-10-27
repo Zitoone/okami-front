@@ -74,35 +74,31 @@
 
     .lightbox-content { //Contenur pour placer l'image et les fleches
         position: relative;
-/*         display: flex;
-        align-items: center;
-        justify-content: center; */
-
-    img {
-        max-width: 90vw; //90% max de l'écran
-        max-height: 90vh;
-        object-fit: contain;
-        border-radius: 8px;
-        cursor: default;
-        display: block;
-    }
-
-    .lightbox-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);// Centrer verticalement
-        background: rgba(0,0,0,0.5); 
-        color: white;
-        border: none;
-        font-size: 2rem;
-        padding: 0.3rem 0.6rem;
-        cursor: pointer;
-        transition: background 0.2s, transform 0.2s;
-
-        &:hover {
-            transform: translateY(-50%) scale(1.2);
+        img {
+            max-width: 90vw; //90% max de l'écran
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: default;
+            display: block;
         }
-    }
+
+        .lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);// Centrer verticalement
+            background: rgba(0,0,0,0.5); 
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 0.3rem 0.6rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+
+            &:hover {
+                transform: translateY(-50%) scale(1.2);
+            }
+        }
 
     .prev { left: -40px; }  // distance par rapport à l'image
     .next { right: -40px; }
