@@ -30,11 +30,14 @@
         h3{
             color: $white;
         }
+        h4, strong{
+            color: $yellow;
+        }
         p, ul, li{
             font-family: $text-font;
             font-weight: bold;
             font-size: 18px;
-            color: black;
+            color:$white;
             text-align: left;
         }
     }

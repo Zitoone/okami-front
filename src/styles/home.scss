@@ -1,6 +1,9 @@
 @use './variables' as *;
 
 //Général
+#main-home{
+    background: $background;
+}
 h2{
     color: $yellow;
     text-align: center;
@@ -11,8 +14,7 @@ p{
     text-align: center;
 }
 .hero{
-    background: $background;
-    padding: 4rem;
+    /* background: $background; */
 
     article{
         max-width: $max-width;
@@ -27,9 +29,29 @@ p{
             height: auto;
             margin-right: 2rem;
             border-radius: 50%;
-            box-shadow: $box-shadow;
+            box-shadow:     0 0 20px rgba(255,182,193,0.5),
+                            0 0 40px rgba(173,216,230,0.4),
+                            0 0 60px rgba(144,238,144,0.3),
+                            0 0 100px rgba(255,255,255,0.2);
+            animation: glowNeon 3s infinite alternate;
         }
-        
+@keyframes glowNeon {
+    0% { box-shadow:
+        0 0 20px rgba(255,182,193,0.5),
+        0 0 40px rgba(173,216,230,0.4),
+        0 0 60px rgba(144,238,144,0.3),
+        0 0 100px rgba(255,255,255,0.2); }
+    50% { box-shadow:
+        0 0 30px rgba(255,182,193,0.7),
+        0 0 50px rgba(173,216,230,0.6),
+        0 0 80px rgba(144,238,144,0.5),
+        0 0 120px rgba(255,255,255,0.3); }
+    100% { box-shadow:
+        0 0 20px rgba(255,182,193,0.5),
+        0 0 40px rgba(173,216,230,0.4),
+        0 0 60px rgba(144,238,144,0.3),
+        0 0 100px rgba(255,255,255,0.2); }
+}      
         h1{
             color: $yellow;
             font-size: 50px;
@@ -39,40 +61,20 @@ p{
             font-size: 30px;
         }
     }
-}
-/* #main-home{
-    background: radial-gradient(circle at center, #028a92 0%, #01484d 70%);
-    background: linear-gradient(180deg, #01393d 0%, #028a92 100%);
-} */
-/* .hero{
-    display: flex;
-    align-items: center; 
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 4rem;
-    h2{
+    .countdown{
+        text-align: center;
         color: $yellow;
-        text-align: left;
+        font-size: 50px;
+        border: 2px solid $white;
+        border-radius: $border-radius;
+        max-width: 500px;
+        margin: auto;
     }
 }
-.hero-img{
-    flex: 1;
-    background: url('/imgHero.png') no-repeat center center;
-    background-size: contain;
-    min-height: 400px; 
-}
-.hero-text{
-    flex: 1;
-    margin-left: 2rem;
-    color: $white;
-} */
 
 //Section 2 video
 #after-movie{
-    background: $background;
     padding: 4rem;
-
 }
 .video-container {
     max-width: 1000px;
@@ -84,7 +86,6 @@ p{
     border-radius: $border-radius;
     box-shadow: $box-shadow;
 }
-
 .video-container iframe {
     position: absolute;
     top: 0;
@@ -96,7 +97,7 @@ p{
 
 //Section 3 Espaces
 #spaces{
-    background: $background;
+/*     background: $background; */
     
     padding: 4rem;
     color: $white;
@@ -136,7 +137,7 @@ p{
 
 // Section 4 Carrousel artistes
 #lineup{
-    background: $background;
+/*     background: $background; */
     padding: 4rem;
     >div{
         max-width: 1200px;
@@ -247,7 +248,7 @@ p{
 
 //Section 5 Participer 
 #participate{
-    background: $background;
+/*     background: $background; */
     padding: 4rem;
 
     div{
@@ -274,7 +275,7 @@ p{
 
 //Section 6 Editions
 #editions{
-    background: $background;
+/*     background: $background; */
     padding: 4rem;
     div{
         max-width: $max-width;

@@ -33,14 +33,14 @@ a {
   border-radius: $border-radius;
   padding: 10px 10px;
   background-color: $yellow;
-  color: $white;
+  color: $blue;
   box-shadow: $box-shadow;
   transition: background-color $transition-duration, box-shadow $transition-duration;
   &:hover {
-    background-color: $white;
+    background-color: $blue;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
     color: $yellow;
-    border: 2px solid $blue;
+    border: 2px solid $yellow;
   }
 }
 .btn-delete{
@@ -146,3 +146,30 @@ label {
     color: $yellow;
   }
 }
+
+//Page contact
+.contact-page{
+  label{
+    color: $yellow;
+    font-size: 24px;
+  }
+  textarea{
+    height: 200px;
+    resize: vertical;
+  }
+  .rgpd {
+      label{
+    color: black;
+    font-size: 10px;
+  }
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px; 
+  justify-content: center;
+    input{
+      width: auto;
+    }
+  }
+}
+  
+  

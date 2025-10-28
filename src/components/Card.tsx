@@ -31,11 +31,11 @@ const Card: React.FC<CardProps> = ({
 }) => {
     const [isOpen, setIsOpen] = useState(false)
 
-    const handleSocialClick = (socials: string, type: string) => {
+/*     const handleSocialClick = (socials: string, type: string) => {
         const urls = socials.split(',').map(s => s.trim())
         const url = urls.find(u => u.includes(type))
         if (url) window.open(url, '_blank', 'noopener,noreferrer')
-    }
+    } */
     const handleClick = () =>{
         if(url) return
         setIsOpen(!isOpen)
@@ -56,19 +56,44 @@ const Card: React.FC<CardProps> = ({
                 {content && <p>{content}</p>}
                 
                 <div className="card-socials">
-                    {socials?.includes("soundcloud") && (
-                        <button onClick={(e) =>{ e.stopPropagation()
+{/*                     {socials?.includes("soundcloud") && (
+                        <a onClick={(e) =>{ e.stopPropagation()
                         handleSocialClick(socials, "soundcloud")}} className="btn">
                             <RiSoundcloudLine /> 
-                        </button>
+                        </a>
                     )}
                     {socials?.includes("instagram") && (
-                        <Button onClick={(e)=> { e.stopPropagation()
+                        <a onClick={(e)=> { e.stopPropagation()
                             handleSocialClick(socials, "instagram")}} className="btn">
                             <RiInstagramFill /> 
-                        </Button>
-                    )}
-                    
+                        </a>
+                    )} */}
+                    {socials
+                        ?.split(',')
+                        .map(s => s.trim())
+                        .map(url => {
+                            let icon, label
+                            if (url.includes('soundcloud')) {
+                            icon = <RiSoundcloudLine />
+                            label = 'Soundcloud'
+                            } else if (url.includes('instagram')) {
+                            icon = <RiInstagramFill />
+                            label = 'Instagram'
+                            } else return null
+                        return (
+                            <a
+                                key={label}
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn"
+                                aria-label={label}
+                                onClick={e => e.stopPropagation()}
+                            >
+                                {icon}
+                            </a>
+                        )
+                    })}
                 </div>
             </article>
         )    

@@ -8,6 +8,7 @@ import { TbShoppingBagHeart } from "react-icons/tb"
 import { MdNoFood } from "react-icons/md"
 import { useState, useEffect } from 'react'
 import Button from '../components/Button'
+import Countdown from '../components/Countdown'
 
 type Artist={
     _id: string
@@ -54,7 +55,7 @@ const Home: React.FC=()=>{
             <main id='main-home'>
                 <section className='hero'>
                     
-                    <article>
+                    <article>                       
                         <img src="/face.jpg" alt="Image Flyer Okami Festival 2026" />
                         <div>
                             <h1>Bienvenue sur le site du festival OKAMI</h1>
@@ -65,35 +66,34 @@ Un lieu où se rencontrent l’art, le bien-être et la créativité : espaces d
 Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et reconnexion à l’essentiel.</p>
                         </div>
                     </article>
+                    <Countdown targetDate="2026-06-03T14:30:00" />
                 </section>
 
                 <section id='after-movie'>
                     <h2>Revis l’énergie vibrante de l’Okami Festival</h2>
 
                     <div className='video-container'>
-                        <iframe /* width="560" height="315"  */src="https://www.youtube.com/embed/LF9PxP_JzfQ?si=OP-m0yOH5QOxWvwO&amp;start=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+                        <iframe src="https://www.youtube.com/embed/LF9PxP_JzfQ?si=OP-m0yOH5QOxWvwO&amp;start=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                     </div>
                 </section>
 
                 <section id='spaces'>
                     <h2>Explore nos espaces sacrés</h2>
                         <div>
-                    <Card url={`/program`} title='Scène DOMA' content='Viens découvrir la scène principale ' icon={<BsFillSpeakerFill />} className='space-card'></Card>
-                    <Card url={`/program`} title='Scène SELVA' content="Scène dédiée à la musique downtempo, live, organique, ethnique. " icon={<BsSpeaker />} className='space-card'></Card>
-                    <Card url={`/program`} title="Espace bien être" content="Un sanctuaire ton esprit, ton corps et ton âme" icon={<FaShieldHeart />} className='space-card'></Card>
-                    <Card url={`/program`} title="Kidzone" content="L'univers des enfants pour des aventures créatives amusantes" icon={<FaChild />} className='space-card'></Card>
-                    <Card url={`/program`} title="Marché artisanal" content="Artisans créatifs sélectionnés avec soin" icon={<TbShoppingBagHeart />} className='space-card'></Card>
-                    <Card url={`/program`} title="Bar et restauration" content="2 bars et un espace pour vous restaurer pendant toute la durée du festival" icon={<MdNoFood />} className='space-card'></Card>
-                    
-
-                    </div>
+                            <Card url={`/program`} title='Scène DOMA' content='Viens découvrir la scène principale ' icon={<BsFillSpeakerFill />} className='space-card'></Card>
+                            <Card url={`/program`} title='Scène SELVA' content="Scène dédiée à la musique downtempo, live, organique, ethnique. " icon={<BsSpeaker />} className='space-card'></Card>
+                            <Card url={`/program`} title="Espace bien être" content="Un sanctuaire ton esprit, ton corps et ton âme" icon={<FaShieldHeart />} className='space-card'></Card>
+                            <Card url={`/program`} title="Kidzone" content="L'univers des enfants pour des aventures créatives amusantes" icon={<FaChild />} className='space-card'></Card>
+                            <Card url={`/program`} title="Marché artisanal" content="Artisans créatifs sélectionnés avec soin" icon={<TbShoppingBagHeart />} className='space-card'></Card>
+                            <Card url={`/program`} title="Bar et restauration" content="2 bars et un espace pour vous restaurer pendant toute la durée du festival" icon={<MdNoFood />} className='space-card'></Card>
+                        </div>
                 </section>
 
                 <section id='lineup'>
                     <div>
-                    <h2>Line Up 2026</h2>
-                    <p>Programmation démentielle à venir</p>
-                    <Carousel autoPlayDelay={3000} loop={artists.length > 2} showPagination={false} showNavigation={true} activateZoom={false}>
+                        <h2>Line Up 2026</h2>
+                        <p>Programmation démentielle à venir</p>
+                        <Carousel autoPlayDelay={3000} loop={artists.length > 2} showPagination={false} showNavigation={true} activateZoom={false}>
                         {artists?.map((artist)=>(
                             <Card className={"artist-card"}
                             key={artist._id}
@@ -107,7 +107,7 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                             />
                         ))}
                     </Carousel>
-</div>
+                    </div>
                 </section>
 
                 <section id='participate'>
@@ -115,8 +115,8 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                     <div>
                         <img src="/participer.jpg" alt="Photo d'un volontaire sur un tracteur à l'édition 2023 du festival Okami" />
                         <span>
-                        <p>Implique toi pleinement en rejoignant notre équipe de bénévoles, ou notre team restauration ou encore nos performers.</p>
-                        <Button to="/participate" className="btn">En savoir plus</Button>
+                            <p>Implique toi pleinement en rejoignant notre équipe de bénévoles, ou notre team restauration ou encore nos performers.</p>
+                            <Button to="/participate" className="btn">En savoir plus</Button>
                         </span>
                     </div>
 
@@ -125,10 +125,10 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
 
                 <section id='editions'>
                     <h2>Au fil des éditions</h2>
-                    <div />
+                    <div/>
                     <span>
-                    <p>Revivez les moments forts des précédentes éditions à travers nos aftermovies et galeries photos.</p>
-                    <Button to="/souvenir" className="btn">Flashback en images</Button>
+                        <p>Revivez les moments forts des précédentes éditions à travers nos aftermovies et galeries photos.</p>
+                        <Button to="/souvenir" className="btn">Flashback en images</Button>
                     </span>
                 </section>
 
