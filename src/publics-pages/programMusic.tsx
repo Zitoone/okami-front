@@ -1,19 +1,9 @@
 import { useState, useEffect } from "react"
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import { RiSoundcloudLine, RiInstagramFill } from "react-icons/ri"
 import Button from "../components/Button"
-
-type Artist = {
-    _id: string
-    personalInfo: {
-        projectName?: string
-        pics?: string
-        socials?: string
-    }
-    adminInfo: {
-        style?: string
-        descriptionFr?: string
-    }
-}
+import type { Artist } from '../types/Artist'
 
 const MusicProgram: React.FC = () => {
     const [artists, setArtists] = useState<Artist[]>([])
@@ -22,7 +12,7 @@ const MusicProgram: React.FC = () => {
     useEffect(() => {
         const fetchArtists = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/public`)
+                const res = await fetch(`${import.meta.env.VITE_API_URL}artists/public`)
                 const data = await res.json()
                 console.log("Données reçues :", data)
                 setArtists(data)
@@ -36,13 +26,11 @@ const MusicProgram: React.FC = () => {
     const toggle = (id: string) => {
         setOpenId((prev) => (prev === id ? null : id))
     }
-    const handleSocialClick = (socials: string, type: string) => {
-        const urls = socials.split(',').map(s => s.trim())
-        const url = urls.find(u => u.includes(type))
-        if (url) window.open(url, '_blank', 'noopener,noreferrer')
-    }
+
 
     return (
+        <>
+        <Header />
         <main className="program-music-page">
             <div className="main-wrap">
                 <div>
@@ -61,17 +49,18 @@ const MusicProgram: React.FC = () => {
                     {!isOpen ? (
                         <>
                             <img
-                            src={artist.personalInfo?.pics ?`${import.meta.env.VITE_APP_API_URL}${artist.personalInfo.pics}`: ''}
-                            alt={artist.personalInfo?.projectName || 'Artiste'}/>
-                            <h3>{artist.personalInfo?.projectName || 'Artiste'}</h3>
-                            <span>{artist.adminInfo?.style || ""}</span>
+                            src={artist.promoPhoto ? `${import.meta.env.VITE_API_URL}${artist.promoPhoto}` : ''}
+                            alt={artist.projectName || 'Artiste'}/>
+                            <h3>{artist.projectName || 'Artiste'}</h3>
+                            <span>{artist.musicalStyle || ""}</span>
                             <div className="card-socials">
-                    {artist.personalInfo?.socials?.includes("soundcloud") &&(                       <Button onClick={(e) => { e.stopPropagation()
-                    handleSocialClick(artist.personalInfo.socials, "soundcloud")}} className="btn"><RiSoundcloudLine /> </Button>
+                    {artist.socialLinks?.soundcloud && (
+                        <Button onClick={(e) => { e.stopPropagation()
+                            window.open(artist.socialLinks.soundcloud, '_blank')}} className="btn"><RiSoundcloudLine /> </Button>
 )}
-                    {artist.personalInfo?.socials?.includes("instagram") && (
+                    {artist.socialLinks?.instagram && (
                         <Button onClick={(e)=> { e.stopPropagation()
-handleSocialClick(artist.personalInfo.socials, "instagram")}} className="btn"><RiInstagramFill /> 
+                            window.open(artist.socialLinks.instagram, '_blank')}} className="btn"><RiInstagramFill /> 
                         </Button>
 )}
                 </div>
@@ -79,7 +68,7 @@ handleSocialClick(artist.personalInfo.socials, "instagram")}} className="btn"><R
                     ) : (
                         <div className="card-description">
                             <button onClick={(e) => { e.stopPropagation(); toggle(artist._id) }}>X</button>
-                            <p>{artist.adminInfo?.descriptionFr || "Aucune description disponible."}</p>
+                            <p>{artist.promoText || "Aucune description disponible."}</p>
                         </div>
                     )}
                     </article>
@@ -88,9 +77,9 @@ handleSocialClick(artist.personalInfo.socials, "instagram")}} className="btn"><R
             </div>
             </div>
         </main>
+        <Footer />
+        </>
     )
 }
 
 export default MusicProgram
-
-//Revoir le comportement au clik des card

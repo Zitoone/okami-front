@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import albums from "../data/albums.json"
 import Button from "../components/Button"
 
@@ -39,10 +41,12 @@ const Album2024: React.FC = () => {
     }, [selectedIndex])
 
     return(
+        <>
+        <Header />
         <main className="album-page">
             <div className="main-wrap">
                 <h1>Souvenirs de l'édition 2024</h1>
-                <p>Celle ci sera notre dernière édition à Castelnau, marquée par des violentes pluies à nouveau...</p>
+                <p>Dernière édition sur le site de Castelnau</p>
             </div>
 
     <div className="album">
@@ -75,6 +79,8 @@ const Album2024: React.FC = () => {
         )}
 
         </main>
+        <Footer />
+        </>
     )
 }
 

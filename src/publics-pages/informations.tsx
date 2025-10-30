@@ -1,7 +1,11 @@
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Collapse from "../components/Collapse"
 
 const Informations: React.FC=()=>{
     return (
+        <>
+        <Header />
         <main className="info-page">
             <div className="main-wrap">
                 <h1>Informations pratiques</h1>
@@ -115,7 +119,8 @@ L’endroit rêvé pour éveiller la curiosité et la créativité des enfants d
 
             </div>
         </main>
-
+        <Footer />
+        </>
     )
 }
 export default Informations

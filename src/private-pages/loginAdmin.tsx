@@ -4,11 +4,13 @@
 import React, { useState } from 'react'
 import Button from '../components/Button'
 import Modal from '../components/Modal'
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm: React.FC = () =>{
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const navigate = useNavigate()
 
     const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -22,7 +24,7 @@ const LoginForm: React.FC = () =>{
         return
     }
     try {
-            const req=await fetch('http://localhost:3000/api/admin/login',{
+            const req=await fetch(`${import.meta.env.VITE_API_URL}admin/login`,{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({email, password})
@@ -33,19 +35,15 @@ const LoginForm: React.FC = () =>{
 
             if(res.token){
                 localStorage.setItem("authToken", res.token)
-                console.log("connexion OK")
-                window.location.href = '/admin/dashboard' 
+                localStorage.setItem("isAdmin", "true")
                 setError('')
-                //Emmene sur le  tableau de bord admin
+                navigate('/admin/dashboard')
             }
 
         } catch (error) {
             setError("Erreur lors de la connexion")
             console.error(error)
         }
-//si OK faire le fetch avec le bon format de données     {"email": "olivia@okamifestival.com",
-/* "password": "pass1234"} */
-//Si reponse OK récupéré token, le stocker (local storage)
     }
     return(
         <main id='login-page'>
@@ -74,5 +72,3 @@ const LoginForm: React.FC = () =>{
 }
 
 export default LoginForm
-
-//TODO: Vider le form si erreur de connexion

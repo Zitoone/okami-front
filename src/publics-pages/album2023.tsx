@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react"
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Carousel from "../components/Carousel"
 import albums from "../data/albums.json"
 
@@ -37,7 +39,9 @@ useEffect(() => {
 
 
     return (
-    <main className="souvenirs-page">
+        <>
+        <Header />
+        <main className="souvenirs-page">
             <div className="main-wrap">
                 <h1>Souvenirs de l'édition 2023</h1>
                 <p>
@@ -70,7 +74,9 @@ useEffect(() => {
             </div>
         )}
         </div>
-    </main>
+        </main>
+        <Footer />
+        </>
     )
 }
 

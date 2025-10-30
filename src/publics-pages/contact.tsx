@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import CustomInput from "../components/CustomInput"
 import Button from "../components/Button"
 import Modal from "../components/Modal"
@@ -55,6 +57,8 @@ console.log("✅ Réponse API :", data)
         
     }
     return (
+        <>
+        <Header />
         <main className="contact-page">
             <div className="main-wrap">
             <h1>Nous contacter</h1>
@@ -91,9 +95,8 @@ Merci de nous aider à faire du Okami Festival une aventure toujours plus magiqu
             </form>   
             </div>
         </main>
-
-
-
+        <Footer />
+        </>
     )
 }
 export default Contact

@@ -1,4 +1,5 @@
-import Seo from '../components/Seo'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Card from '../components/Card'
 import Carousel from '../components/Carousel'
 import { BsFillSpeakerFill, BsSpeaker } from "react-icons/bs"
@@ -9,17 +10,7 @@ import { MdNoFood } from "react-icons/md"
 import { useState, useEffect } from 'react'
 import Button from '../components/Button'
 import Countdown from '../components/Countdown'
-
-type Artist={
-    _id: string
-    personalInfo:{
-        projectName?: string
-        pics?: string
-        socials?: string
-    }
-    adminInfo:{
-        style?: string
-    }}
+import type { Artist } from '../types/Artist'
 
 const Home: React.FC=()=>{
 
@@ -28,9 +19,10 @@ const Home: React.FC=()=>{
     useEffect(()=>{
         const fetchArtists=async()=>{
         try {
-            const res = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/public`)
+            const res = await fetch(`${import.meta.env.VITE_API_URL}artists/public`)
             const data = await res.json()
-            setArtists(data)
+            console.log("Données reçues:", data)
+            setArtists(Array.isArray(data) ? data : [])
         } catch (error) {
             console.log("Erreur lors du chargement des artistes :", error)
         }
@@ -41,18 +33,8 @@ const Home: React.FC=()=>{
 
     return(
         <>
-            <Seo
-            titleKey="home.title"
-            descriptionKey="home.description"
-            keywordsKey="home.keywords"
-            ogTitleKey="home.ogTitle"
-            ogDescriptionKey="home.ogDescription"
-            ogImage="https://www.okamifestival.com/images/festival-banner.jpg"
-            ogUrl="https://www.okamifestival.com"
-            ogType="website"
-            ogSiteName="OKAMI Festival" />
-
-            <main id='main-home'>
+        <Header />
+        <main id='main-home'>
                 <section className='hero'>
                     
                     <article>                       
@@ -93,20 +75,22 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                     <div>
                         <h2>Line Up 2026</h2>
                         <p>Programmation démentielle à venir</p>
+                        {artists.length === 0 ? (
+                            <p style={{textAlign: 'center', padding: '2rem'}}>Aucun artiste pour le moment. La programmation arrive bientôt ! 🎵</p>
+                        ) : (
                         <Carousel autoPlayDelay={3000} loop={artists.length > 2} showPagination={false} showNavigation={true} activateZoom={false}>
-                        {artists?.map((artist)=>(
+                        {artists.map((artist)=>(
                             <Card className={"artist-card"}
                             key={artist._id}
                             url={`/program/music`}
-                            title={artist.personalInfo?.projectName || 'Artiste'}
-                            content={artist.adminInfo?.style || ''}
-                            image={ artist.personalInfo?.pics
-    ? `${import.meta.env.VITE_APP_API_URL}${artist.personalInfo.pics}`
-    : ''}
-                            socials={artist.personalInfo?.socials}
+                            title={artist.projectName || 'Artiste'}
+                            content={artist.musicalStyle || ''}
+                            image={artist.promoPhoto ? `${import.meta.env.VITE_API_URL}${artist.promoPhoto}` : ''}
+                            socials={artist.socialLinks?.instagram || artist.socialLinks?.soundcloud || ''}
                             />
                         ))}
-                    </Carousel>
+                        </Carousel>
+                        )}
                     </div>
                 </section>
 
@@ -132,11 +116,10 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                     </span>
                 </section>
 
-            </main>
+        </main>
+        <Footer />
         </>
     )
 }
 
 export default Home
-
-//TODO: Revoir le style des cards dans le carousel

@@ -65,7 +65,7 @@ const ArtistForm: React.FC=()=>{
         upload.append('personalInfo', JSON.stringify(formData))
 
         try {
-            const res=await fetch(`${import.meta.env.VITE_APP_API_URL}artists/form`, {
+            const res=await fetch(`${import.meta.env.VITE_API_URL}artists/form`, {
                 method: "POST",
                 body: upload
             })
@@ -192,6 +192,3 @@ const ArtistForm: React.FC=()=>{
 }
 
 export default ArtistForm
-
-//TODO: Faire un composant pour div : input + label
-// Utiliser un map sur formData

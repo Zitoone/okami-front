@@ -1,8 +1,11 @@
-import Carousel from "../components/Carousel";
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Construction from "../components/Construction";
 
 const Album2022: React.FC=()=>{
     return (
+        <>
+        <Header />
         <main className="souvenirs-page">
             <div className="main-wrap">
                 <h1>Souvenirs de l'édition 2022</h1>
@@ -14,6 +17,8 @@ const Album2022: React.FC=()=>{
                 </div>
             </div>
         </main>
+        <Footer />
+        </>
     )
 }
 export default Album2022

@@ -1,9 +1,13 @@
 import {useTranslation} from 'react-i18next'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 function Legal(){
    const {t} = useTranslation()
 
    return(
+      <>
+      <Header />
       <main id='legalNotice'>
          <div>
             <h1>{t("legal.title")}</h1>
@@ -54,6 +58,8 @@ function Legal(){
             <p>{t("legal.contactContent")}</p>
          </div>
       </main>
+      <Footer />
+      </>
    )
 }
 export default Legal

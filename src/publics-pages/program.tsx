@@ -1,8 +1,11 @@
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Card from '../components/Card'
-
 
 const Program: React.FC=()=>{
     return(
+        <>
+        <Header />
         <main className="program-page">
             <div className="main-wrap">
                 <h1>Programme 2026</h1>
@@ -15,7 +18,9 @@ const Program: React.FC=()=>{
                     <Card url={'/program/activities'} title="Ateliers & activités" className='program-card' image='activite.jpg' />
                 </div>
             </div>
-    </main>
+        </main>
+        <Footer />
+        </>
     )
 }
 export default Program

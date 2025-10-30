@@ -1,16 +1,57 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import Button from "../../components/Button.js"
-import Collapse from "../../components/Collapse.js"
-import CustomInput from "../../components/CustomInput.js"
+import Button from "../../components/Button"
+import Collapse from "../../components/Collapse"
+import CustomInput from "../../components/CustomInput"
 import { FaArrowCircleLeft } from "react-icons/fa"
 import { Link } from "react-router-dom"
-import Modal from "../../components/Modal.js"
+import Modal from "../../components/Modal"
 import { useNavigate } from 'react-router-dom'
 
+type ArtistData = {
+    personalInfo: {
+        lastName: string
+        firstName: string
+        email: string
+        phone: string
+        projectName: string
+        invitName: string
+        infoRun: string
+        setupTimeInMin: number
+        soundcheck: string
+        record: string
+        setup: string
+        artistComments: string
+        pics: string
+        socials: string
+        promoText: string
+    }
+    adminInfo: {
+        nbOfPerson: number
+        stage: string
+        gigDateTime: string
+        soundcheckDayTime: string
+        arrivedRun: string
+        departRun: string
+        accommodation: string
+        bookingFee: string
+        travelExpense: string
+        totalFees: string
+        contract: string
+        invoice: string
+        roadMap: string
+        paiementInfo: string
+        sacemForm: string
+        specialInfo: string
+        descriptionFr: string
+        descriptionEng: string
+        style: string
+    }
+}
+
 function ArtistEdit() {
-    const { id: artistId } = useParams()
-    const [artistData, setArtistData] = useState({ //Pour éviter undefined
+    const { id: artistId } = useParams<{ id: string }>()
+    const [artistData, setArtistData] = useState<ArtistData>({
         personalInfo: {
             lastName: "",
             firstName: "",
@@ -50,16 +91,16 @@ function ArtistEdit() {
             style: ""
         },
     })
-    const [file, setFile] = useState(null)
+    const [file, setFile] = useState<File | null>(null)
     const [loading, setLoading] = useState(true)
     const [modal, setModal] = useState(false)
 
     const token = localStorage.getItem("authToken")
     const navigate = useNavigate()
 
-    const fetchArtist = async (artistId) => {
+    const fetchArtist = async (artistId: string) => {
         try {
-            const req = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/${artistId}`, {
+            const req = await fetch(`${import.meta.env.VITE_API_URL}artists/${artistId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
@@ -79,34 +120,35 @@ function ArtistEdit() {
             setLoading(false)
         }
     }
+    
     useEffect(() => {
         if (artistId) {
             fetchArtist(artistId)
         }
     }, [artistId])
 
-    const handleChange = (section, e) => { //Section correspond aux 2 différentes parties de artistData
+    const handleChange = (section: keyof ArtistData, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
-        setArtistData((prev) => ({ //prev pour ne pas écraser les données au changement
+        setArtistData((prev) => ({
             ...prev,
-            [section]: { //On met a jour la section modifiée
+            [section]: {
                 ...prev[section],
                 [name]: value
             }
         }))
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         const upload = new FormData()
-        upload.append('personalInfo', JSON.stringify(artistData.personalInfo)) //On transforme en chaine de caractère
+        upload.append('personalInfo', JSON.stringify(artistData.personalInfo))
         upload.append('adminInfo', JSON.stringify(artistData.adminInfo))
         if (file) upload.append('pics', file)
 
         if (!artistId || !artistData) return
 
         try {
-            const req = await fetch(`${import.meta.env.VITE_APP_API_URL}artists/${artistId}`, {
+            const req = await fetch(`${import.meta.env.VITE_API_URL}artists/${artistId}`, {
                 method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -116,7 +158,7 @@ function ArtistEdit() {
             if (!req.ok) throw new Error("Erreur lors de la mise à jour de l'artiste")
             const updatedData = await req.json()
 
-            setArtistData(prev => ({ //On met a jour artistData et si une section est manquante on garde l’ancienne
+            setArtistData(prev => ({
                 personalInfo: updatedData.personalInfo || prev.personalInfo,
                 adminInfo: updatedData.adminInfo || prev.adminInfo
             }))
@@ -125,6 +167,7 @@ function ArtistEdit() {
             console.log(error)
         }
     }
+    
     return (
         <main className="artist-edit">
             <div className='all-forms'>
@@ -134,7 +177,7 @@ function ArtistEdit() {
             {loading ? (
                 <p>Chargement...</p>
             ) : (
-                <form onSubmit={handleSubmit} /* className="form" */ className='artist-form' action="artist-pics" method='post' encType="multipart/form-data" >
+                <form onSubmit={handleSubmit} className='artist-form' action="artist-pics" method='post' encType="multipart/form-data" >
 
                     <Collapse title="Infos artiste">
                         <CustomInput label="Nom" name="lastName" value={artistData.personalInfo.lastName} onChange={(e) => handleChange("personalInfo", e)} />
@@ -219,46 +262,3 @@ function ArtistEdit() {
 }
 
 export default ArtistEdit
-
-//TODO : Afficher la photo de l'artiste si elle existe 
-{/* <div className="input-container">
-  <label>Photo artiste</label>
-
-  {artistData.personalInfo.pics && !file && (
-    <div className="existing-photo" style={{ marginBottom: "10px" }}>
-      <p>Photo actuelle :</p>
-      <img
-        src={`${import.meta.env.VITE_APP_API_URL}uploads/artists${artistData.personalInfo.pics}`}
-        alt="Photo artiste"
-        style={{ width: "150px", height: "auto", borderRadius: "8px", display: "block", marginBottom: "5px" }}
-      />
-      <button
-        type="button"
-        onClick={() =>
-          setArtistData((prev) => ({
-            ...prev,
-            personalInfo: { ...prev.personalInfo, pics: "" },
-          }))
-        }
-        className="btn small-btn"
-      >
-        Supprimer la photo
-      </button>
-    </div>
-  )}
-
-  <input
-    type="file"
-    name="pics"
-    accept="image/*"
-    onChange={(e) => {
-      if (e.target.files && e.target.files.length > 0) {
-        setFile(e.target.files[0]);
-      }
-    }}
-    className="pics-file"
-  />
-
-
-  {file && <p>Nouvelle photo sélectionnée : {file.name}</p>}
-</div> */}

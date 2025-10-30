@@ -1,9 +1,13 @@
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Button from "../components/Button"
 import { useTranslation } from "react-i18next"
 
 const Participate: React.FC=()=>{
     const { t } = useTranslation()
     return (
+        <>
+        <Header />
         <main className="participate-page">
             <div className="main-wrap">
                 <h1>Participer</h1>
@@ -43,16 +47,9 @@ Ton énergie et ton soutien font battre le cœur du festival. Alors, qu’est-ce
                 </section>
 
             </div>
-
         </main>
-
-
-
-
-
+        <Footer />
+        </>
     )
-    
-    
-
 }
 export default Participate

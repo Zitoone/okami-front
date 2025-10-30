@@ -22,6 +22,3 @@ const Dashboard: React.FC = () =>{
 
 }
 export default Dashboard
-
-//TODO: Mettre en place Zustand pour green IT et limité les appels API
-//TODO: Faire système de déconnexion
