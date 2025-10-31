@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import Button from '../components/Button'
 import Modal from '../components/Modal'
 import { useNavigate } from 'react-router-dom'
+import FormHeader from '../components/FormHeader'
 
 const LoginForm: React.FC = () =>{
     const [email, setEmail] = useState('')
@@ -35,7 +36,6 @@ const LoginForm: React.FC = () =>{
 
             if(res.token){
                 localStorage.setItem("authToken", res.token)
-                localStorage.setItem("isAdmin", "true")
                 setError('')
                 navigate('/admin/dashboard')
             }
@@ -46,6 +46,9 @@ const LoginForm: React.FC = () =>{
         }
     }
     return(
+        <>
+        <FormHeader />
+
         <main id='login-page'>
             <div className="main-wrap">
                 <h1>Connexion privée</h1>
@@ -68,6 +71,7 @@ const LoginForm: React.FC = () =>{
                 )}
             </div>
         </main>
+        </>
     )
 }
 

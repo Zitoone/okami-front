@@ -85,7 +85,7 @@ Une aventure humaine et sensorielle à vivre ensemble, entre fête, partage et r
                             url={`/program/music`}
                             title={artist.projectName || 'Artiste'}
                             content={artist.musicalStyle || ''}
-                            image={artist.promoPhoto ? `${import.meta.env.VITE_API_URL}${artist.promoPhoto}` : ''}
+                            image={artist.promoPhoto ? `http://localhost:5001/${artist.promoPhoto}` : ''}
                             socials={artist.socialLinks?.instagram || artist.socialLinks?.soundcloud || ''}
                             />
                         ))}

@@ -22,13 +22,14 @@
 .dashboard-page{
     background-color: $white;
     color: $blue;
+    min-height: 100vh;
     .main-wrap{
-        min-height: calc(100vh - 221px); //Permet de laisser le footer en bas
+        min-height: calc(100vh - 221px);
     }
 }
 .dashboard-page>div>div{
     display: flex;
     justify-content: space-evenly;
     padding: $padding;
-    
 }
+

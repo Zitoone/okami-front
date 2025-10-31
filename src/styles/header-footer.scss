@@ -2,7 +2,6 @@
 
 header,footer {
     width: 100%;  
-    /* background-color: $blue;  */
     background: $background;  
     box-shadow: $box-shadow;
     .container{
@@ -145,8 +144,6 @@ footer {
 
 //Admin Header
 .admin-header-layout {
-  min-height: 100vh;
-  background: #EFE5D2;
 
   .admin-header {
     background: #01484d;
@@ -160,8 +157,8 @@ footer {
     .logo {
       font-size: 1.5rem;
       font-weight: 600;
+      font-family: $title-font;
       cursor: pointer;
-      font-family: 'KG Second Chances', cursive;
     }
   }
 
@@ -174,9 +171,6 @@ footer {
 }
 
 .form-header-layout {
-  min-height: 100vh;
-  background: $white;
-
   .form-header {
     width: 100%;
     max-height: 300px;

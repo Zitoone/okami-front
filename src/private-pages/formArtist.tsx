@@ -4,44 +4,28 @@ import { useTranslation } from 'react-i18next'
 import Button from '../components/Button'
 import Modal from '../components/Modal'
 import { useNavigate } from 'react-router-dom'
-
-
-export type PersonalInfo ={
-    lastName: string,
-    firstName: string,
-    email: string,
-    phone: string,
-    projectName: string,
-    invitName?: string,
-    infoRun?: string,
-    setupTimeInMin?: number | string,
-    soundcheck?: string,
-    record?: string,
-    setup?: string,
-    artistComments?: string,
-    pics?: string,
-    socials?: string,
-    promoText?: string
-}
+import FormHeader from '../components/FormHeader'
+import type { Artist } from '../types/Artist'
 
 const ArtistForm: React.FC=()=>{
     const { t } = useTranslation()
 
-    const [formData, setFormData] = useState<PersonalInfo>({
+    const [formData, setFormData] = useState<Partial<Artist>>({
         lastName: "",
         firstName: "",
         email: "",
         phone: "",
         projectName: "",
-        invitName: "",
-        infoRun: "",
-        setupTimeInMin: "",
-        soundcheck: "",
-        record: "",
+        guestName: "",
+        runInfo: "",
+        setupTime: "",
+        needsSoundcheck: false,
+        canRecordSet: false,
         setup: "",
-        artistComments: "",
-        socials: "",
-        promoText: ""
+        comments: "",
+        socialLinks: {},
+        promoText: "",
+        dataSource: "artist"
         })
     
     const [file, setFile] = useState<File | null>(null)
@@ -55,29 +39,57 @@ const ArtistForm: React.FC=()=>{
             [e.target.name]: e.target.value
         })
     }
+
+    const handleSocialLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setFormData({
+            ...formData,
+            socialLinks: {
+                ...formData.socialLinks,
+                [name]: value
+            }
+        })
+    }
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
-        const upload = new FormData()       
-        if(file){
-            upload.append('pics', file)
+        const upload = new FormData()
+        
+        Object.entries(formData).forEach(([key, value]) => {
+            if (value !== undefined && value !== null && key !== 'socialLinks') {
+                upload.append(key, String(value))
+            }
+        })
+        
+        if (formData.socialLinks) {
+            upload.append('socialLinks', JSON.stringify(formData.socialLinks))
         }
-        upload.append('personalInfo', JSON.stringify(formData))
+        
+        if(file){
+            upload.append('promoPhoto', file)
+        }
 
         try {
             const res=await fetch(`${import.meta.env.VITE_API_URL}artists/form`, {
                 method: "POST",
                 body: upload
             })
-            if(!res.ok) throw new Error("Impossible d'ajouter l'artiste")
+            
+            if(!res.ok) {
+                const errorData = await res.json()
+                console.error("Erreur backend:", errorData)
+                throw new Error(errorData.message || "Impossible d'ajouter l'artiste")
+            }
 
             setModal(true)
 
         } catch (error) { 
-            console.error("❌ Erreur :", error)            
+            console.error("❌ Erreur complète:", error)            
         }
     }
     return(
+        <>
+        <FormHeader />
         <main className='form'>
             <div className='all-forms'>
                 <h1>{t("artistForm.title")}</h1>
@@ -119,42 +131,32 @@ const ArtistForm: React.FC=()=>{
 
                         <div>
                             <label>{t("artistForm.invitName")}</label>
-                            <input name="invitName" value={formData.invitName} onChange={handleChange} />
+                            <input name="guestName" value={formData.guestName || ''} onChange={handleChange} />
                         </div>
 
                         <div>
                             <label>{t("artistForm.infoRun")}</label>
-                            <textarea name="infoRun" value={formData.infoRun} onChange={handleChange} />
+                            <textarea name="runInfo" value={formData.runInfo || ''} onChange={handleChange} />
                         </div>
 
                         <div>
                         <label>{t("artistForm.setupTimeInMin")}</label>
-                        <input type="number" min={0} max={100} name="setupTimeInMin" value={formData.setupTimeInMin} onChange={handleChange} />
-                        </div>
-
-                        <div>
-                            <label>{t("artistForm.soundcheck")}</label>
-                            <input name="soundcheck" value={formData.soundcheck} onChange={handleChange} />
-                        </div>
-
-                        <div>
-                        <label>{t("artistForm.record")}</label>
-                        <input name="record" value={formData.record} onChange={handleChange} />
+                        <input name="setupTime" value={formData.setupTime || ''} onChange={handleChange} />
                         </div>
 
                         <div>
                         <label>{t("artistForm.setup")}</label>
-                        <input name="setup" value={formData.setup} onChange={handleChange} />
+                        <input name="setup" value={formData.setup || ''} onChange={handleChange} />
                         </div>
 
                         <div>
                         <label>{t("artistForm.artistComments")}</label>
-                        <textarea name="artistComments" value={formData.artistComments} onChange={handleChange} />
+                        <textarea name="comments" value={formData.comments || ''} onChange={handleChange} />
                         </div>
 
                         <div>
                             <label>{t("artistForm.pics")}</label>
-                            <input type="file" name="pics" onChange={(e) => {
+                            <input type="file" name="promoPhoto" onChange={(e) => {
                                 if (e.target.files &&  e.target.files.length > 0){
                                     setFile(e.target.files[0])
                                 }
@@ -162,8 +164,18 @@ const ArtistForm: React.FC=()=>{
                         </div>
 
                         <div>
-                            <label>{t("artistForm.socials")}</label>
-                            <input type='text' name='socials' placeholder='https://soundcloud.com/xxx , https://instagram.com/xxx' value={formData.socials} onChange={handleChange}></input>
+                            <label>Instagram</label>
+                            <input type='text' name='instagram' placeholder='https://instagram.com/xxx' value={formData.socialLinks?.instagram || ''} onChange={handleSocialLinkChange} />
+                        </div>
+
+                        <div>
+                            <label>Soundcloud</label>
+                            <input type='text' name='soundcloud' placeholder='https://soundcloud.com/xxx' value={formData.socialLinks?.soundcloud || ''} onChange={handleSocialLinkChange} />
+                        </div>
+
+                        <div>
+                            <label>Website</label>
+                            <input type='text' name='website' placeholder='https://monsite.com' value={formData.socialLinks?.website || ''} onChange={handleSocialLinkChange} />
                         </div>
 
                         <div>
@@ -188,6 +200,7 @@ const ArtistForm: React.FC=()=>{
             </div>
 
         </main>
+        </>
     )
 }
 

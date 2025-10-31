@@ -1,5 +1,9 @@
 @use './variables' as *;
 
+.form {
+    background-color: $white;
+}
+
 .all-forms, .input-container{
     max-width: $max-width;
     text-align: center;
@@ -35,3 +39,8 @@ form > div > textarea,
     font-size: 30px;
     padding: 50px;
 } */
+.artist-form{
+    color: $blue;
+span {
+    color: red;
+}}

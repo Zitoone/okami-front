@@ -49,7 +49,7 @@ const MusicProgram: React.FC = () => {
                     {!isOpen ? (
                         <>
                             <img
-                            src={artist.promoPhoto ? `${import.meta.env.VITE_API_URL}${artist.promoPhoto}` : ''}
+                            src={artist.promoPhoto ? `http://localhost:5001/${artist.promoPhoto}` : ''}
                             alt={artist.projectName || 'Artiste'}/>
                             <h3>{artist.projectName || 'Artiste'}</h3>
                             <span>{artist.musicalStyle || ""}</span>

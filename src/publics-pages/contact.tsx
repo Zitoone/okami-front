@@ -39,7 +39,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
         e.preventDefault()
 
         try {
-            const res= await fetch(`${import.meta.env.VITE_APP_API_URL}email/send`,{
+            const res= await fetch(`${import.meta.env.VITE_API_URL}email/send`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

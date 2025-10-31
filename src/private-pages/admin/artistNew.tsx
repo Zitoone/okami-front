@@ -12,6 +12,7 @@ export default function ArtistNew() {
         lastName: "",
         firstName: "",
         email: "",
+        dataSource: "admin"
     })
 
     const [modal, setModal] = useState(false)
@@ -61,22 +62,22 @@ export default function ArtistNew() {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Nom du projet</label>
-                        <input name="projectName" value={formData.projectName} onChange={handleChange} required />
+                        <input name="projectName" value={formData.projectName || ''} onChange={handleChange} required />
                     </div>
 
                     <div>
                         <label>Nom</label>
-                        <input name="lastName" value={formData.lastName} onChange={handleChange} />
+                        <input name="lastName" value={formData.lastName || ''} onChange={handleChange} />
                     </div>
 
                     <div>
                         <label>Prénom</label>
-                        <input name="firstName" value={formData.firstName} onChange={handleChange} />
+                        <input name="firstName" value={formData.firstName || ''} onChange={handleChange} />
                     </div>
 
                     <div>
                         <label>Email</label>
-                        <input type="email" name="email" value={formData.email} onChange={handleChange} />
+                        <input type="email" name="email" value={formData.email || ''} onChange={handleChange} />
                     </div>
 
                     <Button type="submit" className="btn form-btn">Envoyer</Button>

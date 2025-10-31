@@ -15,9 +15,7 @@ export interface Artist {
     comments?: string;
     promoPhoto?: string;
     socialLinks?: {
-        facebook?: string;
         instagram?: string;
-        spotify?: string;
         soundcloud?: string;
         website?: string;
     };
