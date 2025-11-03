@@ -4,15 +4,15 @@ import Button from "../../components/Button"
 import Collapse from "../../components/Collapse"
 import CustomInput from "../../components/CustomInput"
 import { FaArrowCircleLeft } from "react-icons/fa"
-import { Link } from "react-router-dom"
 import Modal from "../../components/Modal"
 import { useNavigate } from 'react-router-dom'
 import { AdminHeader } from "../../components/AdminHeader"
 import type { Artist } from "../../types/Artist"
+import { artistApi } from "../../services/api"
 
 function ArtistEdit() {
     const { id: artistId } = useParams<{ id: string }>()
-    const [artistData, setArtistData] = useState<Partial<Artist>>({
+    const [artistData, setArtistData] = useState<Partial<Artist>>({ //Partial pour que les champs soit facultatifs
         projectName: "",
         firstName: "",
         lastName: "",
@@ -46,25 +46,16 @@ function ArtistEdit() {
         totalTTC: "",
         paymentInfo: ""
     })
-    const [file, setFile] = useState<File | null>(null)
+    const [file, setFile] = useState<File | null>(null) //Stocker la photo
     const [loading, setLoading] = useState(true)
     const [modal, setModal] = useState(false)
-
-    const token = localStorage.getItem("authToken")
     const navigate = useNavigate()
 
     const fetchArtist = async (artistId: string) => {
         try {
-            const req = await fetch(`${import.meta.env.VITE_API_URL}artists/${artistId}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            if (!req.ok) throw new Error("Erreur lors du chargement de l'artiste")
-            const data = await req.json()
+            setLoading(true)
+            const data = await artistApi.getOne(artistId)
             setArtistData(data)
-
         } catch (error) {
             console.log(error)
         } finally {
@@ -72,37 +63,33 @@ function ArtistEdit() {
         }
     }
     
-    useEffect(() => {
+    useEffect(() => { //Déclenche la récupération de l'artiste (et si l'artiste change aussi)
         if (artistId) {
             fetchArtist(artistId)
         }
     }, [artistId])
 
+    //Gerer automatique le type de champs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target
-        setArtistData((prev) => ({
-            ...prev,
-            [name]: type === 'number' ? Number(value) : value
-        }))
-    }
-
-    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, checked } = e.target
-        setArtistData((prev) => ({
-            ...prev,
-            [name]: checked
-        }))
-    }
-
-    const handleSocialLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-        setArtistData((prev) => ({
-            ...prev,
-            socialLinks: {
-                ...prev.socialLinks,
-                [name]: value
-            }
-        }))
+        const checked = (e.target as HTMLInputElement).checked
+        
+        // Gestion des socialLinks
+        if (['instagram', 'soundcloud', 'website'].includes(name)) {
+            setArtistData((prev) => ({
+                ...prev,
+                socialLinks: {
+                    ...prev.socialLinks,
+                    [name]: value
+                }
+            }))
+        } else {
+            // Gestion des autres champs
+            setArtistData((prev) => ({
+                ...prev,
+                [name]: type === 'checkbox' ? checked : type === 'number' ? Number(value) : value
+            }))
+        }
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -124,15 +111,7 @@ function ArtistEdit() {
         if (!artistId) return
 
         try {
-            const req = await fetch(`${import.meta.env.VITE_API_URL}artists/${artistId}`, {
-                method: "PATCH",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                body: upload
-            })
-            if (!req.ok) throw new Error("Erreur lors de la mise à jour de l'artiste")
-            const updatedData = await req.json()
+            const updatedData = await artistApi.updateWithFile(artistId, upload)
             setArtistData(updatedData)
             setModal(true)
         } catch (error) {
@@ -145,7 +124,7 @@ function ArtistEdit() {
         <AdminHeader />
         <main className="artist-edit">
             <div className='all-forms'>
-                <Link to="/admin/artists"><FaArrowCircleLeft /> Retour sur le tableau des artistes</Link>
+                <button onClick={() => navigate("/admin/artists")}><FaArrowCircleLeft /> Retour sur le tableau des artistes</button>
                 <h1>Modifier {artistData.projectName}</h1>
 
             {loading ? (
@@ -169,7 +148,7 @@ function ArtistEdit() {
                             <label>Photo artiste</label>
                             {artistData.promoPhoto && (
                                 <img 
-                                    src={`http://localhost:5001/${artistData.promoPhoto}`} 
+                                    src={`http://localhost:5001/${artistData.promoPhoto}`}
                                     alt="Photo actuelle" 
                                     style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px', marginBottom: '0.5rem' }}
                                 />
@@ -184,13 +163,13 @@ function ArtistEdit() {
                         <CustomInput label="Texte de promotion" name="promoText" value={artistData.promoText || ''} onChange={handleChange} />
                         
                         <h3>Réseaux sociaux</h3>
-                        <CustomInput label="Instagram" name="instagram" value={artistData.socialLinks?.instagram || ''} onChange={handleSocialLinkChange} />
-                        <CustomInput label="Soundcloud" name="soundcloud" value={artistData.socialLinks?.soundcloud || ''} onChange={handleSocialLinkChange} />
-                        <CustomInput label="Website" name="website" value={artistData.socialLinks?.website || ''} onChange={handleSocialLinkChange} />
+                        <CustomInput label="Instagram" name="instagram" value={artistData.socialLinks?.instagram || ''} onChange={handleChange} />
+                        <CustomInput label="Soundcloud" name="soundcloud" value={artistData.socialLinks?.soundcloud || ''} onChange={handleChange} />
+                        <CustomInput label="Website" name="website" value={artistData.socialLinks?.website || ''} onChange={handleChange} />
                     </Collapse>
 
                     <Collapse title="Infos admin">
-                        <CustomInput label="Nombre de personnes" type="number" name="numberOfPeople" value={artistData.numberOfPeople || 1} onChange={handleChange} min="1" />
+                        <CustomInput label="Nombre de personnes" type="number" name="numberOfPeople" onChange={handleChange} />
                         <CustomInput label="Scène" name="stage" value={artistData.stage || ''} onChange={handleChange} />
                         <CustomInput label="Date et heure de passage" name="performanceDateTime" value={artistData.performanceDateTime || ''} onChange={handleChange} />
                         <CustomInput label="Date et heure soundcheck" name="soundcheckDateTime" value={artistData.soundcheckDateTime || ''} onChange={handleChange} />
@@ -199,8 +178,8 @@ function ArtistEdit() {
                         <CustomInput label="Logement" name="accommodation" value={artistData.accommodation || ''} onChange={handleChange} />
                         <CustomInput label="Contrat" name="contract" value={artistData.contract || ''} onChange={handleChange} />
                         <CustomInput label="Facture" name="invoice" value={artistData.invoice || ''} onChange={handleChange} />
-                        <CustomInput label="Cachet" type="number" name="fee" value={artistData.fee || 0} onChange={handleChange} />
-                        <CustomInput label="Frais de déplacement" type="number" name="travelExpenses" value={artistData.travelExpenses || 0} onChange={handleChange} />
+                        <CustomInput label="Cachet" type="number" name="fee" onChange={handleChange} />
+                        <CustomInput label="Frais de déplacement" type="number" name="travelExpenses" onChange={handleChange} />
                         <CustomInput label="Total TTC" name="totalTTC" value={artistData.totalTTC || ''} onChange={handleChange} />
                         <CustomInput label="Infos paiement" name="paymentInfo" value={artistData.paymentInfo || ''} onChange={handleChange} />
                         <CustomInput label="Feuille de route" name="roadmap" value={artistData.roadmap || ''} onChange={handleChange} />
@@ -216,13 +195,13 @@ function ArtistEdit() {
                         <CustomInput label="Set up de l'artiste" name="setup" value={artistData.setup || ''} onChange={handleChange} />
                         <div className="input-container">
                             <label>
-                                <input type="checkbox" name="needsSoundcheck" checked={artistData.needsSoundcheck || false} onChange={handleCheckboxChange} />
+                                <input type="checkbox" name="needsSoundcheck" checked={artistData.needsSoundcheck || false} onChange={handleChange} />
                                 {" "}Besoin de soundcheck
                             </label>
                         </div>
                         <div className="input-container">
                             <label>
-                                <input type="checkbox" name="canRecordSet" checked={artistData.canRecordSet || false} onChange={handleCheckboxChange} />
+                                <input type="checkbox" name="canRecordSet" checked={artistData.canRecordSet || false} onChange={handleChange} />
                                 {" "}Autorisation d'enregistrement
                             </label>
                         </div>
@@ -249,3 +228,5 @@ function ArtistEdit() {
 }
 
 export default ArtistEdit
+
+//TODO: Voir pour refactoriser cette page

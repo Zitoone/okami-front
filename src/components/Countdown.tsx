@@ -15,17 +15,17 @@ const Countdown = ({ targetDate }: CountdownProps) => {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>(null)
 
     useEffect(() => {
-        const interval = setInterval(() => {
+        const interval = setInterval(() => { //exécute une fonction chaque seconde pour recalculer le temps restant.
         const now = new Date().getTime()
-        const distance = new Date(targetDate).getTime() - now
+        const distance = new Date(targetDate).getTime() - now //Différence etre le le temps actuel et la date clible
 
-        if (distance < 0) {
+        if (distance < 0) { //Si cette différence est terminée, on met tout a 0
             clearInterval(interval)
             setTimeLeft(null)
             return
         }
 
-        setTimeLeft({
+        setTimeLeft({ //Si la date n'est pas dépassé on convertit en jour, heure, min et sec
             days: Math.floor(distance / (1000 * 60 * 60 * 24)),
             hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
             minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
@@ -33,7 +33,7 @@ const Countdown = ({ targetDate }: CountdownProps) => {
         })
     }, 1000)
 
-    return () => clearInterval(interval)
+    return () => clearInterval(interval) //Fonction pour arrêter le minuteur
     }, [targetDate])
 
     if (!timeLeft) return <div>OKAMI : C'est parti ! 🎉</div>

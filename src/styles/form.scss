@@ -2,6 +2,15 @@
 
 .form {
     background-color: $white;
+        .language-switcher{
+            max-width: $max-width;
+            flex-direction: row;
+            place-self: center;
+            padding: $padding;
+    }
+    h1{
+        font-size: 40px;
+    }
 }
 
 .all-forms, .input-container{
@@ -13,7 +22,7 @@
 form{
     display: flex;
     flex-direction: column;
-    gap: 1em;
+    gap: 2em;
     max-width: 900px;
     justify-self: center;   
     width: 100%;
@@ -34,13 +43,19 @@ form > div > textarea,
     align-self: center;
 }
 
-/* .form-success-msg{
-    color: $green;
-    font-size: 30px;
-    padding: 50px;
-} */
 .artist-form{
     color: $blue;
-span {
-    color: red;
-}}
+    
+    label {
+        text-align: left;
+        display: block;
+    }
+    
+    input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    
+    span {
+        color: red;
+    }
+}

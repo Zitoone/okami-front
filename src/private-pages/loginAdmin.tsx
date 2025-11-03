@@ -6,6 +6,7 @@ import Button from '../components/Button'
 import Modal from '../components/Modal'
 import { useNavigate } from 'react-router-dom'
 import FormHeader from '../components/FormHeader'
+import {adminApi} from "../services/api"
 
 const LoginForm: React.FC = () =>{
     const [email, setEmail] = useState('')
@@ -25,25 +26,14 @@ const LoginForm: React.FC = () =>{
         return
     }
     try {
-            const req=await fetch(`${import.meta.env.VITE_API_URL}admin/login`,{
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({email, password})
-            })
-            if(!req.ok) throw new Error("Impossible de se connecter")
-            
-            const res = await req.json()
-
-            if(res.token){
-                localStorage.setItem("authToken", res.token)
-                setError('')
-                navigate('/admin/dashboard')
-            }
-
-        } catch (error) {
-            setError("Erreur lors de la connexion")
-            console.error(error)
-        }
+        const token = await adminApi.login(email, password)
+        localStorage.setItem("authToken", token)
+        setError('')
+        navigate('/admin/dashboard')
+    } catch (error) {
+        setError("Erreur lors de la connexion")
+        console.error(error)
+    }
     }
     return(
         <>

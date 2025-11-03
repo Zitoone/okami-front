@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Button from "../../components/Button"
 import { AdminHeader } from "../../components/AdminHeader"
 import type { Artist } from "../../types/Artist"
+import { artistApi } from "../../services/api"
 
 export default function ArtistPage() {
   const [artists, setArtists] = useState<Artist[]>([])
@@ -11,27 +12,18 @@ export default function ArtistPage() {
   const [error, setError] = useState<string | null>(null)
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null)
 
-  const token = localStorage.getItem("authToken") //Récupération du token pour accèder à cette page
-
-  const formatPhone = (phone:string) =>{
+  const formatPhone = (phone: string) => {
     const cleaned = phone.replace(/\D/g, '')
     return cleaned.replace(/(\d{2})(?=\d)/g, '$1 ')
   }
-//Fonction pour récupérer tous les artistes depuis l'API
+  // Fonction pour récupérer tous les artistes depuis l'API
   const fetchArtists = async () => {
     try { 
       setLoading(true)
-      const req = await fetch(`${import.meta.env.VITE_API_URL}artists`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, //Sécurisation par le token
-        },
-      })
-      if (!req.ok) throw new Error("Erreur lors du chargement des artistes")
-      const datas: Artist[] = await req.json()
-      datas.sort((a,b)=>{
-        if(a===b) return 0
-        return (a.projectName || '').toLowerCase() < (b.projectName || '').toLowerCase() ? -1 :1
+      const datas = await artistApi.getAll()
+      datas.sort((a, b) => {
+        if (a === b) return 0
+        return (a.projectName || '').toLowerCase() < (b.projectName || '').toLowerCase() ? -1 : 1
       })
       setArtists(datas)
       setFilteredArtists(datas) 
@@ -43,26 +35,16 @@ export default function ArtistPage() {
     }
   }
 
-  //Fonction pour supprimer l'artiste sélectionné (par son ID)
+  // Fonction pour supprimer l'artiste sélectionné (par son ID)
   const deleteArtist = async (id: string) => {
-    if(!window.confirm("Tu veux vraiment supprimer cet artiste de la base de données ?")) return //On lance une fonction native windows.confirm qui ouvre une fenetre de confirmation qui retournera false (car on inverse la valeur) si l'utilisateur clic sur confirmer
+    if (!window.confirm("Tu veux vraiment supprimer cet artiste de la base de données ?")) return
 
     try {
-      const req = await fetch(`${import.meta.env.VITE_API_URL}artists/${id}`,{
-        method: "DELETE",
-        headers:{
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      if (!req.ok) throw new Error("Erreur sur la suppression de l'artiste")
-
-      // Mise a jour de l'état local de setArtists aprés la suppression.
-      // prev pour le state précédent donc la liste avant la supression
-      //.filter crée et retourne un nouveau tableau d'artistes sans celui qui a l'id selectionné
+      await artistApi.delete(id)
+      // Mise à jour de l'état local après suppression
       setArtists((prev) => prev.filter((artist) => artist._id !== id))
-    setSelectedArtist(null)
-    alert("Artiste supprimé avec succès ✅") //Faire une modale
+      setSelectedArtist(null)
+      alert("Artiste supprimé avec succès ✅")
     } catch (error) {
       const err = error as Error
       setError(err.message)

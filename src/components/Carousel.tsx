@@ -6,7 +6,7 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 
 export type CarouselProps = {
-    children: React.ReactNode 
+    children: React.ReactNode //N'importe quel élément du carousel
     autoPlayDelay?: number
     loop?: boolean
     showPagination?: boolean
@@ -19,7 +19,7 @@ const Carousel: React.FC<CarouselProps> = ({
     loop = true,
     showPagination = false,
     showNavigation = true,
-
+// = valeur par défaut si aucune valeur n'est passée
     
 }) => {
     
@@ -30,10 +30,10 @@ const Carousel: React.FC<CarouselProps> = ({
             spaceBetween={30}
             slidesPerView={2}
             loop={loop}
-            autoplay={autoPlayDelay ? { delay: autoPlayDelay, disableOnInteraction: true} : false}
+            autoplay={autoPlayDelay ? { delay: autoPlayDelay, disableOnInteraction: true} : false} //s'arrête quand on clic dessus
             navigation={showNavigation}
             pagination={showPagination ? { clickable: true } : false}
-            breakpoints={{
+            breakpoints={{ //Change le nombre de slide selon la taille d'écran
             1280: { slidesPerView: 4 },
             1024: { slidesPerView: 3 },
             768: { slidesPerView: 2 },

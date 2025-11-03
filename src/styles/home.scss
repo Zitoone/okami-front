@@ -14,8 +14,6 @@ p{
     text-align: center;
 }
 .hero{
-    /* background: $background; */
-
     article{
         max-width: $max-width;
         margin: auto;
@@ -97,8 +95,6 @@ p{
 
 //Section 3 Espaces
 #spaces{
-/*     background: $background; */
-    
     padding: 4rem;
     color: $white;
     span{       
@@ -137,7 +133,6 @@ p{
 
 // Section 4 Carrousel artistes
 #lineup{
-/*     background: $background; */
     padding: 4rem;
     >div{
         max-width: 1200px;
@@ -146,16 +141,17 @@ p{
 .carousel-container {
     position: relative;
     width: 100%;
-    /* padding: 50px 0; */
-    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto;
     z-index: 0;
 
     .swiper {
         width: 90%;
         margin: 0 auto;
-        height: 420px;
+        height: 320px;
         display: flex; 
         align-items: center;
+        border-radius: $border-radius;
     }
     .swiper-slide {
     display: flex;
@@ -176,6 +172,7 @@ p{
         text-shadow: 0 0 8px rgba(255, 180, 0, 0.8);
         transition: all 0.3s ease;
         transform: scale(1.1);
+        z-index: 10;
 
         &:hover {
         color: lighten(#ffb400, 10%);

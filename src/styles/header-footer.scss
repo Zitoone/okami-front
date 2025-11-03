@@ -5,11 +5,11 @@ header,footer {
     background: $background;  
     box-shadow: $box-shadow;
     .container{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: $padding;
-  }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $padding;
+    }
 }
 header{
   top: 0;
@@ -37,6 +37,11 @@ header{
 
     li a.active {
       color: $yellow;
+    }
+
+    // Cacher les boutons dans navbar en desktop
+    .buyTickets, .language-switcher {
+      display: none;
     }
   }
 
@@ -83,27 +88,57 @@ footer {
 //Resposive design
 @media (max-width: $breakpoint-tablet) {
   header {
+    // Cacher les boutons hors navbar en mobile
+    > .container > .buyTickets,
+    > .container > .language-switcher {
+      display: none;
+    }
     justify-content: space-between;
 
     .navbar {
       display: none;
-      position: absolute;
-      top: 0;
-      right: 0;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100vw;
+      height: calc(100vh - 70px);
       background: $white;   
-      padding: 20px;
+      padding: 60px 40px;
       text-align: center;
-      z-index: 1001;
+      z-index: 1000;
+
+      // Cacher les boutons dans navbar par défaut
+      .buyTickets, .language-switcher{
+        display: none;
+      }
 
       ul {
         flex-direction: column;
+        gap: 1.5em;
+        font-size: 1.2rem;
         a{
         color: $blue;
         }
       }
 
       &.open {
-        display: block !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        // Afficher les boutons dans navbar quand menu ouvert
+        .buyTickets, .language-switcher{
+          display: block !important;
+          margin-top: 30px;
+        }
+
+        .language-switcher{
+          display: flex !important;
+          flex-direction: row;
+          justify-content: center;
+          gap: 15px;
+        }
       }
     }
 
@@ -143,24 +178,28 @@ footer {
 
 
 //Admin Header
-.admin-header-layout {
+.admin-header {
+  background: #01484d;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
-  .admin-header {
-    background: #01484d;
-    color: #EFE5D2;
-    padding: 1.5rem 2rem;
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1.5rem 2rem;
 
     .logo {
       font-size: 1.5rem;
       font-weight: 600;
       font-family: $title-font;
+      color: $white;
       cursor: pointer;
     }
   }
+}
+
+.admin-header-layout {
+  max-width: $max-width;
 
   .admin-main {
     padding: 2rem;

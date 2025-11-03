@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom" //Permet de détecter l'url actuel
 import { TiThMenu } from "react-icons/ti";
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
@@ -11,7 +11,7 @@ function Header() {
   const path = location.pathname
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen) //Change l'état du menu au clic
 
   useEffect(() => {
     const handleResize = () => { if (isMenuOpen) setIsMenuOpen(false) }
@@ -19,7 +19,7 @@ function Header() {
       const nav = document.querySelector(".navbar")
       const burger = document.querySelector(".burger")
       if (nav && !nav.contains(event.target as Node) && burger && !burger.contains(event.target as Node)) {
-        setIsMenuOpen(false)
+        setIsMenuOpen(false) //Fermer le menu si on clic en dehors
       }
     }
     const handleScroll = () => { if (isMenuOpen) setIsMenuOpen(false) }
@@ -27,7 +27,7 @@ function Header() {
     document.addEventListener("click", handleClickOutside)
     window.addEventListener("resize", handleResize)
     window.addEventListener("scroll", handleScroll)
-    return () => {
+    return () => { //fonction de nettoyage
       document.removeEventListener("click", handleClickOutside)
       window.removeEventListener("resize", handleResize)
       window.removeEventListener("scroll", handleScroll)
@@ -91,8 +91,23 @@ function Header() {
               </NavLink>
             </li>
           </ul>
+
+{/* Boutons pour le menu en responsive */}
+          <Button href="https://tinyurl.com/mrz6jv8v" className="btn buyTickets">
+            {t("btnTickets")}
+          </Button>
+
+          <div className="language-switcher">
+            <button onClick={() => i18n.changeLanguage("fr")} >
+              <ReactCountryFlag countryCode="FR" className="btn" aria-label="French" />
+            </button>
+            <button onClick={() => i18n.changeLanguage("en")}>
+              <ReactCountryFlag countryCode="GB" className="btn" aria-label="English" />
+            </button>
+          </div> 
         </nav> 
 
+{/* Boutons pour le header en mode desktop */}
         <Button href="https://tinyurl.com/mrz6jv8v" className="btn buyTickets">
           {t("btnTickets")}
         </Button>

@@ -8,12 +8,12 @@ export const AdminHeader = () => {
         navigate('/login')
     };
 
-    return (
-        <div className="admin-header-layout">
-        <header className="admin-header">
-            <div className="logo" onClick={() => navigate('/admin/dashboard')}>OKAMI Manager</div>
-            <button onClick={handleLogout} className="btn btn-secondary">Déconnexion</button>
+    return(
+        <header className='admin-header'>
+            <div className='container'>
+                <div className="logo" onClick={() => navigate('/admin/dashboard')}>OKAMI Manager</div>
+                <button onClick={handleLogout} className="btn btn-secondary">Déconnexion</button>
+            </div>
         </header>
-        </div>
     )
 }

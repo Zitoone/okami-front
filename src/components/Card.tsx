@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom"
-import Button from '../components/Button'
+import { useNavigate } from "react-router-dom"
 import { RiSoundcloudLine, RiInstagramFill } from "react-icons/ri"
+import { CiGlobe } from "react-icons/ci"
 import { useState } from "react"
 
+type socialProps={
+    instagram?: string,
+    soundcloud?: string,
+    website?: string
+}
 type CardProps={
     className?: string,
     url?: string
@@ -11,10 +16,8 @@ type CardProps={
     subtitle?: string,
     image?:string,
     content?: string,
-    socials?: string,
+    socials?: socialProps,
     children?: React.ReactNode,
-    isOpen?: boolean
-    
 }
 
 const Card: React.FC<CardProps> = ({
@@ -27,17 +30,15 @@ const Card: React.FC<CardProps> = ({
     content,
     socials,
     children,
-    /* isOpen */
 }) => {
     const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate()
 
-/*     const handleSocialClick = (socials: string, type: string) => {
-        const urls = socials.split(',').map(s => s.trim())
-        const url = urls.find(u => u.includes(type))
-        if (url) window.open(url, '_blank', 'noopener,noreferrer')
-    } */
-    const handleClick = () =>{
-        if(url) return
+    const handleClick = () =>{ //Si la card a un URL, navigue vers l'URL sinon elle bascule en isOpen et affichera le contenu children
+        if(url) {
+            navigate(url)
+            return
+        }
         setIsOpen(!isOpen)
     }
     const handleClose = () =>{
@@ -56,39 +57,38 @@ const Card: React.FC<CardProps> = ({
                 {content && <p>{content}</p>}
                 
                 <div className="card-socials">
-{/*                     {socials?.includes("soundcloud") && (
-                        <a onClick={(e) =>{ e.stopPropagation()
-                        handleSocialClick(socials, "soundcloud")}} className="btn">
-                            <RiSoundcloudLine /> 
-                        </a>
-                    )}
-                    {socials?.includes("instagram") && (
-                        <a onClick={(e)=> { e.stopPropagation()
-                            handleSocialClick(socials, "instagram")}} className="btn">
-                            <RiInstagramFill /> 
-                        </a>
-                    )} */}
-                    {socials
-                        ?.split(',')
-                        .map(s => s.trim())
-                        .map(url => {
-                            let icon, label
-                            if (url.includes('soundcloud')) {
-                            icon = <RiSoundcloudLine />
-                            label = 'Soundcloud'
-                            } else if (url.includes('instagram')) {
-                            icon = <RiInstagramFill />
-                            label = 'Instagram'
-                            } else return null
-                        return (
+                    {socials &&
+                        ["instagram", "soundcloud", "website"].map((key)=>{ //On parcourt le tableau des socials, on définit la clé et récupère le lien correspondant
+                            const url = socials[key as keyof typeof socials] //Pour éviter les erreurs TypeScript
+                            if (!url) return null //S'il n'y a pas de lien, on ne retourne rien
+
+                            let icon, label //On définit l'icone et le nom
+                            switch (key) {
+                                case "instagram":
+                                    icon = <RiInstagramFill />
+                                    label = 'Instagram'
+                                    break
+                                case "soundcloud":
+                                    icon = <RiSoundcloudLine />
+                                    label = 'Soundcloud'
+                                    break
+                                case "website":
+                                    icon = <CiGlobe />
+                                    label = 'Site web'
+                                    break
+                                default:
+                                    return null
+                            }
+
+                        return ( //On crée le lien cliquable 
                             <a
-                                key={label}
+                                key={key}
                                 href={url}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                target="_blank" //Dans un nouvel onglet
+                                rel="noopener noreferrer" //Indique qu'il n'y a pas de relation entre les 2 sites (pour + de sécurité)
                                 className="btn"
                                 aria-label={label}
-                                onClick={e => e.stopPropagation()}
+                                onClick={e => e.stopPropagation()} //Pour éviter le clic sur la carte globale
                             >
                                 {icon}
                             </a>
@@ -97,16 +97,12 @@ const Card: React.FC<CardProps> = ({
                 </div>
             </article>
         )    
-        if (url) {
-            return <Link to={url}>{cardContent}</Link>
-        }
 
         if(isOpen){
             return(
                 <article className={className}>
                     <button onClick={handleClose} className="btn">X</button>
                     {children}
-                    
                 </article>
             )
         }
