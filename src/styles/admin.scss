@@ -1,15 +1,18 @@
 @use './variables' as *;
 
+
+.login-wrapper, .dashboard-wrapper{
+    background-color: $white;
+        color: $blue;
+    min-height: 100vh;
+}
 //Page Login Admin
 #login-page{
-    background-color: $white;
     color: $blue;
     h1{
         margin-top: 0;
     }
-    .main-wrap{
-        min-height: calc(100vh - 221px); //Permet de laisser le footer en bas
-    }
+
     form{
         padding: $padding;
     }
@@ -19,17 +22,20 @@
 }
 
 //Page dashboard
-.dashboard-page{
-    background-color: $white;
-    color: $blue;
-    min-height: 100vh;
-    .main-wrap{
-        min-height: calc(100vh - 221px);
-    }
-}
 .dashboard-page>div>div{
     display: flex;
     justify-content: space-evenly;
     padding: $padding;
 }
+
+@media (max-width:$breakpoint-mobile){
+    .dashboard-page > div > div {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+}
+
+
+
 

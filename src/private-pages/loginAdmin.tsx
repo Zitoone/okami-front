@@ -36,7 +36,7 @@ const LoginForm: React.FC = () =>{
     }
     }
     return(
-        <>
+        <div className='login-wrapper'>
         <FormHeader />
 
         <main id='login-page'>
@@ -61,7 +61,7 @@ const LoginForm: React.FC = () =>{
                 )}
             </div>
         </main>
-        </>
+        </div>
     )
 }
 

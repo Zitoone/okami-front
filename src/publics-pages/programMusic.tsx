@@ -4,6 +4,7 @@ import Footer from '../components/Footer'
 import { RiSoundcloudLine, RiInstagramFill } from "react-icons/ri"
 import Button from "../components/Button"
 import type { Artist } from '../types/Artist'
+import { artistApi } from "../services/api"
 
 const MusicProgram: React.FC = () => {
     const [artists, setArtists] = useState<Artist[]>([])
@@ -12,12 +13,10 @@ const MusicProgram: React.FC = () => {
     useEffect(() => {
         const fetchArtists = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_URL}artists/public`)
-                const data = await res.json()
-                console.log("Données reçues :", data)
-                setArtists(data)
+                const datas = await artistApi.getPublic()
+                setArtists(datas)
             } catch (error) {
-                console.log("Erreur lors du chargement des artistes :", error)
+                console.error("Erreur lors du chargement des artistes :", error)
             }
         }
     fetchArtists()
@@ -46,7 +45,12 @@ const MusicProgram: React.FC = () => {
                         key={artist._id}
                         className={`artist-card-page ${isOpen ? "open" : ""}`}
                         onClick={() => toggle(artist._id)} >
-                    {!isOpen ? (
+                    {isOpen ? (
+                        <div className="card-description">
+                            <button onClick={(e) => { e.stopPropagation(); toggle(artist._id) }}>X</button>
+                            <p>{artist.promoText || "Aucune description disponible."}</p>
+                        </div>
+                    ) : (
                         <>
                             <img
                             src={artist.promoPhoto ? `http://localhost:5001/${artist.promoPhoto}` : ''}
@@ -65,11 +69,6 @@ const MusicProgram: React.FC = () => {
 )}
                 </div>
                         </>
-                    ) : (
-                        <div className="card-description">
-                            <button onClick={(e) => { e.stopPropagation(); toggle(artist._id) }}>X</button>
-                            <p>{artist.promoText || "Aucune description disponible."}</p>
-                        </div>
                     )}
                     </article>
                 )

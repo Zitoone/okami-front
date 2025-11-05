@@ -52,3 +52,5 @@ const Souvenirs: React.FC=()=>{
     )
 }
 export default Souvenirs
+
+//TODO : Faire une partie Présentation association, équipe, valeurs

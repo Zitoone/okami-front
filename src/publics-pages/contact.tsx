@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import CustomInput from "../components/CustomInput"
 import Button from "../components/Button"
 import Modal from "../components/Modal"
+import { emailApi } from "../services/api"
 
 type FormData = {
     name?: string
@@ -23,38 +24,29 @@ const Contact: React.FC=()=>{
         isAgree: false
     })
     const [modal, setModal]= useState(false)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
 const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const target = e.target;
+    const target = e.target
     setFormData({
         ...formData,
         [target.name]: 
             target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value //Pour confirmer a TS que la checkbox est bien un input
-    });
-};
-
-    
+    })
+}
     const handleSubmit= async (e: React.FormEvent) => {
         e.preventDefault()
+        setLoading(true)
 
         try {
-            const res= await fetch(`${import.meta.env.VITE_API_URL}email/send`,{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)  
-            })
-            if(!res.ok) throw new Error("Impossible d'envoyer le message")
-                const data = await res.json()
-console.log("✅ Réponse API :", data)
-                setModal(true)
-
+            await emailApi.send(formData)
+            setModal(true)
         } catch (error) {
             console.error("❌ Erreur :", error)
+        } finally {
+            setLoading(false)
         }
-        
     }
     return (
         <>
@@ -80,7 +72,9 @@ Merci de nous aider à faire du Okami Festival une aventure toujours plus magiqu
                     <label htmlFor="rgpd">J'accepte que mes informations soient traitées conformément à la politique de confidentialité.</label>
                 </div>
 
-                <Button type="submit" className="form-btn btn">Envoyer</Button>
+                <Button type="submit" className="form-btn btn" disabled={loading}>
+                    {loading ? 'Envoi en cours...' : 'Envoyer'}
+                </Button>
 
                 {modal && (
                     <Modal

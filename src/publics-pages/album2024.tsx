@@ -85,3 +85,5 @@ const Album2024: React.FC = () => {
 }
 
 export default Album2024
+
+//TODO: Mettre une ancre pour revenir en haut de page si besoin

@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react'
 import Button from '../components/Button'
 import Countdown from '../components/Countdown'
 import type { Artist } from '../types/Artist'
+import { artistApi } from '../services/api'
 
 const Home: React.FC=()=>{
 
@@ -19,11 +20,11 @@ const Home: React.FC=()=>{
     useEffect(()=>{
         const fetchArtists=async()=>{
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}artists/public`)
-            const data = await res.json()
-            setArtists(Array.isArray(data) ? data : [])
+            const datas = await artistApi.getPublic()
+        
+            setArtists(Array.isArray(datas) ? datas : []) //Pour vérifier que le back retourne toujours un tableau afin d'éviter les erreurs
         } catch (error) {
-            console.log("Erreur lors du chargement des artistes :", error)
+            console.error("Erreur lors du chargement des artistes :", error)
         }
     }
         fetchArtists()
@@ -61,10 +62,10 @@ const Home: React.FC=()=>{
                     <section id='spaces'>
                         <h2>Explore nos espaces sacrés</h2>
                             <div>
-                                <Card url={`/program`} title='Scène DOMA' content='Viens découvrir la scène principale ' icon={<BsFillSpeakerFill />} className='space-card'></Card>
-                                <Card url={`/program`} title='Scène SELVA' content="Scène dédiée à la musique downtempo, live, organique, ethnique. " icon={<BsSpeaker />} className='space-card'></Card>
-                                <Card url={`/program`} title="Espace bien être" content="Un sanctuaire ton esprit, ton corps et ton âme" icon={<FaShieldHeart />} className='space-card'></Card>
-                                <Card url={`/program`} title="Kidzone" content="L'univers des enfants pour des aventures créatives amusantes" icon={<FaChild />} className='space-card'></Card>
+                                <Card url={`/program/music`} title='Scène DOMA' content='Viens découvrir la scène principale ' icon={<BsFillSpeakerFill />} className='space-card'></Card>
+                                <Card url={`/program/music`} title='Scène SELVA' content="Scène dédiée à la musique downtempo, live, organique, ethnique. " icon={<BsSpeaker />} className='space-card'></Card>
+                                <Card url={`/program/healing`} title="Espace bien être" content="Un sanctuaire ton esprit, ton corps et ton âme" icon={<FaShieldHeart />} className='space-card'></Card>
+                                <Card url={`/program/kidzone`} title="Kidzone" content="L'univers des enfants pour des aventures créatives amusantes" icon={<FaChild />} className='space-card'></Card>
                                 <Card url={`/program`} title="Marché artisanal" content="Artisans créatifs sélectionnés avec soin" icon={<TbShoppingBagHeart />} className='space-card'></Card>
                                 <Card url={`/program`} title="Bar et restauration" content="2 bars et un espace pour vous restaurer pendant toute la durée du festival" icon={<MdNoFood />} className='space-card'></Card>
                             </div>

@@ -25,13 +25,18 @@ export const artistApi = {
         return response.data
     },
 
+    getPublic: async (): Promise<Artist[]> => {
+        const response = await axiosInstance.get('artists/public')
+        return response.data
+    },
+
     getOne: async (id: string): Promise<Artist> => {
         const response = await axiosInstance.get(`artists/${id}`)
         return response.data
     },
     //PARTIAL permet de ne pas avoir a remplir tous les champs
     create: async (artist: Partial<Artist>): Promise<Artist> => {
-        const response = await axiosInstance.post('artists', artist)
+        const response = await axiosInstance.post('artists/new', artist)
         return response.data
     },
 
@@ -58,5 +63,11 @@ export const adminApi = {
     login: async (email: string, password: string): Promise<string> => {
         const response = await axiosInstance.post('admin/login', { email, password })
         return response.data.token
+    }
+}
+
+export const emailApi = {
+    send: async (data: { name?: string; email?: string; object?: string; message?: string; isAgree?: boolean }): Promise<void> => {
+        await axiosInstance.post('email/send', data)
     }
 }

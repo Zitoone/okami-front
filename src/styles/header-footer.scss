@@ -1,4 +1,5 @@
 @use './variables' as *;
+@use "sass:color";
 
 header,footer {
     width: 100%;  
@@ -13,7 +14,7 @@ header,footer {
 }
 header{
   top: 0;
-  z-index: 10;
+  z-index: 100;
   position: sticky;
 }
   header img,
@@ -79,13 +80,22 @@ footer {
       font-size: xx-large;
       color: $yellow;
         &:hover {
-    color: $white;
+          color: $white;
   }
     }
   }
 }
 
-//Resposive design
+//Responsive design
+@media (max-width: $breakpoint-desktop){
+  header .buyTickets{
+    display: none;
+  }
+  .hero article img {
+        margin-left: 2rem;
+  }
+}
+
 @media (max-width: $breakpoint-tablet) {
   header {
     // Cacher les boutons hors navbar en mobile
@@ -122,19 +132,19 @@ footer {
       }
 
       &.open {
-        display: flex !important;
+        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
         // Afficher les boutons dans navbar quand menu ouvert
         .buyTickets, .language-switcher{
-          display: block !important;
+          display: block;
           margin-top: 30px;
         }
 
         .language-switcher{
-          display: flex !important;
+          display: flex;
           flex-direction: row;
           justify-content: center;
           gap: 15px;
@@ -148,6 +158,7 @@ footer {
       font-size: 25px;
     }
   }
+
 }
 
 @media (max-width: $breakpoint-mobile) {
@@ -173,7 +184,7 @@ footer {
     ul{
       text-align: center;
     }
-}
+  }
 }
 
 
@@ -210,6 +221,8 @@ footer {
 }
 
 .form-header-layout {
+  background: white;
+  
   .form-header {
     width: 100%;
     max-height: 300px;
@@ -222,9 +235,9 @@ footer {
     .banner-image {
       width: 100%;
       height: auto;
-      max-height: 300px;
-      object-fit: contain;
-      display: block;
+/*       max-height: 300px;
+      object-fit: cover;
+      display: block; */
     }
   }
 
@@ -237,19 +250,12 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .form-header-layout {
-    .form-header {
-      max-height: 200px;
-
-      .banner-image {
-        max-height: 200px;
-      }
-    }
-
-    .form-main {
-      padding: 1rem;
-    }
+  .form-header-layout header{
+    background: $white;
   }
+      .form-header-layout .form-header  {
+      box-shadow: none;
+    }
 }
 
 //Legal notice page
@@ -267,5 +273,13 @@ footer {
   margin: auto;
   h2{
   padding-top: 50px;
+  }
+}
+@media (max-width: $breakpoint-mobile){
+  #legalNotice{
+    text-align: justify;
+    h1{
+      font-size: 1.5em;
+    }
   }
 }

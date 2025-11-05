@@ -124,3 +124,5 @@ L’endroit rêvé pour éveiller la curiosité et la créativité des enfants d
     )
 }
 export default Informations
+
+//TODO: Changer la couleurs des fleches des collapse

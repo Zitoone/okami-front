@@ -42,3 +42,13 @@
         }
     }
 }
+
+@media (max-width: $breakpoint-mobile){
+    .info-page #general-info {
+        flex-direction: column-reverse;
+        align-items: center;
+        img{
+            width: 90%;
+        }
+    }
+}

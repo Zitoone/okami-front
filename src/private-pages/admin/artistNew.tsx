@@ -5,6 +5,7 @@ import Modal from "../../components/Modal"
 import { Link } from "react-router-dom"
 import { FaArrowCircleLeft } from "react-icons/fa"
 import type { Artist } from "../../types/Artist"
+import { artistApi } from "../../services/api"
 
 export default function ArtistNew() {
     const [formData, setFormData] = useState<Partial<Artist>>({
@@ -16,9 +17,6 @@ export default function ArtistNew() {
     })
 
     const [modal, setModal] = useState(false)
-
-    const token = localStorage.getItem("authToken")
-
     const navigate = useNavigate()
 
     // Fonction pour gérer les changements dans les input
@@ -33,25 +31,13 @@ export default function ArtistNew() {
     //Fonction pour envoyer un nouvel artiste au back
     const handleSubmit = async (e:React.FormEvent) => {
         e.preventDefault()
-        /* if(!formData) return */
 
         try {
-            const req = await fetch(`${import.meta.env.VITE_API_URL}artists/new`,{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(formData)
-            })
-            if(!req.ok) throw new Error("Impossible d'ajouter l'artiste")
-
+            await artistApi.create(formData)
             setModal(true)
-            
         } catch (error) {
-    const err = error as Error
-    console.log(err.message)
-    }
+            console.error("❌ Erreur:", error)
+        }
     }
 
     return(

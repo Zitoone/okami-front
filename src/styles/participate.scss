@@ -38,8 +38,7 @@
         }
 }
 .float-text {
-    font-family: $font !important;
-    /* display: inline-block; */
+    font-family: $font;
     animation: floatSide 3s ease-in-out infinite;
 } 
 #tickets{
@@ -62,8 +61,8 @@
     #market>div{
         flex-direction: column;
     }
-            img{
-                width: 100%;
-            }
-        }
-    
+    .participate-page img {
+        width: 100%;
+    }
+}
+

@@ -8,6 +8,7 @@ type ButtonProps = {
   type?: 'button' | 'submit' | 'reset'
   className?: string    // optionnel, pour ajouter des classes CSS
   onClick?: (e:React.MouseEvent<HTMLButtonElement>)=> void //ne r'envoit rien
+  disabled?: boolean    // optionnel, pour désactiver le bouton
 }
 
 const Button: FC<ButtonProps> = ({
@@ -16,7 +17,8 @@ const Button: FC<ButtonProps> = ({
   href,
   type = 'button',
   className = '',
-  onClick
+  onClick,
+  disabled = false
 }) => {
   const navigate = useNavigate() //pour une redirection sur le site
 
@@ -33,7 +35,7 @@ const Button: FC<ButtonProps> = ({
 }
 
   return (
-    <button type={type} onClick={type === "button" ? handleClick : undefined} className={className}>
+    <button type={type} onClick={type === "button" ? handleClick : undefined} className={className} disabled={disabled}>
       {children}
     </button>
   )

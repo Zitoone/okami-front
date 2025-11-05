@@ -1,4 +1,5 @@
 @use './variables' as *;
+@use "sass:color";
 
 //Général
 #main-home{
@@ -124,10 +125,11 @@ p{
     border-radius: $border-radius;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
             &:hover {
-        color: lighten(#ffb400, 10%);
+        color: color.adjust(#ffb400, $lightness: 10%);
         transform: scale(1);
         transition: transform 0.3s ease;
         text-shadow: 0 0 12px rgba(255, 180, 0, 1);
+        cursor:pointer;
         }
 }
 
@@ -175,7 +177,7 @@ p{
         z-index: 10;
 
         &:hover {
-        color: lighten(#ffb400, 10%);
+        color: color.adjust(#ffb400, $lightness: 10%);
         transform: scale(1.3);
         text-shadow: 0 0 12px rgba(255, 180, 0, 1);
         }
@@ -325,12 +327,47 @@ p{
             font-size: 24px;
         }
         img{
-            width: 60%;
-            margin: 0 0 16px 0;
+            width: 40%;
+            margin: 40px 0 0 0;
         }
     }
     #spaces>div{
         grid-template-columns: 1fr;
     }
+    .countdown{
+        display: none;
+    }
+    #main-home .video-container{
+        height: 400px;
+    }
+    #spaces > div {
+        padding: 0;
+    }
     
 }
+
+@media (max-width: $breakpoint-min){
+    .artist-card {
+    max-width: 250px;
+    padding: 0.5rem;
+    }
+    .carousel-container .swiper {
+        width: 85%;
+        height: 280px;
+    }
+    .swiper-button-next, .swiper-button-prev {
+        transform: scale(0.8);
+    }
+    .artist-card {
+        h3 {
+            font-size: 16px;
+        }
+        img {
+            width: 40%;
+        }
+    }
+    #lineup {
+        padding: 2rem 1rem;
+    }
+}
+

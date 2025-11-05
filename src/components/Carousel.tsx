@@ -28,7 +28,7 @@ const Carousel: React.FC<CarouselProps> = ({
             <Swiper
             modules={[Autoplay, Pagination, Navigation]}
             spaceBetween={30}
-            slidesPerView={2}
+            slidesPerView={1}
             loop={loop}
             autoplay={autoPlayDelay ? { delay: autoPlayDelay, disableOnInteraction: true} : false} //s'arrête quand on clic dessus
             navigation={showNavigation}

@@ -4,7 +4,7 @@ import { ProtectedRoute } from './components/ProtectedRoutes.tsx'
 
 import Home from './publics-pages/home.tsx'
 import Legal from './publics-pages/legal.tsx'
-import NotFound from './publics-pages/notFound.tsx'
+import NotFound from './publics-pages/404.tsx'
 import Program from './publics-pages/program.tsx'
 import Participate from './publics-pages/participate.tsx'
 import Informations from './publics-pages/informations.tsx'

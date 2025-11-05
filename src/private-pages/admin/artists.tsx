@@ -1,32 +1,36 @@
+// Import nécessaire à la page
 import { useEffect, useState } from "react"
 import Button from "../../components/Button"
+import Modal from "../../components/Modal"
 import { AdminHeader } from "../../components/AdminHeader"
 import type { Artist } from "../../types/Artist"
 import { artistApi } from "../../services/api"
 
 export default function ArtistPage() {
-  const [artists, setArtists] = useState<Artist[]>([])
-  const [filteredArtists, setFilteredArtists] = useState<Artist[]>([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null)
+  // Gestion des états pour stocker des données  
+  const [artists, setArtists] = useState<Artist[]>([]) // Artistes récupérés depuis l'API
+  const [filteredArtists, setFilteredArtists] = useState<Artist[]>([]) // Liste filtrée selon la recherche (affichée à l'écran)
+  const [searchTerm, setSearchTerm] = useState('') // Texte tapé dans la barre de recherche
+  const [loading, setLoading] = useState(true) // Chargement en cours ou terminé
+  const [error, setError] = useState<string | null>(null) // Stocke le message d'erreur 
+  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null) // Artiste sélectionné pour afficher le panneau latéral
+  const [showDeleteModal, setShowDeleteModal] = useState(false) // modal de suppression
+  const [artistToDelete, setArtistToDelete] = useState<string | null>(null) // ID de l'artiste à supprimer
 
+// Fonction pour obtenir un n° de tel lisible
   const formatPhone = (phone: string) => {
-    const cleaned = phone.replace(/\D/g, '')
-    return cleaned.replace(/(\d{2})(?=\d)/g, '$1 ')
+    const cleaned = phone.replace(/\D/g, '') 
+    return cleaned.replace(/(\d{2})(?=\d)/g, '$1 ') 
   }
-  // Fonction pour récupérer tous les artistes depuis l'API
+
+  // Fonction qui récupère la liste d'artiste
   const fetchArtists = async () => {
     try { 
       setLoading(true)
       const datas = await artistApi.getAll()
-      datas.sort((a, b) => {
-        if (a === b) return 0
-        return (a.projectName || '').toLowerCase() < (b.projectName || '').toLowerCase() ? -1 : 1
-      })
-      setArtists(datas)
-      setFilteredArtists(datas) 
+      
+      setArtists(datas) // Stocke la liste complète
+      setFilteredArtists(datas) // Initialise la liste filtrée avec tous les artistes
     } catch (error) {
       const err = error as Error
       setError(err.message)
@@ -35,16 +39,25 @@ export default function ArtistPage() {
     }
   }
 
-  // Fonction pour supprimer l'artiste sélectionné (par son ID)
-  const deleteArtist = async (id: string) => {
-    if (!window.confirm("Tu veux vraiment supprimer cet artiste de la base de données ?")) return
+  // Fonction pour appeler la modal de confirmation de suppression
+  const confirmDelete = (id: string) => {
+    setArtistToDelete(id) // Stocke l'ID de l'artiste à supprimer
+    setShowDeleteModal(true)
+  }
+
+  // Fonction pour supprimer l'artiste
+  const deleteArtist = async () => {
+    if (!artistToDelete) return // Si pas d'ID, on arrête la fonction
 
     try {
-      await artistApi.delete(id)
-      // Mise à jour de l'état local après suppression
-      setArtists((prev) => prev.filter((artist) => artist._id !== id))
+      await artistApi.delete(artistToDelete)
+      
+      // Mise à jour de l'état local (sans recharger la page)
+      setArtists((prev) => prev.filter((artist) => artist._id !== artistToDelete)) // Filtre pour garder tous les artistes SAUF celui supprimé
+      
       setSelectedArtist(null)
-      alert("Artiste supprimé avec succès ✅")
+      setShowDeleteModal(false)
+      setArtistToDelete(null)
     } catch (error) {
       const err = error as Error
       setError(err.message)
@@ -52,21 +65,22 @@ export default function ArtistPage() {
   }
 
   useEffect(() => {
-    fetchArtists()
+    fetchArtists() // UseEffect qui récupère les artistes dès que la page s'affiche
   }, [])
 
   useEffect(() => {
+    // Filtre les artistes dont le nom contient le texte recherché
     const filtered = artists.filter(artist => 
-      (artist.projectName || '').toLowerCase().includes(searchTerm.toLowerCase())
+      (artist.projectName || '').toLowerCase().includes(searchTerm.toLowerCase()) // Comparaison en minuscules
     )
-    setFilteredArtists(filtered)
-  }, [searchTerm, artists])
+    setFilteredArtists(filtered) // Met à jour la liste affichée
+  }, [searchTerm, artists]) // Dépendances : se déclenche quand searchTerm ou artists change
 
-  //Gestion des affichages si la page est en cours de chargement ou si il y a une erreur
+
   if (loading) return <p>Chargement des artistes en cours…</p>
   if (error) return <p style={{ color: "red" }}>{error}</p>
 
-  //On retourne le rendu s'il n'y a pas d'erreur
+  // Si pas de chargement ni d'erreur, on affiche la page complète
   return (
     <>
     <AdminHeader />
@@ -78,9 +92,11 @@ export default function ArtistPage() {
         <input 
           type="text" 
           placeholder="Rechercher un artiste..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm} // Valeur affichée = état searchTerm
+          onChange={(e) => setSearchTerm(e.target.value)} // À chaque frappe, met à jour searchTerm
           className="search-input"
+          id="search"
+          name="search"
         />
         <Button to={("/admin/artists/new")} className="btn add-btn">+ Ajouter un artiste</Button>
       </div>
@@ -94,7 +110,6 @@ export default function ArtistPage() {
               <th>PROJET</th>
               <th>NOM</th>
               <th>PRÉNOM</th>
-              <th>EMAIL</th>
               <th>TEL</th>
               <th>Nb de pers</th>
               <th>SCÈNE</th>
@@ -104,17 +119,16 @@ export default function ArtistPage() {
           <tbody>
             {filteredArtists.map((artist) => (
               <tr
-                key={artist._id}
-                onClick={() => setSelectedArtist(artist)} //Ouvre le panneau latéral si on clic sur la ligne
+                key={artist._id} // key unique obligatoire
+                onClick={() => setSelectedArtist(artist)} // Au clic on stocke l'artiste dans selectedArtist
                 className="clickable-row"
               >
                 <td><strong>{artist.projectName || "-"}</strong></td>
                 <td>{artist.lastName || "-"}</td>
                 <td>{artist.firstName || "-"}</td>
-                <td>{artist.email || "-"}</td>
                 <td>
                   {artist.phone ? (
-                    <a href={`tel:${artist.phone}`}>{formatPhone(artist.phone)}</a>
+                    <a href={`tel:${artist.phone}`}>{formatPhone(artist.phone)}</a> // Lien cliquable pour appeler
                   ) : "-"}
                 </td>
                 <td>{artist.numberOfPeople || "-"}</td>
@@ -146,28 +160,29 @@ export default function ArtistPage() {
         ))}
       </div>
 
-{/* Affichage conditionnel pour le panneau latéral qui donne les infos sur l'artiste sélectionné */}
+{/* Panneau latéral  */}
       {selectedArtist && (
         <>
-          <div className="overlay" onClick={() => setSelectedArtist(null)} />  {/* Permet de fermer le panneau latéral si on clic dedans et de remettre l'état de l'artiste sélectionné à nul */}
+          <div className="overlay" onClick={() => setSelectedArtist(null)} />
           <aside className="side-panel">
-            <button className="close-btn" onClick={() => setSelectedArtist(null)} aria-label="Fermer">✕</button>
+            <button className="close-btn" onClick={() => setSelectedArtist(null)} aria-label="Fermer">✕</button>           
+            {/* Affiche la photo uniquement si elle existe */}
             {selectedArtist.promoPhoto && (
               <img 
-                src={`http://localhost:5001/${selectedArtist.promoPhoto.startsWith('uploads/') ? selectedArtist.promoPhoto : `uploads/artists/${selectedArtist.promoPhoto}`}`} 
+                src={`http://localhost:5001/${selectedArtist.promoPhoto}`} 
                 alt={selectedArtist.projectName} 
                 className="artist-photo"
                 onError={(e) => { e.currentTarget.style.display = 'none'; console.log('Image non trouvée:', selectedArtist.promoPhoto) }}
               />
             )}
             <h2>{selectedArtist.projectName}</h2>
-              <div className="tableBtns">
-                {/* Boutons pour modifier ou supprimer l'artiste */}
+            <p id='email'>{selectedArtist.email || "-"}</p>
+            <div className="tableBtns">
               <Button type="button" className="btn" to={`/admin/artist-edit/${selectedArtist._id}`}>Modifier</Button>
 
-              <Button type="button"  className="btn btn-delete" onClick={() => deleteArtist(selectedArtist._id)}>Supprimer</Button> {/* Fonction de rappel qui sera déclenchée au clic */}
-              </div>
-              {/* Liste des infos détaillés de l'artiste sélectionné */}
+              <Button type="button"  className="btn btn-delete" onClick={() => confirmDelete(selectedArtist._id)}>Supprimer</Button>
+            </div>
+            {/* Liste des infos détaillés de l'artiste sélectionné */}
             <h3>Logistique</h3>
             <p><strong>Run arrivée :</strong>{selectedArtist.arrivalRun || "-"}</p>
             <p><strong>Run départ :</strong>{selectedArtist.departureRun || "-"}</p>
@@ -223,13 +238,26 @@ export default function ArtistPage() {
             <p><strong>Créé le :</strong> {selectedArtist.createdAt ? new Date(selectedArtist.createdAt).toLocaleString('fr-FR') : '-'}</p>
             <p><strong>Modifié le :</strong> {selectedArtist.updatedAt ? new Date(selectedArtist.updatedAt).toLocaleString('fr-FR') : '-'}</p>
 
-            {/* Bouton pour fermer qui ré initialise l'artiste sélectionné a nul */}
             <Button onClick={() => setSelectedArtist(null)} className="btn">Fermer</Button> 
           </aside>
         </>
+      )}
+
+      {/* Modal de confirmation de suppression si showDeleteModal = true */}
+      {showDeleteModal && (
+        <Modal
+          text="Veux-tu vraiment supprimer cet artiste de la base de données ?"
+          onConfirm={deleteArtist} // Fonction appelée si on clique sur "Confirmer"
+          onClose={() => { // Fonction appelée si on clique sur la croix
+            setShowDeleteModal(false) // Ferme le modal
+            setArtistToDelete(null) // Réinitialise l'ID
+          }}
+        />
       )}
       </div>
     </main>
     </>
   )
 }
+
+//TODO: Faire modale pour la suppression

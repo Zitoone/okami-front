@@ -44,7 +44,8 @@ function ArtistEdit() {
         fee: 0,
         travelExpenses: 0,
         totalTTC: "",
-        paymentInfo: ""
+        paymentInfo: "",
+        isValidated: false
     })
     const [file, setFile] = useState<File | null>(null) //Stocker la photo
     const [loading, setLoading] = useState(true)
@@ -69,7 +70,7 @@ function ArtistEdit() {
         }
     }, [artistId])
 
-    //Gerer automatique le type de champs
+    //Gestion automatique le type de champs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target
         const checked = (e.target as HTMLInputElement).checked
@@ -169,6 +170,12 @@ function ArtistEdit() {
                     </Collapse>
 
                     <Collapse title="Infos admin">
+                        <div className="input-container">
+                            <label>
+                                <input type="checkbox" name="isValidated" checked={artistData.isValidated || false} onChange={handleChange} />
+                                {" "}Artiste validé (visible sur le site public)
+                            </label>
+                        </div>
                         <CustomInput label="Nombre de personnes" type="number" name="numberOfPeople" onChange={handleChange} />
                         <CustomInput label="Scène" name="stage" value={artistData.stage || ''} onChange={handleChange} />
                         <CustomInput label="Date et heure de passage" name="performanceDateTime" value={artistData.performanceDateTime || ''} onChange={handleChange} />
