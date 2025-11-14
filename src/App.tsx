@@ -1,5 +1,6 @@
 import {Routes, Route} from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop.tsx'
+import ScrollToTopButton from './components/ScrollToTopButton.tsx'
 import { ProtectedRoute } from './components/ProtectedRoutes.tsx'
 
 import Home from './publics-pages/home.tsx'
@@ -12,6 +13,7 @@ import Souvenirs from './publics-pages/albums.tsx'
 import Album2022 from './publics-pages/album2022.tsx'
 import Album2023 from './publics-pages/album2023.tsx'
 import Album2024 from './publics-pages/album2024.tsx'
+/* import Album2025 from './publics-pages/album2025.tsx' */
 import Contact from './publics-pages/contact.tsx'
 import MusicProgram from './publics-pages/programMusic.tsx'
 
@@ -27,6 +29,7 @@ function App(){
   return(
     <>
     <ScrollToTop />
+    <ScrollToTopButton />
     <Routes>
     <Route path='/' element={<Home />} />
     <Route path='/program' element={<Program />} />
@@ -37,6 +40,7 @@ function App(){
       <Route path='/album2022' element={<Album2022 />} />
       <Route path='/album2023' element={<Album2023 />} />
       <Route path='/album2024' element={<Album2024 />} />
+{/*       <Route path='/album2025' element={<Album2025 />} /> */}
     <Route path='/contact' element={<Contact />} />    
     <Route path='/legal' element={<Legal />} />
     <Route path='*' element={<NotFound />} />

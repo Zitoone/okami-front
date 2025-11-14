@@ -145,7 +145,7 @@ export default function ArtistPage() {
         {filteredArtists.map((artist) => (
           <div
             key={artist._id}
-            className="artist-card"
+            className="cards"
             onClick={() => setSelectedArtist(artist)}
           >
             <h3>{artist.projectName || "-"}</h3>
@@ -165,11 +165,11 @@ export default function ArtistPage() {
         <>
           <div className="overlay" onClick={() => setSelectedArtist(null)} />
           <aside className="side-panel">
-            <button className="close-btn" onClick={() => setSelectedArtist(null)} aria-label="Fermer">✕</button>           
+            <button className="close" onClick={() => setSelectedArtist(null)} aria-label="Fermer">✕</button>           
             {/* Affiche la photo uniquement si elle existe */}
             {selectedArtist.promoPhoto && (
               <img 
-                src={`http://localhost:5001/${selectedArtist.promoPhoto}`} 
+                src={selectedArtist.promoPhoto}
                 alt={selectedArtist.projectName} 
                 className="artist-photo"
                 onError={(e) => { e.currentTarget.style.display = 'none'; console.log('Image non trouvée:', selectedArtist.promoPhoto) }}
@@ -238,7 +238,9 @@ export default function ArtistPage() {
             <p><strong>Créé le :</strong> {selectedArtist.createdAt ? new Date(selectedArtist.createdAt).toLocaleString('fr-FR') : '-'}</p>
             <p><strong>Modifié le :</strong> {selectedArtist.updatedAt ? new Date(selectedArtist.updatedAt).toLocaleString('fr-FR') : '-'}</p>
 
-            <Button onClick={() => setSelectedArtist(null)} className="btn">Fermer</Button> 
+            <div className='close-btn'>
+              <Button onClick={() => setSelectedArtist(null)} className="btn">Fermer</Button>
+            </div> 
           </aside>
         </>
       )}
@@ -260,4 +262,3 @@ export default function ArtistPage() {
   )
 }
 
-//TODO: Faire modale pour la suppression

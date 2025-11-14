@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import Modal from "../../components/Modal"
 import { Link } from "react-router-dom"
 import { FaArrowCircleLeft } from "react-icons/fa"
+import { AdminHeader } from "../../components/AdminHeader"
 import type { Artist } from "../../types/Artist"
 import { artistApi } from "../../services/api"
 
@@ -41,6 +42,8 @@ export default function ArtistNew() {
     }
 
     return(
+        <>
+        <AdminHeader />
         <main className="artist-new">
             <div className="main-wrap">
                 <Link to="/admin/artists"><FaArrowCircleLeft /> Retour sur le tableau des artistes</Link>
@@ -81,6 +84,7 @@ export default function ArtistNew() {
                 </form>
             </div>
         </main>
+        </>
     )
 
 }

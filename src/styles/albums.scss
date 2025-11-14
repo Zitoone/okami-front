@@ -43,6 +43,19 @@
     }
 }
 
+.album-page .main-wrap .flyer{
+    display: flex; 
+    align-items: center;
+    padding: 40px;
+    p{
+        padding: 20px;
+    }
+    img{
+        width: 40%;
+        object-fit: cover;
+    }
+}
+
 //Styles des carousel
 .album-carousel .carousel-container{
     position: relative;
@@ -118,6 +131,11 @@
     }
 }
 
+.video-container{
+    margin-bottom: 100px;
+    border-radius: 0;
+}
+
 //Albums sans carousel
 .album{
     display: grid; 
@@ -130,6 +148,7 @@
         object-fit: cover;
         width: 250px;
         height: 250px;
+        cursor: pointer;
     }
 }
 .load-more{
@@ -137,8 +156,16 @@
     padding: $padding;
 }
 
+@media (max-width:$breakpoint-tablet){
+    .album-page .main-wrap .flyer{
+        flex-direction: column-reverse;
+                img{
+            width: 90%;
+        }
+        }
 
-
+    
+}
 
 
 

@@ -15,7 +15,7 @@ const Souvenirs: React.FC=()=>{
                     <Card 
                         url={"/album2022"} 
                         title="2022" 
-                        image="/DJs2.jpg"
+                        image="/couv22.webp"
                         className="souvenir-card"
                     ></Card>                   
 

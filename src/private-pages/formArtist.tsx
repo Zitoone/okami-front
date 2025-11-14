@@ -9,12 +9,16 @@ import FormHeader from '../components/FormHeader'
 import type { Artist } from '../types/Artist'
 import { artistApi } from '../services/api'
 
+
+
+
 export const ArtistForm = () => {
     const { t, i18n } = useTranslation()
     const navigate = useNavigate()
     
     // États du formulaire
-    const [file, setFile] = useState<File | null>(null) // Photo de l'artiste
+    const [file, setFile] = useState<File | null>(null)
+    const [preview, setPreview] = useState<string | null>(null)
     const [modal, setModal] = useState(false) // Affichage modal succès
     const [formData, setFormData] = useState<Partial<Artist>>({
         projectName: "",
@@ -34,7 +38,7 @@ export const ArtistForm = () => {
         musicalStyle: "",
         dataSource: "artist"
     })
-    
+
 
     // Gère les changements des champs normaux (texte, checkbox)
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -60,34 +64,34 @@ export const ArtistForm = () => {
         }))
     }
 
+    // Gère le changement de fichier
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = e.target.files?.[0]
+        if (selectedFile) {
+            setFile(selectedFile)
+            setPreview(URL.createObjectURL(selectedFile))
+        }
+    }
+
     // Soumission du formulaire
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
-        // Préparation des données pour l'envoi
-        const upload = new FormData()
-        
-        // Ajout de tous les champs sauf socialLinks
+        const data = new FormData()
         Object.entries(formData).forEach(([key, value]) => {
-            if (value !== undefined && value !== null && key !== 'socialLinks') {
-                upload.append(key, String(value))
+            if (key === 'socialLinks') {
+                data.append(key, JSON.stringify(value))
+            } else if (typeof value === 'boolean') {
+                data.append(key, value.toString())
+            } else if (value) {
+                data.append(key, value.toString())
             }
         })
-        
-        // Ajout des réseaux sociaux en JSON
-        if (formData.socialLinks) {
-            upload.append('socialLinks', JSON.stringify(formData.socialLinks))
-        }
-        
-        // Ajout de la photo si elle existe
-        if (file) {
-            upload.append('promoPhoto', file)
-        }
+        if (file) data.append('promoPhoto', file)
 
-        // Envoi au backend
         try {
-            await artistApi.submitForm(upload)
-            setModal(true) // Affiche la modal de succès
+            await artistApi.submitForm(data)
+            setModal(true)
         } catch (error) {
             console.error("❌ Erreur:", error)
         }
@@ -156,7 +160,7 @@ export const ArtistForm = () => {
 
                         <div>
                             <label>{t("artistForm.setup")}</label>
-                            <input name="setup" value={formData.setup || ''} onChange={handleChange} />
+                            <textarea name="setup" value={formData.setup || ''} onChange={handleChange} />
                         </div>
 
                         <div>
@@ -183,14 +187,10 @@ export const ArtistForm = () => {
                         <div>
                             <label>Instagram</label>
                             <input name="instagram" placeholder="https://instagram.com/xxx" value={formData.socialLinks?.instagram || ''} onChange={handleSocialLinkChange} />
-{/*                         </div>
 
-                        <div> */}
                             <label>Soundcloud</label>
                             <input name="soundcloud" placeholder="https://soundcloud.com/xxx" value={formData.socialLinks?.soundcloud || ''} onChange={handleSocialLinkChange} />
-{/*                         </div>
 
-                        <div> */}
                             <label>Website</label>
                             <input name="website" placeholder="https://monsite.com" value={formData.socialLinks?.website || ''} onChange={handleSocialLinkChange} />
                         </div>
@@ -207,12 +207,14 @@ export const ArtistForm = () => {
 
                         <div>
                             <label>{t("artistForm.pics")}</label>
-                            <input 
-                                type="file" 
-                                name="promoPhoto" 
-                                onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])} 
-                                className='pics-file'
-                            />
+                            {preview && (
+                                <img 
+                                    src={preview} 
+                                    alt="Aperçu" 
+                                    style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px', marginBottom: '0.5rem', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
+                                />
+                            )}
+                            <input type="file" accept="image/*" onChange={handleFileChange} />
                         </div>
 
                         <Button type="submit" className="btn form-btn">{t("artistForm.submit")} </Button>

@@ -12,6 +12,17 @@
   a, h1, h2, h3, .table-list {
     color: $blue;
   }
+  
+  .all-forms > a {
+    display: block;
+    text-align: left;
+  }
+  
+  input:not([type="file"]), textarea {
+    width: 100%;
+    max-width: 100%;
+    border: 2px solid grey;
+  }
 }
 
 // Page liste des artistes
@@ -86,10 +97,8 @@
   .mobile-view {
     display: none;
   } 
-  .artist-card {
-/*     max-width: 300px;
+  .cards {
     width: 100%;
-    background: $white; */
     border: 1px solid $blue;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -126,6 +135,17 @@
   z-index: 10;
 }
 
+// Style photo artiste (global)
+.artist-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  margin: 1rem auto;
+  display: block;
+  object-fit: cover;
+  box-shadow: $box-shadow;
+}
+
 // Panneau latéral
 .side-panel {
   position: fixed;
@@ -139,16 +159,8 @@
   z-index: 101;
   padding: 1.5rem;
   overflow-y: auto;
-  animation: slideIn 0.3s ease forwards; 
-  .artist-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 8px;
-    margin: 1rem auto;
-    display: block;
-    object-fit: cover;
-  }  
-  .close-btn {
+  animation: slideIn 0.3s ease forwards;  
+  .close {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -168,6 +180,8 @@
     color: $blue;
     text-align: justify;
     font-family: $text-font;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }  
   a {
     color: $blue;
@@ -179,7 +193,23 @@
   #email{
     text-align: center;
   }
+  .close-btn{
+    text-align: center;
+    margin: 1rem;
+  }
 }
+
+//Artist Edit
+.photo-upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  .artist-photo {
+    margin: 0;
+  }
+}
+
 
 @keyframes slideIn {
   from {
@@ -224,7 +254,17 @@
   }
 }
 
-//TODO: Vérifier css des cartes artist : .artist-card utilisée pour 2 choses différentes
+@media (max-width: 430px) {
+  .artist-edit, .artist-new, form > div  {
+    input[type="file"] {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
 
 
 

@@ -88,6 +88,12 @@ Merci de nous aider à faire du Okami Festival une aventure toujours plus magiqu
 
             </form>   
             </div>
+
+
+            <div className="img-wrap" >
+                <div/>
+            </div>
+
         </main>
         <Footer />
         </>

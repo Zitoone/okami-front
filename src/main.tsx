@@ -17,6 +17,7 @@ import "./styles/participate.scss"
 import "./styles/info.scss"
 import "./styles/admin.scss"
 import "./styles/albums.scss"
+import "./styles/contact.scss"
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import Button from "../../components/Button"
 import Collapse from "../../components/Collapse"
 import CustomInput from "../../components/CustomInput"
@@ -125,7 +125,7 @@ function ArtistEdit() {
         <AdminHeader />
         <main className="artist-edit">
             <div className='all-forms'>
-                <button onClick={() => navigate("/admin/artists")}><FaArrowCircleLeft /> Retour sur le tableau des artistes</button>
+                <Link to="/admin/artists"><FaArrowCircleLeft /> Retour sur le tableau des artistes</Link>
                 <h1>Modifier {artistData.projectName}</h1>
 
             {loading ? (
@@ -140,28 +140,36 @@ function ArtistEdit() {
                         <CustomInput label="Email" type="email" name="email" value={artistData.email || ''} onChange={handleChange} />
                         <CustomInput label="Téléphone" name="phone" value={artistData.phone || ''} onChange={handleChange} />
                         <CustomInput label="Nom invité" name="guestName" value={artistData.guestName || ''} onChange={handleChange} />
-                        <CustomInput label="Demande runs artiste" name="runInfo" value={artistData.runInfo || ''} onChange={handleChange} />
+                        <div className="input-container">
+                            <label>Demande runs artiste</label>
+                            <textarea name="runInfo" value={artistData.runInfo || ''} onChange={handleChange} className="all-inputs" />
+                        </div>
                         <div className="input-container">
                             <label>Commentaire artiste</label>
                             <textarea name="comments" value={artistData.comments || ''} onChange={handleChange} className="all-inputs" />
                         </div>
                         <div className="input-container">
                             <label>Photo artiste</label>
-                            {artistData.promoPhoto && (
-                                <img 
-                                    src={`http://localhost:5001/${artistData.promoPhoto}`}
-                                    alt="Photo actuelle" 
-                                    style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px', marginBottom: '0.5rem' }}
-                                />
-                            )}
-                            <input type="file" name="promoPhoto" onChange={(e) => {
-                                if (e.target.files && e.target.files.length > 0) {
-                                    setFile(e.target.files[0])
-                                }
-                            }} className="pics-file" />
+                            <div className="photo-upload-container">
+                                <input type="file" name="promoPhoto" onChange={(e) => {
+                                    if (e.target.files && e.target.files.length > 0) {
+                                        setFile(e.target.files[0])
+                                    }
+                                }} className="pics-file" />
+                                {artistData.promoPhoto && (
+                                    <img 
+                                        src={artistData.promoPhoto}
+                                        alt="Photo actuelle" 
+                                        className="artist-photo"
+                                    />
+                                )}
+                            </div>
                         </div>
                         <CustomInput label="Style musical" name="musicalStyle" value={artistData.musicalStyle || ''} onChange={handleChange} />
-                        <CustomInput label="Texte de promotion" name="promoText" value={artistData.promoText || ''} onChange={handleChange} />
+                        <div className="input-container">
+                            <label>Texte de promotion</label>
+                            <textarea name="promoText" value={artistData.promoText || ''} onChange={handleChange} className="all-inputs" />
+                        </div>
                         
                         <h3>Réseaux sociaux</h3>
                         <CustomInput label="Instagram" name="instagram" value={artistData.socialLinks?.instagram || ''} onChange={handleChange} />
@@ -170,11 +178,9 @@ function ArtistEdit() {
                     </Collapse>
 
                     <Collapse title="Infos admin">
-                        <div className="input-container">
-                            <label>
-                                <input type="checkbox" name="isValidated" checked={artistData.isValidated || false} onChange={handleChange} />
-                                {" "}Artiste validé (visible sur le site public)
-                            </label>
+                        <div className="input-container" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <label htmlFor="isValidated" style={{ margin: 0 }}>Artiste validé (visible sur le site public)</label>
+                            <input type="checkbox" name="isValidated" checked={artistData.isValidated || false} onChange={handleChange} style={{ width: 'auto' }} />
                         </div>
                         <CustomInput label="Nombre de personnes" type="number" name="numberOfPeople" onChange={handleChange} />
                         <CustomInput label="Scène" name="stage" value={artistData.stage || ''} onChange={handleChange} />
@@ -199,7 +205,10 @@ function ArtistEdit() {
 
                     <Collapse title="Infos techniques">
                         <CustomInput label="Temps d'installation" name="setupTime" value={artistData.setupTime || ''} onChange={handleChange} />
-                        <CustomInput label="Set up de l'artiste" name="setup" value={artistData.setup || ''} onChange={handleChange} />
+                        <div className="input-container">
+                            <label>Set up de l'artiste</label>
+                            <textarea name="setup" value={artistData.setup || ''} onChange={handleChange} className="all-inputs" />
+                        </div>
                         <div className="input-container">
                             <label>
                                 <input type="checkbox" name="needsSoundcheck" checked={artistData.needsSoundcheck || false} onChange={handleChange} />

@@ -1,0 +1,41 @@
+@use './variables' as *;
+@use "sass:color";
+
+//Page contact
+.contact-page{
+    label{
+        color: $yellow;
+        font-size: 24px;
+    }
+    textarea{
+        height: 200px;
+        resize: vertical;
+        border: 2px solid black;
+    }
+    .rgpd {
+        label{
+        color: black;
+        font-size: 10px;
+    }
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 8px; 
+    justify-content: center;
+        input{
+        width: auto;
+        }
+    }
+    .img-wrap{
+        div{
+        max-width: 200px;
+        height: 400px;
+        margin: auto;
+        padding: 200px;
+        background: url("/DJs2.jpg") no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow;
+        }
+    }
+}

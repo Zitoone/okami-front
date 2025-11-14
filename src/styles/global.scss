@@ -9,10 +9,8 @@ body {
   font-family: $font;
 }
 .form {
-/*   max-width: $max-width; */
   margin: 0 auto;
   padding: $padding;
-/*   background-color: $white; */
   h1, h2, p{
     color: $blue;
   }
@@ -72,6 +70,13 @@ label {
   margin-bottom: 8px;
   font-weight: 600;
 }
+
+input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  transform: scale(1.5);
+  cursor: pointer;
+}
 .container {
   max-width: $max-width;
   margin: auto;
@@ -86,6 +91,29 @@ label {
 .collapse-content {
   transition: all 0.3s ease;
   padding: 10px 0;
+}
+
+.scroll-top-btn{
+  position: fixed;
+  bottom: 6rem;
+  right: 3rem;
+  background-color: $yellow;
+  color: $blue;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+/*   box-shadow: $box-shadow; */
+  z-index: 100;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: $blue;
+    color: $yellow;
+    transform: scale(1.15) rotate(360deg);
+    box-shadow: 0 0 20px rgba(255, 180, 0, 0.8);
+  }
 }
 
 
@@ -160,30 +188,6 @@ label {
   }
 }
 
-//Page contact
-.contact-page{
-  label{
-    color: $yellow;
-    font-size: 24px;
-  }
-  textarea{
-    height: 200px;
-    resize: vertical;
-  }
-  .rgpd {
-      label{
-    color: black;
-    font-size: 10px;
-  }
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 8px; 
-  justify-content: center;
-    input{
-      width: auto;
-    }
-  }
-}
 
 @media (max-width: $breakpoint-mobile){
   .program-page, .program-music-page, .participate-page, .info-page, .souvenirs-page, .album-page, .contact-page{

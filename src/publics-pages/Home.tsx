@@ -38,7 +38,7 @@ const Home: React.FC=()=>{
                     <section className='hero'>
                         
                         <article>                       
-                            <img src="/face.jpg" alt="Image Flyer Okami Festival 2026" />
+                            <img src="/avatar.png" alt="Image Flyer Okami Festival 2026" />
                             <div>
                                 <h1>Bienvenue sur le site du festival OKAMI</h1>
                             <span>3 - 7 JUIN 2026</span>
@@ -74,9 +74,8 @@ const Home: React.FC=()=>{
                     <section id='lineup'>
                         <div>
                             <h2>Line Up 2026</h2>
-                            <p>Programmation démentielle à venir</p>
                             {artists.length === 0 ? (
-                                <p style={{textAlign: 'center', padding: '2rem'}}>Aucun artiste pour le moment. La programmation arrive bientôt ! 🎵</p>
+                                <p style={{textAlign: 'center', padding: '2rem'}}>Notre programmation démantielle arrive bientôt ! 🎵</p>
                             ) : (
                             <Carousel autoPlayDelay={3000} loop={artists.length > 2} showPagination={false} showNavigation={true}>
                             {artists.map((artist)=>(
@@ -99,7 +98,7 @@ const Home: React.FC=()=>{
                         <div>
                             <img src="/participer.jpg" alt="Photo d'un volontaire sur un tracteur à l'édition 2023 du festival Okami" />
                             <span>
-                                <p>Implique toi pleinement en rejoignant notre équipe de bénévoles, ou notre team restauration ou encore nos performers.</p>
+                                <p>Implique toi pleinement en rejoignant notre équipe de bénévoles, ou notre marché d'artisans ou encore nos performers.</p>
                                 <Button to="/participate" className="btn">En savoir plus</Button>
                             </span>
                         </div>

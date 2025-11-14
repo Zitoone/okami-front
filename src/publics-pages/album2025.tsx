@@ -4,18 +4,17 @@ import Footer from '../components/Footer'
 import albums from "../data/albums.json"
 import Button from "../components/Button"
 
-const Album2024: React.FC = () => {
-    const images = albums["okami_2024"]
+const Album2025: React.FC = () => {
+    const images = albums["okami_2025"]
     const [visibleCount, setVisibleCount] = useState(100)
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
     const loadMore = () => {
     setVisibleCount((prev) => prev + 52)
     }
-
     const handleClick = (index: number) => {
         setSelectedIndex(index)
-    }
+    }   
     const handlePrev = (e?: React.MouseEvent) => {
         e?.stopPropagation?.()
         if (selectedIndex === null) return
@@ -24,41 +23,45 @@ const Album2024: React.FC = () => {
     const handleNext = (e?: React.MouseEvent) => {
         e?.stopPropagation?.()
         if (selectedIndex === null) return
-        setSelectedIndex((selectedIndex +1) % images.length)
+        setSelectedIndex((selectedIndex + 1) % images.length)
     }
 
     useEffect(() => {
-        if (selectedIndex === null) return // lightbox fermée
+        if(selectedIndex === null) return
 
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "ArrowLeft") handlePrev()
-            else if (e.key === "ArrowRight") handleNext()
-            else if (e.key === "Escape") setSelectedIndex(null)
+            const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowLeft') {
+                handlePrev()
+            } else if (e.key === 'ArrowRight') {
+                handleNext()
+            } else if (e.key === 'Escape') {
+                setSelectedIndex(null)
+            }
         }
-
-        window.addEventListener("keydown", handleKeyDown)
-        return () => window.removeEventListener("keydown", handleKeyDown)
+        window.addEventListener('keydown', handleKeyDown)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+        }
     }, [selectedIndex])
 
     return(
         <>
         <Header />
-        <main className="album-page">
+        <main className='album-page'>
             <div className="main-wrap">
-                <h1>Souvenirs de l'édition 2024</h1>
-                <div className="flyer">
-                    <div>
-                    <p>Dernière danse sur les terres de Castelnau, berceau de notre aventure et témoin de tant de moments inoubliables.</p>
-                    <p>C’est ici que tout a commencé, que les premiers sourires se sont échangés, que la musique a résonné jusque dans les étoiles.</p>
-                    <p>Nous tenons à remercier du fond du cœur les propriétaires, pour leur accueil, leur confiance et leur soutien indéfectible.
-                    Grâce à eux, la magie a pu opérer une fois encore, réunissant âmes, artistes et bénévoles autour de cette même énergie bienveillante et vibrante.</p>
-                    <p>Castelnau restera à jamais gravé dans notre histoire</p>
-                    </div>
-                    <img src="/affiche24.jpeg" alt="Affiche Okami 2024" />
-                </div>    
-            
-                <div className="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/LF9PxP_JzfQ?si=7LDW9dVtIBy5ns9s" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+                <h1>Souvenirs de 2025</h1>
+                <p>2025 marque un nouveau chapitre pour OKAMI : un lieu inédit, des surprises à chaque coin et une énergie renouvelée qui a électrisé le public. Avec ses deux scènes vibrantes, la Kidzone qui s’agrandit et la Healing Zone proposant un programme magnifique, le festival a offert des expériences inédites et des moments de partage intenses. Entre performances captivantes, découvertes musicales et instants de détente, cette édition a créé de nouveaux souvenirs que personne n’est prêt d’oublier, inscrivant encore plus profondément OKAMI dans le cœur de ses festivaliers.</p>
+            </div>
+
+                <div className="soundcloud">
+                    <iframe 
+                        width="100%" 
+                        height="450" 
+                        scrolling="no" 
+                        frameBorder="no" 
+                        allow="autoplay" 
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/okami-festival&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+</iframe>
                 </div>
 
             <div className="album">
@@ -84,15 +87,20 @@ const Album2024: React.FC = () => {
                         <button className="lightbox-btn prev" onClick={handlePrev}>‹</button>
                         <img src={images[selectedIndex]} alt={`Photo ${selectedIndex + 1}`} />
                         <button className="lightbox-btn next" onClick={handleNext}>›</button>
+
+
                     </div>
-                </div>       
-        )}
+
             </div>
+        )}
+
         </main>
         <Footer />
         </>
+    
     )
+
+
 }
 
-export default Album2024
-
+export default Album2025
