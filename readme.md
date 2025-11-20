@@ -38,6 +38,7 @@ Serveur Vite sur : http://localhost:5173
 ## Structure
 
 okami-front/
+
 ├── public/       
 ├── src/
 │   ├── assets/
