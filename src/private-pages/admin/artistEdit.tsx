@@ -209,17 +209,13 @@ function ArtistEdit() {
                             <label>Set up de l'artiste</label>
                             <textarea name="setup" value={artistData.setup || ''} onChange={handleChange} className="all-inputs" />
                         </div>
-                        <div className="input-container">
-                            <label>
-                                <input type="checkbox" name="needsSoundcheck" checked={artistData.needsSoundcheck || false} onChange={handleChange} />
-                                {" "}Besoin de soundcheck
-                            </label>
+                        <div className="input-container" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <label htmlFor="needsSoundcheck" style={{ margin: 0 }}>Besoin de soundcheck</label>
+                            <input type="checkbox" id="needsSoundcheck" name="needsSoundcheck" checked={artistData.needsSoundcheck || false} onChange={handleChange} style={{ width: 'auto' }} />
                         </div>
-                        <div className="input-container">
-                            <label>
-                                <input type="checkbox" name="canRecordSet" checked={artistData.canRecordSet || false} onChange={handleChange} />
-                                {" "}Autorisation d'enregistrement
-                            </label>
+                        <div className="input-container" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <label htmlFor="canRecordSet" style={{ margin: 0 }}>Autorisation d'enregistrement</label>
+                            <input type="checkbox" id="canRecordSet" name="canRecordSet" checked={artistData.canRecordSet || false} onChange={handleChange} style={{ width: 'auto' }} />
                         </div>
                     </Collapse>
 
@@ -245,4 +241,4 @@ function ArtistEdit() {
 
 export default ArtistEdit
 
-//TODO: Voir pour refactoriser cette page
+//TODO: Voir pour la latence entre le la validation de la mise a jour et la modale de confirmation

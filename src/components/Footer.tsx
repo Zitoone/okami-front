@@ -16,9 +16,9 @@ function Footer(){
                 </div>
 
                 <div className='social'>
-                    <Link to="https://www.facebook.com/profile.php?id=100083597941322" target='_blank'><FaFacebook /></Link>
-                    <Link to="https://www.instagram.com/okami_festival/" target='_blank'><FaInstagramSquare /></Link>
-                    <Link to='/contact'><MdOutlineMail /></Link>
+                    <Link to="https://www.facebook.com/profile.php?id=100083597941322" target='_blank' aria-label="Visitez notre page Facebook"><FaFacebook /></Link>
+                    <Link to="https://www.instagram.com/okami_festival/" target='_blank' aria-label="Visitez notre page Instagram"><FaInstagramSquare /></Link>
+                    <Link to='/contact' aria-label="Nous contacter par email"><MdOutlineMail /></Link>
                 </div>
             </div>
         </footer>

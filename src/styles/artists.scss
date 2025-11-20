@@ -4,6 +4,7 @@
 .artist-edit, .artist-new {
   background-color: $white;
   min-height: 100vh;
+  min-height: 100vh;
   
   h1 {
     padding-top: 2rem;
@@ -31,6 +32,7 @@
   padding: 1rem;
   background-color: $white;
   color: $blue;
+  min-height: 100vh;
   min-height: 100vh;  
   .main-wrap {
     max-width: 1440px;

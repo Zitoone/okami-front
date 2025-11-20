@@ -50,7 +50,7 @@ const Card: React.FC<CardProps> = ({
     const cardContent = (
             <article className={`${className} ${isOpen ? "open" : ""}`}
                 onClick={handleClick}>
-                {image && <img src={image} alt={title} />}
+                {image && <img src={image} alt={title} loading="lazy" />}
                 {icon && <span>{icon}</span>}
                 {title && <h3>{title}</h3>}
                 {subtitle && <h4>{subtitle}</h4>}

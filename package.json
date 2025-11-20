@@ -7,10 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vercel-build": "vite build"
+
   },
   "dependencies": {
-    "@uploadthing/react": "^7.3.3",
     "axios": "^1.13.1",
     "i18next": "^25.4.2",
     "normalize.css": "^8.0.1",
@@ -20,7 +21,6 @@
     "react-i18next": "^15.7.3",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.8.2",
-    "saas": "^1.0.0",
     "sass": "^1.91.0",
     "swiper": "^12.0.2"
   },
@@ -48,7 +48,7 @@
     "festival"
   ],
   "author": "olivia nanquette",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Zitoone/okami-connect/issues"
   },

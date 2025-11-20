@@ -38,6 +38,7 @@ export const ArtistForm = () => {
         musicalStyle: "",
         dataSource: "artist"
     })
+    const [loading, setLoading] = useState(false)
 
 
     // Gère les changements des champs normaux (texte, checkbox)
@@ -76,6 +77,7 @@ export const ArtistForm = () => {
     // Soumission du formulaire
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setLoading(true)
 
         const data = new FormData()
         Object.entries(formData).forEach(([key, value]) => {
@@ -94,6 +96,8 @@ export const ArtistForm = () => {
             setModal(true)
         } catch (error) {
             console.error("❌ Erreur:", error)
+        } finally {
+            setLoading(false)
         }
     }
     return (
@@ -119,94 +123,90 @@ export const ArtistForm = () => {
                         <h2>{t("artistForm.mainTitle")}</h2>
 
                         <div>
-                            <label>{t("artistForm.projectName")} *</label>
-                            <input name="projectName" value={formData.projectName} onChange={handleChange} required />
+                            <label htmlFor='projectName'>{t("artistForm.projectName")} *</label>
+                            <input id='projectName' name="projectName" value={formData.projectName} onChange={handleChange} required />
                         </div>
                         
                         <div>
-                            <label>{t("artistForm.lastName")} *</label>
-                            <input name="lastName" value={formData.lastName} onChange={handleChange} required />
+                            <label htmlFor='lastName'>{t("artistForm.lastName")} *</label>
+                            <input id='lastName' name="lastName" value={formData.lastName} onChange={handleChange} required />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.firstName")} *</label>
-                            <input name="firstName" value={formData.firstName} onChange={handleChange} required />
+                            <label htmlFor='firstName'>{t("artistForm.firstName")} *</label>
+                            <input id='firstName' name="firstName" value={formData.firstName} onChange={handleChange} required />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.email")} *</label>
-                            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+                            <label htmlFor='email'>{t("artistForm.email")} *</label>
+                            <input type="email" id='email' name="email" value={formData.email} onChange={handleChange} autoComplete='off' required />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.phone")} *</label>
-                            <input name="phone" value={formData.phone} onChange={handleChange} required />
+                            <label htmlFor='phone'>{t("artistForm.phone")} *</label>
+                            <input type='tel' id='phone' name="phone" value={formData.phone} onChange={handleChange} autoComplete='off' required />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.invitName")}</label>
-                            <input name="guestName" value={formData.guestName || ''} onChange={handleChange} />
+                            <label htmlFor='guestName'>{t("artistForm.invitName")}</label>
+                            <input id='guestName' name="guestName" value={formData.guestName || ''} onChange={handleChange} />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.infoRun")}</label>
-                            <textarea name="runInfo" value={formData.runInfo || ''} onChange={handleChange} />
+                            <label htmlFor='runInfo'>{t("artistForm.infoRun")}</label>
+                            <textarea id='runInfo' name="runInfo" value={formData.runInfo || ''} onChange={handleChange} />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.setupTime")}</label>
-                            <input name="setupTime" value={formData.setupTime || ''} onChange={handleChange} />
+                            <label htmlFor='setupTime'>{t("artistForm.setupTime")}</label>
+                            <input id='setupTime' name="setupTime" value={formData.setupTime || ''} onChange={handleChange} />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.setup")}</label>
-                            <textarea name="setup" value={formData.setup || ''} onChange={handleChange} />
+                            <label htmlFor='setup'>{t("artistForm.setup")}</label>
+                            <textarea id='setup' name="setup" value={formData.setup || ''} onChange={handleChange} />
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <label htmlFor="needsSoundcheck" style={{ margin: 0 }}>{t("artistForm.soundcheck")}</label>
+                            <input type="checkbox" id="needsSoundcheck" name="needsSoundcheck" checked={formData.needsSoundcheck || false} onChange={handleChange} style={{ width: 'auto' }} />
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <label htmlFor="canRecordSet" style={{ margin: 0 }}>{t("artistForm.record")}</label>
+                            <input type="checkbox" id="canRecordSet" name="canRecordSet" checked={formData.canRecordSet || false} onChange={handleChange} style={{ width: 'auto' }} />
                         </div>
 
                         <div>
-                            <label>
-                                <input type="checkbox" name="needsSoundcheck" checked={formData.needsSoundcheck || false} onChange={handleChange} />
-                                {t("artistForm.soundcheck")}
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>
-                                <input type="checkbox" name="canRecordSet" checked={formData.canRecordSet || false} onChange={handleChange} />
-                                {t("artistForm.record")}
-                            </label>
-                        </div>
-
-                        <div>
-                            <label>{t("artistForm.artistComments")}</label>
-                            <textarea name="comments" value={formData.comments || ''} onChange={handleChange} />
+                            <label htmlFor='comments' >{t("artistForm.artistComments")}</label>
+                            <textarea id='comments' name="comments" value={formData.comments || ''} onChange={handleChange} />
                         </div>
 
                         <h2>{t("artistForm.promoTitle")}</h2>
                         
                         <div>
-                            <label>Instagram</label>
-                            <input name="instagram" placeholder="https://instagram.com/xxx" value={formData.socialLinks?.instagram || ''} onChange={handleSocialLinkChange} />
+                            <label htmlFor='instagram'>Instagram</label>
+                            <input id='instagram' name="instagram" placeholder="https://instagram.com/xxx" value={formData.socialLinks?.instagram || ''} onChange={handleSocialLinkChange} />
 
-                            <label>Soundcloud</label>
-                            <input name="soundcloud" placeholder="https://soundcloud.com/xxx" value={formData.socialLinks?.soundcloud || ''} onChange={handleSocialLinkChange} />
+                            <label htmlFor='soundcloud'>Soundcloud</label>
+                            <input id='soundcloud' name="soundcloud" placeholder="https://soundcloud.com/xxx" value={formData.socialLinks?.soundcloud || ''} onChange={handleSocialLinkChange} />
 
-                            <label>Website</label>
-                            <input name="website" placeholder="https://monsite.com" value={formData.socialLinks?.website || ''} onChange={handleSocialLinkChange} />
+                            <label htmlFor='website'>Website</label>
+                            <input id='website' name="website" placeholder="https://monsite.com" value={formData.socialLinks?.website || ''} onChange={handleSocialLinkChange} />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.style")}</label>
-                            <input name="musicalStyle" value={formData.musicalStyle || ''} onChange={handleChange} />
+                            <label htmlFor='musicalStyle'>{t("artistForm.style")}</label>
+                            <input id='musicalStyle' name="musicalStyle" value={formData.musicalStyle || ''} onChange={handleChange} />
                         </div>
 
                         <div>
-                            <label>{t("artistForm.promoText")}</label>
-                            <textarea name='promoText' value={formData.promoText} onChange={handleChange}></textarea>
+                            <label htmlFor='promoText'>{t("artistForm.promoText")}</label>
+                            <textarea id='promoText' name='promoText' value={formData.promoText} onChange={handleChange}></textarea>
                         </div>
 
                         <div>
-                            <label>{t("artistForm.pics")}</label>
+                            <label htmlFor='promoPhoto'>{t("artistForm.pics")}</label>
                             {preview && (
                                 <img 
                                     src={preview} 
@@ -214,10 +214,13 @@ export const ArtistForm = () => {
                                     style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px', marginBottom: '0.5rem', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
                                 />
                             )}
-                            <input type="file" accept="image/*" onChange={handleFileChange} />
+                            <input id='promoPhoto' type="file" accept="image/*" onChange={handleFileChange} />
                         </div>
 
-                        <Button type="submit" className="btn form-btn">{t("artistForm.submit")} </Button>
+                    <Button type="submit" className="btn form-btn" disabled={loading}>
+                        {loading ? t("btn.loading") : t("btn.submit")}
+                    </Button>
+
 
                         {modal && (
                             <Modal
@@ -235,5 +238,4 @@ export const ArtistForm = () => {
         </>
     )
 }
-
 export default ArtistForm

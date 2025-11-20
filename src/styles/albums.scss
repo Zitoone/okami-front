@@ -55,6 +55,14 @@
         object-fit: cover;
     }
 }
+.flyer a{
+    display: block;
+    text-align: center;
+    span{
+    color: $yellow;
+    }
+}
+
 
 //Styles des carousel
 .album-carousel .carousel-container{
@@ -86,7 +94,7 @@
     z-index: 9999;
     cursor: zoom-out;
 
-    .lightbox-content { //Contenur pour placer l'image et les fleches
+    .lightbox-content { //Conteneur pour placer l'image et les fleches
         position: relative;
         img {
             max-width: 90vw; //90% max de l'écran
@@ -117,7 +125,7 @@
     .prev { left: -40px; }  // distance par rapport à l'image
     .next { right: -40px; }
 
-    @media (max-width: 768px) { //Fleches se rapprochent de l'image et boutons + petits
+    @media (max-width: $breakpoint-tablet) { //Fleches se rapprochent de l'image et boutons + petits
         .prev { left: -20px; }
         .next { right: -20px; }
         .lightbox-btn { font-size: 1.5rem; padding: 0.2rem 0.4rem; }
@@ -131,9 +139,8 @@
     }
 }
 
-.video-container{
+.album-page .video-container{
     margin-bottom: 100px;
-    border-radius: 0;
 }
 
 //Albums sans carousel
@@ -156,6 +163,15 @@
     padding: $padding;
 }
 
+.soundcloud{
+    max-width: 1200px;
+    margin: 0 auto 50px;
+    iframe{
+        border: none;
+        overflow: hidden;
+    }
+}
+
 @media (max-width:$breakpoint-tablet){
     .album-page .main-wrap .flyer{
         flex-direction: column-reverse;
@@ -163,8 +179,12 @@
             width: 90%;
         }
         }
+}
 
-    
+@media (max-width: $breakpoint-mobile){
+    .album-page .video-container{
+        height: 300px;
+    }
 }
 
 

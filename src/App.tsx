@@ -3,19 +3,19 @@ import ScrollToTop from './components/ScrollToTop.tsx'
 import ScrollToTopButton from './components/ScrollToTopButton.tsx'
 import { ProtectedRoute } from './components/ProtectedRoutes.tsx'
 
-import Home from './publics-pages/home.tsx'
-import Legal from './publics-pages/legal.tsx'
-import NotFound from './publics-pages/404.tsx'
-import Program from './publics-pages/program.tsx'
-import Participate from './publics-pages/participate.tsx'
-import Informations from './publics-pages/informations.tsx'
-import Souvenirs from './publics-pages/albums.tsx'
-import Album2022 from './publics-pages/album2022.tsx'
-import Album2023 from './publics-pages/album2023.tsx'
-import Album2024 from './publics-pages/album2024.tsx'
-/* import Album2025 from './publics-pages/album2025.tsx' */
-import Contact from './publics-pages/contact.tsx'
-import MusicProgram from './publics-pages/programMusic.tsx'
+import Home from './public-pages/home.tsx'
+import Legal from './public-pages/legal.tsx'
+import NotFound from './public-pages/404.tsx'
+import Program from './public-pages/program.tsx'
+import Participate from './public-pages/participate.tsx'
+import Informations from './public-pages/informations.tsx'
+import Souvenir from './public-pages/albums.tsx'
+import Album2022 from './public-pages/album2022.tsx'
+import Album2023 from './public-pages/album2023.tsx'
+import Album2024 from './public-pages/album2024.tsx'
+import Album2025 from './public-pages/album2025.tsx'
+import Contact from './public-pages/contact.tsx'
+import MusicProgram from './public-pages/programMusic.tsx'
 
 //Pages privées/formulaires
 import ArtistForm from './private-pages/formArtist.tsx'
@@ -36,11 +36,11 @@ function App(){
       <Route path='/program/music' element={<MusicProgram />} />
     <Route path='/participate' element={<Participate />} />
     <Route path='/faq' element={<Informations />} />
-    <Route path='/souvenir' element={<Souvenirs />} />
-      <Route path='/album2022' element={<Album2022 />} />
-      <Route path='/album2023' element={<Album2023 />} />
-      <Route path='/album2024' element={<Album2024 />} />
-{/*       <Route path='/album2025' element={<Album2025 />} /> */}
+    <Route path='/souvenir' element={<Souvenir />} />
+      <Route path='/souvenir/2022' element={<Album2022 />} />
+      <Route path='/souvenir/2023' element={<Album2023 />} />
+      <Route path='/souvenir/2024' element={<Album2024 />} />
+      <Route path='/souvenir/2025' element={<Album2025 />} />
     <Route path='/contact' element={<Contact />} />    
     <Route path='/legal' element={<Legal />} />
     <Route path='*' element={<NotFound />} />

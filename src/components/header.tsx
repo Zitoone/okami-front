@@ -37,9 +37,9 @@ function Header() {
   return (
     <header>
       <div className="container">
-        <NavLink to="/"><img src="/logo.png" alt="Logo Okami festival" aria-label="Logo Okami"/></NavLink>
+        <NavLink to="/"><img src="/logo.png" alt="Logo Okami festival"/></NavLink>
 
-        <div className="burger" onClick={toggleMenu}>
+        <div className="burger" onClick={toggleMenu} aria-label="Menu burger">
           <TiThMenu />
         </div>
 
@@ -98,10 +98,10 @@ function Header() {
           </Button>
 
           <div className="language-switcher">
-            <button onClick={() => i18n.changeLanguage("fr")} >
+            <button onClick={() => i18n.changeLanguage("fr")} aria-label="Changer la langue en français">
               <ReactCountryFlag countryCode="FR" className="btn" aria-label="French" />
             </button>
-            <button onClick={() => i18n.changeLanguage("en")}>
+            <button onClick={() => i18n.changeLanguage("en")} aria-label="Change language to English">
               <ReactCountryFlag countryCode="GB" className="btn" aria-label="English" />
             </button>
           </div> 
@@ -113,10 +113,10 @@ function Header() {
         </Button>
 
         <div className="language-switcher">
-          <button onClick={() => i18n.changeLanguage("fr")} >
+          <button onClick={() => i18n.changeLanguage("fr")} aria-label="Changer la langue en français">
             <ReactCountryFlag countryCode="FR" className="btn" aria-label="French" />
           </button>
-          <button onClick={() => i18n.changeLanguage("en")}>
+          <button onClick={() => i18n.changeLanguage("en")} aria-label="Change language to English">
             <ReactCountryFlag countryCode="GB" className="btn" aria-label="English" />
           </button>
         </div>

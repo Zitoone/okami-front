@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
     baseURL: API_URL
 })
 
-// Intercepteur pour ajouter automatiquement le token à chaque requête
+// Intercepteur pour ajouter automatiquement le token à chaque requête (genre de middleware)
 axiosInstance.interceptors.request.use((config) => {
     const token = localStorage.getItem('authToken')
     if (token) {
@@ -19,6 +19,7 @@ axiosInstance.interceptors.request.use((config) => {
     return config
 })
 
+//Lie toutes les routes liées aux artists 
 export const artistApi = {
     getAll: async (): Promise<Artist[]> => {
         const response = await axiosInstance.get('artists')
@@ -44,18 +45,19 @@ export const artistApi = {
         await axiosInstance.delete(`artists/${id}`)
     },
 
+    //Envoyer le form avec l'upload de la photo ensemble
     submitForm: async (formData: FormData): Promise<Artist> => {
-        const response = await axiosInstance.post('artists/form', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        })
+        const response = await axiosInstance.post('artists/form', formData)
         return response.data
     },
 
     updateWithFile: async (id: string, formData: FormData): Promise<Artist> => {
-        const response = await axiosInstance.patch(`artists/${id}`, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        })
-        return response.data
+    const response = await axiosInstance.patch(`artists/${id}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    return response.data;
     }
 }
 

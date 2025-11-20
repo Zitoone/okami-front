@@ -81,9 +81,11 @@
     "socials": "Links to your social media",
     "style": "What style are you planning to play at the festival?",
     "promoText": "Add here the presentation text that will be used for promotion",
-    "pics": "Upload here the photo we can use for festival promotion.",
-
-    "submit": "Submit"
+    "pics": "Upload here the photo we can use for festival promotion."
+  },
+  "btn": {
+    "submit": "Send",
+    "loading": "Sending..."
   },
   "form.successMsg":"🩷 Form successfully submitted, thank you! 💚",
   "modale.close": "Close"

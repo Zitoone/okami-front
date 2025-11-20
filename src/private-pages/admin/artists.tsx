@@ -15,13 +15,40 @@ export default function ArtistPage() {
   const [error, setError] = useState<string | null>(null) // Stocke le message d'erreur 
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null) // Artiste sélectionné pour afficher le panneau latéral
   const [showDeleteModal, setShowDeleteModal] = useState(false) // modal de suppression
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false) //modal de confirmation de suppression
   const [artistToDelete, setArtistToDelete] = useState<string | null>(null) // ID de l'artiste à supprimer
 
 // Fonction pour obtenir un n° de tel lisible
-  const formatPhone = (phone: string) => {
+/*   const formatPhone = (phone: string) => {
     const cleaned = phone.replace(/\D/g, '') 
-    return cleaned.replace(/(\d{2})(?=\d)/g, '$1 ') 
+    return cleaned.replace(/(\d{2})(?=\d)/g, '$1 ')  
+  } */
+  const formatPhone = (phone: string) => {
+  if (!phone) return ""
+  const raw = phone.trim();
+  // 1) 00 → + (ex: 001514... → +1514...)
+  const normalized = raw.startsWith("00") ? "+" + raw.slice(2) : raw
+  // 2) Indicatif explicite : commence par +
+  if (normalized.startsWith("+")) {
+    const indic = normalized.match(/^\+\d{1,3}/)[0]
+    const rest = normalized.slice(indic.length).replace(/\D/g, "")
+    // Cas spécial +1 (USA/Canada) : format 3-3-4
+    if (indic === "+1" && rest.length >= 10) {
+      const r = rest.slice(-10);
+      return `${indic} ${r.slice(0,3)} ${r.slice(3,6)} ${r.slice(6)}`.trim()
+    }
+    // Autres pays → format par 2
+    return indic + (rest ? " " + rest.replace(/(\d{2})(?=\d)/g, "$1 ").trim() : "")
   }
+  // 3) Pas de + : si 11 chiffres et commence par 1 → on traite comme USA/Canada
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 11 && digits.startsWith("1")) {
+    const r = digits.slice(1)
+    return `+1 ${r.slice(0,3)} ${r.slice(3,6)} ${r.slice(6)}`.trim()
+  }
+  // 4) Fallback simple FR-ish : groupe par 2
+  return digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim()
+}
 
   // Fonction qui récupère la liste d'artiste
   const fetchArtists = async () => {
@@ -57,6 +84,7 @@ export default function ArtistPage() {
       
       setSelectedArtist(null)
       setShowDeleteModal(false)
+      setShowConfirmationModal(true) 
       setArtistToDelete(null)
     } catch (error) {
       const err = error as Error
@@ -172,7 +200,6 @@ export default function ArtistPage() {
                 src={selectedArtist.promoPhoto}
                 alt={selectedArtist.projectName} 
                 className="artist-photo"
-                onError={(e) => { e.currentTarget.style.display = 'none'; console.log('Image non trouvée:', selectedArtist.promoPhoto) }}
               />
             )}
             <h2>{selectedArtist.projectName}</h2>
@@ -217,7 +244,7 @@ export default function ArtistPage() {
             <ul>
               {(() => {
                 const links = typeof selectedArtist.socialLinks === 'string' 
-                  ? JSON.parse(selectedArtist.socialLinks) 
+                  ? JSON.parse(selectedArtist.socialLinks) //Convertir en objet utilisable
                   : selectedArtist.socialLinks;
                 return (
                   <>
@@ -250,10 +277,18 @@ export default function ArtistPage() {
         <Modal
           text="Veux-tu vraiment supprimer cet artiste de la base de données ?"
           onConfirm={deleteArtist} // Fonction appelée si on clique sur "Confirmer"
-          onClose={() => { // Fonction appelée si on clique sur la croix
-            setShowDeleteModal(false) // Ferme le modal
-            setArtistToDelete(null) // Réinitialise l'ID
+          onClose={() => { // Fonction appelée si on clique sur fermer
+            setShowDeleteModal(false) // Ferme le modal 
           }}
+        />
+      )}
+
+      {showConfirmationModal && (
+        <Modal text="L'artiste a bien été supprimé"
+        onClose={()=>{
+          setArtistToDelete(null) // Réinitialise l'ID
+          setShowConfirmationModal(false)
+        }}
         />
       )}
       </div>
@@ -262,3 +297,4 @@ export default function ArtistPage() {
   )
 }
 
+//TODO : fermer toutes les modales si on clique en dehors

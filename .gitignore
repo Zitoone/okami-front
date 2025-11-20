@@ -1,5 +1,7 @@
 notes.md
 .env
+.env.local
+generateAlbumsJSON.js
 
 # Logs
 logs

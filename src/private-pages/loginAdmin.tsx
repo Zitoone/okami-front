@@ -57,7 +57,13 @@ const LoginForm: React.FC = () =>{
 
                 </form>
                 {error && (
-                    <Modal text={`⛔ ${error}`} type="error" onClose={() => setError('')} />
+                    <Modal text={`⛔ ${error}`} 
+                    type="error" 
+                    onClose={() => {
+                        setError('')
+                        setEmail('')
+                        setPassword('')           
+                    }} />
                 )}
             </div>
         </main>

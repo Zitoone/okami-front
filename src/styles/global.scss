@@ -8,6 +8,16 @@ body {
   margin: 0;
   font-family: $font;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
 .form {
   margin: 0 auto;
   padding: $padding;
@@ -21,19 +31,17 @@ a {
   transition: color $transition-duration;
   &:hover {
     color: color.adjust(#ffb400, $lightness: 10%);
-    transform: scale(1);
-    transition: transform 0.3s ease;
     text-shadow: 0 0 12px rgba(255, 180, 0, 1);
   }
 }
 .btn {
   font-family: $font;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   cursor: pointer;
   border: none;
   border-radius: $border-radius;
-  padding: 10px 10px;
+  padding: 0.625rem;
   background-color: $yellow;
   color: $blue;
   box-shadow: $box-shadow;
@@ -54,7 +62,7 @@ a {
 .collapse-button{
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 1.125rem;
   cursor: pointer;
   color: $blue;
 }
@@ -67,7 +75,7 @@ p {
 
 label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
@@ -90,7 +98,7 @@ input[type="checkbox"] {
 
 .collapse-content {
   transition: all 0.3s ease;
-  padding: 10px 0;
+  padding: 0.625rem 0;
 }
 
 .scroll-top-btn{
@@ -101,11 +109,10 @@ input[type="checkbox"] {
   color: $blue;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.125rem;
   cursor: pointer;
-/*   box-shadow: $box-shadow; */
   z-index: 100;
   transition: all 0.3s ease;
   &:hover {
@@ -120,13 +127,10 @@ input[type="checkbox"] {
 //Edit
 .collapse>span{
     display: flex;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 //Modales
-.modal p{
-  color: $blue;
-}
 .modal-container{
   position: fixed;
   top: 0;
@@ -138,32 +142,31 @@ input[type="checkbox"] {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  .close-btn{
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    font-size: medium;
-    cursor: pointer;
-  }
 }
-.success, .error {
+.modal {
   text-align: center;
   background-color: $white;
-  padding: 20px;
+  padding: 1.25rem;
   border: 5px solid $yellow;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   max-width: 500px;
   min-width: 200px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  
+  p {
+    color: $blue;
+    margin: 0;
+  }
 }
-//Séparer le style succes ou error si besoin dans
 
 .program-page, .program-music-page, .participate-page, .info-page, .souvenirs-page, .album-page, .contact-page {
   background: $background;
       h1{
-        font-size: 50px;
+        font-size: 3.125rem;
         color: $yellow;
     }
 }
@@ -192,7 +195,11 @@ input[type="checkbox"] {
 @media (max-width: $breakpoint-mobile){
   .program-page, .program-music-page, .participate-page, .info-page, .souvenirs-page, .album-page, .contact-page{
     h1{
-      font-size: 40px;
+      font-size: 2.5rem;
     }
+  }
+  .scroll-top-btn{
+    bottom: 10rem;
+    right: 1.5rem;
   }
 }

@@ -17,19 +17,15 @@ const Modal: FC<ModalProps>=({text,type="success", onClose, onConfirm})=>{
     if(type==="error") className +=" error"
     return(
         <div className='modal-container'>
-            <div className={className} style={{ position: 'relative' }}>
-                <button 
-                    className="close-btn" 
-                    onClick={onClose} 
-                    aria-label="Fermer"
-                >✕</button>
+            <div className={className}>
                 <p>{text}</p>
-                {onConfirm ? (
-                    <Button className='btn' onClick={onConfirm}>
-                        Confirmer
-                    </Button>
-                ) : (
-                    <Button className='btn' onClick={onClose}>
+                {onConfirm ? ( // Si onConfirm existe choix entre 2 boutons
+                    <div style={{display: 'flex', gap: '1rem'}}> 
+                        <Button className='btn' onClick={onClose}>Annuler</Button>
+                        <Button className='btn btn-delete' onClick={onConfirm}>Confirmer</Button>
+                    </div>
+                ) : ( // Si onConfirm n'existe pas (modale simple d'information)
+                    <Button className='btn' onClick={onClose}> {/* Un seul bouton pour fermer */}
                         {t("modale.close")}
                     </Button>
                 )}

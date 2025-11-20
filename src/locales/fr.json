@@ -78,9 +78,11 @@
     "socials": "Liens de tes réseaux sociaux",
     "style": "Quel style comptes-tu jouer au festival ?",
     "promoText": "Ajoute le texte de présentation qui sera utilisé pour la promotion",
-    "pics": "Télécharge ici la photo que nous pourrons utiliser pour la promotion du festival",
-
-  "submit": "Envoyer"
+    "pics": "Télécharge ici la photo que nous pourrons utiliser pour la promotion du festival"
+  },
+  "btn": {
+    "submit": "Envoyer",
+    "loading": "Envoi en cours..."
   },
   "form.successMsg":"🩷 Formulaire envoyé avec succès, merci! 💚",
   "modale.close": "Fermer"

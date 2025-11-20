@@ -2,7 +2,7 @@
 
 .info-page{
     h2{
-        font-size: 40px;
+        font-size: 2.5rem;
     }
     #general-info{
         img{
@@ -15,7 +15,7 @@
             display: flex;
             align-items: flex-start;
             text-align: center;
-            padding: 50px 0;
+            padding: 3rem 0;
             
             span{
                 padding: $padding;
@@ -36,7 +36,7 @@
         p, ul, li{
             font-family: $text-font;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 1.125rem;
             color:$white;
             text-align: left;
         }

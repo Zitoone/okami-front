@@ -5,7 +5,7 @@
 .contact-page{
     label{
         color: $yellow;
-        font-size: 24px;
+        font-size: 1.5rem;
     }
     textarea{
         height: 200px;
@@ -15,11 +15,11 @@
     .rgpd {
         label{
         color: black;
-        font-size: 10px;
+        font-size: 0.625rem;
     }
     display: inline-flex;
     align-items: flex-start;
-    gap: 8px; 
+    gap: 0.5rem; 
     justify-content: center;
         input{
         width: auto;
@@ -27,15 +27,21 @@
     }
     .img-wrap{
         div{
-        max-width: 200px;
-        height: 400px;
-        margin: auto;
-        padding: 200px;
-        background: url("/DJs2.jpg") no-repeat;
+        width: 12.5rem;
+        height: 25rem;
+        margin: 0 auto 3rem;
+        background: url("/DJs2.webp") no-repeat;
         background-size: cover;
         background-position: center;
         border-radius: $border-radius;
         box-shadow: $box-shadow;
         }
+    }
+}
+
+@media (max-width: $breakpoint-mobile){
+    .contact-page .img-wrap div{
+        width: 9.375rem;
+        height: 18.75rem;
     }
 }
