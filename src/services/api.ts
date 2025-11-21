@@ -73,3 +73,5 @@ export const emailApi = {
         await axiosInstance.post('email/send', data)
     }
 }
+
+console.log("API_URL:", import.meta.env.VITE_API_URL);
