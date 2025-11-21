@@ -13,6 +13,7 @@ type CountdownProps = {
 
 const Countdown = ({ targetDate }: CountdownProps) => {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>(null)
+    const [isFinished, setIsFinished] = useState(false)
 
     useEffect(() => {
         const interval = setInterval(() => { //exécute une fonction chaque seconde pour recalculer le temps restant.
@@ -21,7 +22,7 @@ const Countdown = ({ targetDate }: CountdownProps) => {
 
         if (distance < 0) { //Si cette différence est terminée, on met tout a 0
             clearInterval(interval)
-            setTimeLeft(null)
+            setIsFinished(true)
             return
         }
 
@@ -36,7 +37,9 @@ const Countdown = ({ targetDate }: CountdownProps) => {
     return () => clearInterval(interval) //Fonction pour arrêter le minuteur
     }, [targetDate])
 
-    if (!timeLeft) return <div>OKAMI : C'est parti ! 🎉</div>
+    if (isFinished) return <div>OKAMI : C'est parti ! 🎉</div>
+
+    if (!timeLeft) return null
 
     return (
         <div className='countdown'>
