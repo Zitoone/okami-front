@@ -51,7 +51,7 @@ const MusicProgram: React.FC = () => {
                     {isOpen ? (
                         <div className="card-description">
                             <button onClick={(e) => { e.stopPropagation(); toggle(artist._id) }} aria-label="Fermer">X</button>
-                            <p>{artist.promoText || "Aucune description disponible."}</p>
+                            <p>Aucune description disponible.</p>
                         </div>
                     ) : (
                         <>

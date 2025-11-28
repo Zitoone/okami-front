@@ -95,3 +95,23 @@ form > div > input[type="file"] {
         justify-content: flex-start;
     }
 }
+
+.countdown-page{
+    background: $white;
+    div{
+        .countdown, p{
+            background: $white;
+            text-align: center;
+            color: $blue;
+            
+        }
+        p{
+            font-size: 1.5rem;
+        }
+        .countdown{
+            font-weight: bold;
+            font-size: 3rem;
+        }
+    }
+
+}

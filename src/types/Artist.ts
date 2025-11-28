@@ -7,20 +7,24 @@ export interface Artist {
     email?: string;
     phone?: string;
     guestName?: string;
-    runInfo?: string;
     setup?: string;
     setupTime?: string;
-    needsSoundcheck?: boolean;
+    needsSoundcheck?: string;
     canRecordSet?: boolean;
     comments?: string;
+    riderTechUrl?: string;
+    riderTechUpload?: string;
     promoPhoto?: string;
     socialLinks?: {
         instagram?: string;
         soundcloud?: string;
+        spotify?: string;
+        facebook?: string;
         website?: string;
+        youtube?: string;
     };
     musicalStyle?: string;
-    promoText?: string;
+/*     promoText?: string; */
     numberOfPeople?: number;
     stage?: string;
     performanceDateTime?: string;

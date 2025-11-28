@@ -45,7 +45,7 @@ const Home: React.FC=()=>{
                             <h2>Ou la music et la nature se rencontrent</h2>
                             <p>Cinq jours d’expérience unique en pleine nature, bercés par le son de la rivière et les vibrations de la musique électronique.</p>
                             <p>Attention ce site n'est pas le site officiel du festival, il a été réalisé pour un projet dans le cadre d'une formation.</p>
-                            <a href="https://www.okamifestival.com/">🐺 ➡️ Site officiel</a>
+                            <a href="https://www.okamifestival.com/" target='_blank' aria-label="Visitez le site officiel de l'Okami">🐺 ➡️ Site officiel</a>
                             </div>
                         </article>
                         <Countdown targetDate="2026-06-03T14:30:00" />

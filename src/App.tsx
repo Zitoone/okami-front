@@ -16,6 +16,7 @@ import Album2024 from './public-pages/album2024.tsx'
 import Album2025 from './public-pages/album2025.tsx'
 import Contact from './public-pages/contact.tsx'
 import MusicProgram from './public-pages/programMusic.tsx'
+import CountdownPage from './public-pages/countdownPage.tsx'
 
 //Pages privées/formulaires
 import ArtistForm from './private-pages/formArtist.tsx'
@@ -47,6 +48,7 @@ function App(){
 
 {/* Pages privées */}
     <Route path='/artist-form' element={<ArtistForm />} />
+    <Route path='/countdown' element={<CountdownPage />} />
 
     <Route path='/login' element={<LoginForm />} />
     <Route path='/admin/dashboard' element={

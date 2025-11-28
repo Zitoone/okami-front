@@ -214,7 +214,6 @@ export default function ArtistPage() {
             <p><strong>Run arrivée :</strong>{selectedArtist.arrivalRun || "-"}</p>
             <p><strong>Run départ :</strong>{selectedArtist.departureRun || "-"}</p>
             <p><strong>Logement :</strong>{selectedArtist.accommodation || "-"}</p>
-            <p><strong>Infos run demandé par l'artiste :</strong>{selectedArtist.runInfo || "-"}</p>
 
             <h3>Technique</h3>
 
@@ -223,6 +222,25 @@ export default function ArtistPage() {
             <p><strong>Soundcheck :</strong> {selectedArtist.needsSoundcheck ? 'Oui' : 'Non'}</p>
             <p><strong>Soundcheck date et heure:</strong> {selectedArtist.soundcheckDateTime || "-"}</p>
             <p><strong>Accord pour enregistrer la prestation :</strong> {selectedArtist.canRecordSet ? 'Oui' : 'Non'}</p>
+            <p><strong>Rider technique :</strong></p>
+              {selectedArtist.riderTechUrl ? (
+                // Cas 1 : L'artiste a fourni une URL
+                <a
+                  href={selectedArtist.riderTechUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: "0.85rem",color: "#666"}}
+                >
+                  Ouvrir le rider technique (URL)
+                </a>
+              ) : selectedArtist.riderTechUpload ? (
+                // Cas 2 : Un fichier a été uploadé
+                  <p>Fichier uploadé dispo dans le Kdrive</p>
+              ) : (
+                // Cas 3 : Rien du tout
+                <span>-</span>
+              )}
+
             <p><strong>Commentaire artiste :</strong> {selectedArtist.comments || "-"}</p>
 
             <h3>Administratif</h3>
@@ -243,20 +261,34 @@ export default function ArtistPage() {
             <p><strong>Réseaux sociaux :</strong></p>
             <ul>
               {(() => {
-                const links = typeof selectedArtist.socialLinks === 'string' 
-                  ? JSON.parse(selectedArtist.socialLinks) //Convertir en objet utilisable
-                  : selectedArtist.socialLinks;
-                return (
-                  <>
-                    {links?.instagram && <li><a href={links.instagram} target="_blank" rel="noopener noreferrer">{links.instagram}</a></li>}
-                    {links?.soundcloud && <li><a href={links.soundcloud} target="_blank" rel="noopener noreferrer">{links.soundcloud}</a></li>}
-                    {links?.website && <li><a href={links.website} target="_blank" rel="noopener noreferrer">{links.website}</a></li>}
-                    {!links?.instagram && !links?.soundcloud && !links?.website && <li>-</li>}
-                  </>
-                );
-              })()}
+              const links = typeof selectedArtist.socialLinks === 'string'
+                ? JSON.parse(selectedArtist.socialLinks)
+                : selectedArtist.socialLinks;
+
+              // Tableau de tous les réseaux que tu veux afficher
+              const socialFields = ['instagram', 'soundcloud', 'spotify', 'facebook', 'website', 'youtube'];
+
+              const hasAnyLink = socialFields.some(field => links?.[field]);
+
+              return (
+                <>
+                  {hasAnyLink ? (
+                    socialFields.map((field) =>
+                      links?.[field] ? (
+                        <li key={field}>
+                          <a href={links[field]} target="_blank" rel="noopener noreferrer">
+                            {links[field]}
+                          </a>
+                        </li>
+                      ) : null
+                    )
+                  ) : (
+                    <li>-</li>
+                  )}
+                </>
+              );
+            })()}
             </ul>            
-            <p><strong>Texte promo artiste :</strong> {selectedArtist.promoText || "-"}</p>
             <p><strong>Statut :</strong> {selectedArtist.isValidated ? '✅ Validé' : '❌ Non validé'}</p>
 
             <h3>Métadonnées</h3>
@@ -297,4 +329,5 @@ export default function ArtistPage() {
   )
 }
 
-//TODO : fermer toutes les modales si on clique en dehors
+//TODO : fermer toutes les modales en cliquant en dehors → ajouter un onClick sur l’overlay et stopper la propagation sur le contenu du panneau.
+//réutiliser le même composant Modal pour toutes tes modales (suppr, confirmation…) pour réduire le code répété.
