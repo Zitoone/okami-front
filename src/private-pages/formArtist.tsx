@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactCountryFlag from "react-country-flag"
 import Button from '../components/Button'
@@ -32,9 +32,17 @@ export const ArtistForm = () => {
         comments: "",
         socialLinks: {},
         musicalStyle: "",
+        riderTechUrl: "",
         dataSource: "artist"
     })
     const [loading, setLoading] = useState(false)
+
+    // Nettoyage du blob pour éviter memory leak
+    useEffect(() => {
+        return () => {
+            if (preview) URL.revokeObjectURL(preview)
+        }
+    }, [preview])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target
@@ -69,19 +77,39 @@ export const ArtistForm = () => {
     const handlePromoPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if(file) {
+            // Validation taille max 10MB
+            if (file.size > 10 * 1024 * 1024) {
+                setError(t("artistForm.fileTooLarge"))
+                setPromoPhoto(null)
+                if (preview) URL.revokeObjectURL(preview)
+                setPreview(null)
+                e.target.value = ''
+                return
+            }
+            if (preview) URL.revokeObjectURL(preview)
             setPromoPhoto(file)
-            // Création d'un Blob local pour la preview (utilisation de URL.createObjectURL)
             setPreview(URL.createObjectURL(file))
             setError(null)
         } else {
             setPromoPhoto(null)
+            if (preview) URL.revokeObjectURL(preview)
             setPreview(null)
         }
     }
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
-        if (file) setRiderTech(file)
+        if (file) {
+            // Validation taille max 10MB
+            if (file.size > 10 * 1024 * 1024) {
+                setError(t("artistForm.fileTooLarge"))
+                setRiderTech(null)
+                e.target.value = ''
+                return
+            }
+            setRiderTech(file)
+            setError(null)
+        }
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -215,7 +243,7 @@ export const ArtistForm = () => {
                                 style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px', marginBottom: '0.5rem', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
                             />
                         )}
-                        <label htmlFor='promoPhoto'>{t("artistForm.pics")}</label>
+                        <label htmlFor='promoPhoto'>{t("artistForm.pics")} *</label>
                         <input id='promoPhoto' name='promoPhoto' type="file" accept="image/*" onChange={handlePromoPhotoChange} />
                     </div>
 
@@ -240,7 +268,7 @@ export const ArtistForm = () => {
                         <input id='musicalStyle' name="musicalStyle" value={formData.musicalStyle || ''} onChange={handleChange} />
                     </div>
 
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {error && <p role="alert" style={{ color: 'red' }}>{error}</p>}
 
 
                     <Button type="submit" className="btn form-btn" disabled={loading}>

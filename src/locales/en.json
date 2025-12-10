@@ -81,14 +81,16 @@
     "promoTitle": "Press & promo info",
     "socials": "Links to your social media",
     "style": "What style are you planning to play at the festival?",
-    "pics": "Upload here the photo we can use for festival promotion.",
-    "photoRequired": "A photo is required for promotion"
+    "pics": "Upload here the photo we can use for festival promotion (max 10 MB).",
+    "photoRequired": "A photo is required for promotion",
+    "fileTooLarge": "File is too large (max 10 MB). Please compress your image or use another file.",
+    "submitFailed": "Form submission failed. Please try again later."
   },
   "btn": {
     "submit": "Send",
     "loading": "Sending..."
   },
-  "submitFailed": "Form submission failed. Please try again later.",
+
   "form.successMsg":"🩷 Form successfully submitted, thank you! 💚",
   "modale.close": "Close"
 }

@@ -59,7 +59,7 @@
 
   "artistForm": {
     "title": "Formulaire Artiste",
-    "intro": "Nous sommes heureux de te retrouver pour l’édition OKAMI 2026 ! Merci de remplir ce formulaire avec soin afin que nous puissions t’accueillir dans les meilleures conditions. Si certaines réponses ne sont pas encore disponibles, tu peux nous les envoyer plus tard à l’adresse : booking@okamifestival.com\nN’hésite pas non plus à nous contacter si tu as besoin d’informations complémentaires",
+    "intro": "Nous sommes heureux de te retrouver pour l’édition OKAMI 2026 ! Merci de remplir ce formulaire avec soin afin que nous puissions t’accueillir dans les meilleures conditions. Si certaines réponses ne sont pas encore disponibles, tu peux nous les envoyer plus tard à l’adresse : booking@okamifestival.com\nN’hésite pas non plus à nous contacter si tu as besoin d’informations complémentaires\nLes champs marqués d’un * sont obligatoires.",
     "mainTitle": "Informations générales",
     "projectName": "Nom du projet, écris-le tel que tu souhaites qu’il apparaisse dans la programmation",
     "lastName": "Nom",
@@ -70,16 +70,17 @@
     "setupTime": "Combien de temps d'installation as-tu besoin ?",
     "setup": "Quel est ton setup ? De quel matériel as-tu besoin, et qu’apporteras-tu ?",
     "soundcheck": "As-tu besoin de faire des balances ? Si oui, combien de temps ?",
-    "riderTech1": "Si tu en as, ajoute ici le lien vers ton rider technique (Google Drive, Dropbox, WeTransfer...)",
-    "riderTech2": "OU télécharge ton rider technique (PDF, Word, Excel...)",
+    "riderTech1": "Si tu en as, ajoute ici l'url de ton rider technique (Google Drive, Dropbox, WeTransfer...)",
+    "riderTech2": "OU télécharge ton rider technique (max 3 MB). Pour les fichiers plus lourds, utilise le champ URL ci-dessus.",
     "record": "Es-tu d'accord pour que ton set/live soit enregistré ? Coche si tu es d'accord",
     "artistComments": "Un commentaire à ajouter?",
 
     "promoTitle": "Informations promotionnelles",
     "socials": "Liens de tes réseaux sociaux",
     "style": "Quel style comptes-tu jouer au festival ?",
-    "pics": "Télécharge ici la photo que nous pourrons utiliser pour la promotion du festival",
+    "pics": "Télécharge ici la photo que nous pourrons utiliser pour la promotion du festival (max 10 MB)",
     "photoRequired": "La photo est obligatoire pour la promotion",
+    "fileTooLarge": "Le fichier est trop lourd (max 10 MB). Compresse ton image ou utilise un autre fichier.",
     "submitFailed": "L'envoi du formulaire a échoué. Veuillez réessayer plus tard."
   },
   "btn": {
