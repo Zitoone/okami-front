@@ -8,6 +8,8 @@ const Album2025: React.FC = () => {
     const images = albums["okami_2025"]
     const [visibleCount, setVisibleCount] = useState(100)
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+    // Stocke la position X du début du swipe
+    const [touchStart, setTouchStart] = useState<number | null>(null)
 
     const loadMore = () => {
     setVisibleCount((prev) => prev + 52)
@@ -24,6 +26,35 @@ const Album2025: React.FC = () => {
         e?.stopPropagation?.()
         if (selectedIndex === null) return
         setSelectedIndex((selectedIndex + 1) % images.length)
+    }
+
+    // Détecte le début du swipe et enregistre la position X de départ
+    const handleTouchStart = (e: React.TouchEvent) => {
+        setTouchStart(e.targetTouches[0].clientX)
+    }
+
+    // Détecte la fin du swipe et calcule la direction
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        // Récupère la position X de fin du swipe (variable locale, pas state)
+        const currentTouchEnd = e.changedTouches[0].clientX
+        
+        // Si pas de position de départ enregistrée, on annule
+        if (touchStart === null) return
+
+        // Calcule la distance horizontale du swipe (positif = gauche, négatif = droite)
+        const distance = touchStart - currentTouchEnd
+
+        // Si distance > 50px, c'est un swipe vers la gauche → image suivante
+        if (distance > 50) {
+            handleNext()
+        }
+        // Si distance < -50px, c'est un swipe vers la droite → image précédente
+        else if (distance < -50) {
+            handlePrev()
+        }
+        
+        // Reset la position de départ pour le prochain swipe
+        setTouchStart(null)
     }
 
     useEffect(() => {
@@ -88,7 +119,11 @@ const Album2025: React.FC = () => {
 
                 {selectedIndex !== null && (
                     <div className="lightbox" onClick={() => setSelectedIndex(null)}>
-                        <div className="lightbox-content" onClick={(e)=> e.stopPropagation()}>
+                        <div className="lightbox-content"
+                            onClick={(e)=> e.stopPropagation()}
+                            onTouchStart={handleTouchStart}
+                            onTouchEnd={handleTouchEnd}
+                        >
                             <button className="lightbox-btn prev" onClick={handlePrev} aria-label="Photo précédente">‹</button>
                             <img src={images[selectedIndex]} alt={`Photo ${selectedIndex + 1}`} />
                             <button className="lightbox-btn next" onClick={handleNext} aria-label="Photo suivante">›</button>

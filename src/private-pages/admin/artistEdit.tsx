@@ -48,7 +48,9 @@ function ArtistEdit() {
 
     const [file, setFile] = useState<File | null>(null) // Stocker la photo à uploader
     const [preview, setPreview] = useState<string | null>(null) // Aperçu image temporaire
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true) // Chargement initial des données
+    const [submitting, setSubmitting] = useState(false) // Envoi du formulaire en cours
+    const [error, setError] = useState<string | null>(null) // Message d'erreur
     const [modal, setModal] = useState(false)
     const navigate = useNavigate()
 
@@ -141,12 +143,18 @@ function ArtistEdit() {
         if (!artistId) return
 
         try {
-            // Try-catch ajouté pour gérer les erreurs du back
-            const updatedData = await artistApi.updateWithFile(artistId, upload)
-            setArtistData(updatedData)
+            setSubmitting(true) // Active l'état de chargement
+            setError(null) // Réinitialise les erreurs précédentes
+            
+            await artistApi.updateWithFile(artistId, upload)
+            
+            // Succès : affiche la modale de confirmation
             setModal(true)
         } catch (error) {
             console.error("Erreur lors de la mise à jour de l'artiste :", error)
+            setError("❌ Erreur lors de la mise à jour. Réessayez.")
+        } finally {
+            setSubmitting(false) // Désactive l'état de chargement
         }
     }
 
@@ -244,7 +252,11 @@ function ArtistEdit() {
                             </div>
                         </Collapse>
 
-                        <Button type="submit" className="btn form-btn">Mettre à jour</Button>
+                        {error && <p role="alert" style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
+
+                        <Button type="submit" className="btn form-btn" disabled={submitting}>
+                            {submitting ? "Mise à jour en cours..." : "Mettre à jour"}
+                        </Button>
 
                         {modal && (
                             <Modal
@@ -265,5 +277,3 @@ function ArtistEdit() {
 }
 
 export default ArtistEdit
-
-// TODO: Voir pour la latence entre le la validation de la mise à jour et la modale de confirmation
