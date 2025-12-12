@@ -37,7 +37,7 @@ function Header() {
   return (
     <header>
       <div className="container">
-        <NavLink to="/"><img src="/logo.png" alt="Logo Okami festival"/></NavLink>
+        <NavLink to="/"><img src="/logo.webp" alt="Logo Okami festival"/></NavLink>
 
         <div className="burger" onClick={toggleMenu} aria-label="Menu burger">
           <TiThMenu />

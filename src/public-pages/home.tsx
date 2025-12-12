@@ -38,7 +38,7 @@ const Home: React.FC=()=>{
                     <section className='hero'>
                         
                         <article>                       
-                            <img src="/avatar.png" alt="Image Flyer Okami Festival 2026" />
+                            <img src="/avatar.webp" alt="Image Flyer Okami Festival 2026" fetchPriority="high" />
                             <div>
                                 <h1>Bienvenue sur le site du festival OKAMI</h1>
                             <span>3 - 7 JUIN 2026</span>
