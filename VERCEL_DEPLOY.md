@@ -1,10 +1,24 @@
-# 🚀 Déploiement Frontend sur Vercel - Guide Complet
+# 🚀 Guide de déploiement Frontend sur Vercel
 
-## 📋 Prérequis
+## 📋 Table des matières
+
+- [Prérequis techniques](#prérequis-techniques)
+- [Installation de Vercel CLU](#installation-de-vercel-cli)
+- [Premier Déploiement](#premier-déploiement)
+- [Configuration des Variables d'Environnement](#configuration-des-variables-denvironnement)
+- [Déploiements Suivants](#déploiements-suivants)
+- [Vérifications Avant Déploiement](#vérifications-avant-déploiement)
+- [Checklist Déploiement Complet](#checklist-déploiement-complet)
+- [Commandes Utiles](#commandes-utiles)
+- [URLs Importantes](#urls-importantes)
+
+---
+
+## 📦 Prérequis techniques
 
 - Node.js installé
 - Compte Vercel créé
-- Backend déjà déployé (Railway ou Vercel)
+- Backend déjà déployé (Render)
 - Git configuré
 
 ---
@@ -67,18 +81,16 @@ Ton site est maintenant en ligne ! 🎉
 3. Va dans **Settings** → **Environment Variables**
 4. Ajoute la variable :
    - **Name:** `VITE_API_URL`
-   - **Value:** `https://okami-back-production.up.railway.app/api/`
+   - **Value:** `https://okami-back.onrender.com/api`
    - **Environments:** Coche `Production`, `Preview`, `Development`
 5. Clique sur **Save**
-
-⚠️ **IMPORTANT** : Le slash final `/api/` est obligatoire !
 
 ### Méthode 2 : Via CLI
 
 ```bash
 vercel env add VITE_API_URL production
 ```
-Colle la valeur : `https://okami-back-production.up.railway.app/api/`
+Colle la valeur : `https://okami-back.onrender.com/api`
 
 ### 4. Redéployer après ajout de variables
 ```bash
@@ -134,58 +146,12 @@ Teste le build en local avant de déployer.
 
 ---
 
-## 🐛 Résolution de Problèmes
-
-### CORS Error
-**Symptôme :** Erreur CORS dans la console
-
-**Solution :**
-1. Va dans les variables d'env de ton **backend** (Railway)
-2. Vérifie que `FRONT_URL` = `https://okami-sigma.vercel.app`
-3. Format : **sans** slash final
-4. Redéploie le backend si modifié
-
-### 404 sur les routes React
-**Symptôme :** Refresh de page → 404
-
-**Solution :**
-✅ Déjà configuré dans `vercel.json` :
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
-```
-
-### API non joignable
-**Symptôme :** Erreur Network ou 500
-
-**Solution :**
-1. Vérifie `VITE_API_URL` dans Vercel
-2. Teste l'API directement :
-   ```bash
-   curl https://okami-back-production.up.railway.app/api/artists/public
-   ```
-3. Vérifie que le backend Railway est bien démarré
-
-### Build échoue
-**Symptôme :** Erreur pendant `npm run build`
-
-**Solution :**
-1. Vérifie les erreurs TypeScript localement
-2. Corrige les erreurs
-3. Teste `npm run build` en local
-4. Redéploie
-
----
-
 ## 📝 Checklist Déploiement Complet
 
 ### Backend (Railway)
 - [ ] Backend déployé et accessible
 - [ ] `MONGO_URI` configurée
-- [ ] `CLOUDINARY_*` configurées
+- [ ] `CLOUDINARY` configurées
 - [ ] `FRONT_URL` = `https://okami-sigma.vercel.app`
 - [ ] CORS configuré pour accepter le front
 

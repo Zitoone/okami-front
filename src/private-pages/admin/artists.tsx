@@ -18,37 +18,15 @@ export default function ArtistPage() {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false) //modal de confirmation de suppression
   const [artistToDelete, setArtistToDelete] = useState<string | null>(null) // ID de l'artiste à supprimer
 
-// Fonction pour obtenir un n° de tel lisible
-/*   const formatPhone = (phone: string) => {
-    const cleaned = phone.replace(/\D/g, '') 
-    return cleaned.replace(/(\d{2})(?=\d)/g, '$1 ')  
-  } */
+  // Fonction pour formater les numéros de téléphone
   const formatPhone = (phone: string) => {
-  if (!phone) return ""
-  const raw = phone.trim();
-  // 1) 00 → + (ex: 001514... → +1514...)
-  const normalized = raw.startsWith("00") ? "+" + raw.slice(2) : raw
-  // 2) Indicatif explicite : commence par +
-  if (normalized.startsWith("+")) {
-    const indic = normalized.match(/^\+\d{1,3}/)[0]
-    const rest = normalized.slice(indic.length).replace(/\D/g, "")
-    // Cas spécial +1 (USA/Canada) : format 3-3-4
-    if (indic === "+1" && rest.length >= 10) {
-      const r = rest.slice(-10);
-      return `${indic} ${r.slice(0,3)} ${r.slice(3,6)} ${r.slice(6)}`.trim()
-    }
-    // Autres pays → format par 2
-    return indic + (rest ? " " + rest.replace(/(\d{2})(?=\d)/g, "$1 ").trim() : "")
+    if (!phone) return "" // Si vide, retourne vide
+    // Retire espaces, tirets, points, parenthèses
+    const clean = phone.replace(/[\s\-\.\(\)]/g, "")
+    // Groupe les chiffres par 2 avec un espace
+    // Exemple : 0612345678 devient 06 12 34 56 78
+    return clean.replace(/(\d{2})/g, "$1 ").trim()
   }
-  // 3) Pas de + : si 11 chiffres et commence par 1 → on traite comme USA/Canada
-  const digits = raw.replace(/\D/g, "");
-  if (digits.length === 11 && digits.startsWith("1")) {
-    const r = digits.slice(1)
-    return `+1 ${r.slice(0,3)} ${r.slice(3,6)} ${r.slice(6)}`.trim()
-  }
-  // 4) Fallback simple FR-ish : groupe par 2
-  return digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim()
-}
 
   // Fonction qui récupère la liste d'artiste
   const fetchArtists = async () => {
@@ -146,12 +124,12 @@ export default function ArtistPage() {
           </thead>
           <tbody>
             {filteredArtists.map((artist) => (
-              <tr
+              <tr //ligne
                 key={artist._id} // key unique obligatoire
                 onClick={() => setSelectedArtist(artist)} // Au clic on stocke l'artiste dans selectedArtist
                 className="clickable-row"
               >
-                <td><strong>{artist.projectName || "-"}</strong></td>
+                <td><strong>{artist.projectName || "-"}</strong></td> 
                 <td>{artist.lastName || "-"}</td>
                 <td>{artist.firstName || "-"}</td>
                 <td>
@@ -261,28 +239,37 @@ export default function ArtistPage() {
             <p><strong>Réseaux sociaux :</strong></p>
             <ul>
               {(() => {
+              // Étape 1 : Transformation des données si nécessaire
+              // Les réseaux sociaux peuvent arriver sous 2 formats différents :
+              // - Soit comme un objet JavaScript : { instagram: "...", soundcloud: "..." }
+              // - Soit comme du texte JSON : '{"instagram":"...","soundcloud":"..."}'
+              // On vérifie le type et on convertit en objet si besoin
               const links = typeof selectedArtist.socialLinks === 'string'
-                ? JSON.parse(selectedArtist.socialLinks)
-                : selectedArtist.socialLinks;
+                ? JSON.parse(selectedArtist.socialLinks) // Convertit le texte en objet
+                : selectedArtist.socialLinks; // Déjà un objet, on le garde
 
-              // Tableau de tous les réseaux que tu veux afficher
+              // Étape 2 : Liste de tous les réseaux sociaux qu'on veut afficher
               const socialFields = ['instagram', 'soundcloud', 'spotify', 'facebook', 'website', 'youtube'];
 
+              // Étape 3 : Vérifie si au moins UN réseau social existe
+              // some() retourne true si au moins un élément du tableau remplit la condition
               const hasAnyLink = socialFields.some(field => links?.[field]);
 
               return (
                 <>
                   {hasAnyLink ? (
+                    // Si au moins un lien existe, on parcourt tous les réseaux
                     socialFields.map((field) =>
-                      links?.[field] ? (
+                      links?.[field] ? ( // Si ce réseau spécifique a un lien
                         <li key={field}>
                           <a href={links[field]} target="_blank" rel="noopener noreferrer">
                             {links[field]}
                           </a>
                         </li>
-                      ) : null
+                      ) : null // Si pas de lien pour ce réseau, on n'affiche rien
                     )
                   ) : (
+                    // Si aucun lien n'existe, on affiche juste un tiret
                     <li>-</li>
                   )}
                 </>

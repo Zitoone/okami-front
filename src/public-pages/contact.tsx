@@ -24,6 +24,7 @@ const Contact: React.FC=()=>{
         isAgree: false
     })
     const [modal, setModal]= useState(false)
+    const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
@@ -38,12 +39,19 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
     const handleSubmit= async (e: React.FormEvent) => {
         e.preventDefault()
         setLoading(true)
+        setError(null)
 
         try {
             await emailApi.send(formData)
             setModal(true)
-        } catch (error) {
+        } catch (error: any) {
             console.error("❌ Erreur :", error)
+            // Affiche un message d'erreur clair à l'utilisateur
+            if (error.response?.status === 500) {
+                setError("❌ Erreur serveur. Le service d'envoi d'email est temporairement indisponible. Contactez-nous à info@okamifestival.com")
+            } else {
+                setError("❌ Erreur lors de l'envoi. Vérifiez votre connexion et réessayez.")
+            }
         } finally {
             setLoading(false)
         }
@@ -71,6 +79,8 @@ Merci de nous aider à faire du Okami Festival une aventure toujours plus magiqu
                     <input type="checkbox" name="isAgree" id="rgpd" checked={formData.isAgree} onChange={handleChange} required/>
                     <label htmlFor="rgpd">J'accepte que mes informations soient traitées conformément à la politique de confidentialité.</label>
                 </div>
+
+                {error && <p role="alert" style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
 
                 <Button type="submit" className="form-btn btn" disabled={loading}>
                     {loading ? 'Envoi en cours...' : 'Envoyer'}
