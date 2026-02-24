@@ -22,9 +22,8 @@ export default function ArtistPage() {
   const formatPhone = (phone: string) => {
     if (!phone) return "" // Si vide, retourne vide
     // Retire espaces, tirets, points, parenthèses
-    const clean = phone.replace(/[\s\-\.\(\)]/g, "")
+    const clean = phone.replace(/[\s\-().]/g, "")
     // Groupe les chiffres par 2 avec un espace
-    // Exemple : 0612345678 devient 06 12 34 56 78
     return clean.replace(/(\d{2})/g, "$1 ").trim()
   }
 

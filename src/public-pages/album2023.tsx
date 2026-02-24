@@ -3,12 +3,13 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import albums from "../data/albums.json"
 import Button from "../components/Button"
+import { useTranslation } from "react-i18next"
 
 const Album2023: React.FC = () => {
+    const { t } = useTranslation()
     const images = albums["okami_2023"]
     const [visibleCount, setVisibleCount] = useState(100)
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-    // Stocke la position X du début du swipe
     const [touchStart, setTouchStart] = useState<number | null>(null)
 
     const loadMore = () => {
@@ -29,32 +30,20 @@ const Album2023: React.FC = () => {
         setSelectedIndex((selectedIndex +1) % images.length)
     }
 
-    // Détecte le début du swipe et enregistre la position X de départ
     const handleTouchStart = (e: React.TouchEvent) => {
         setTouchStart(e.targetTouches[0].clientX)
     }
 
-    // Détecte la fin du swipe et calcule la direction
     const handleTouchEnd = (e: React.TouchEvent) => {
-        // Récupère la position X de fin du swipe (variable locale, pas state)
         const currentTouchEnd = e.changedTouches[0].clientX
-        
-        // Si pas de position de départ enregistrée, on annule
         if (touchStart === null) return
-
-        // Calcule la distance horizontale du swipe (positif = gauche, négatif = droite)
         const distance = touchStart - currentTouchEnd
-
-        // Si distance > 50px, c'est un swipe vers la gauche → image suivante
         if (distance > 50) {
             handleNext()
         }
-        // Si distance < -50px, c'est un swipe vers la droite → image précédente
         else if (distance < -50) {
             handlePrev()
         }
-        
-        // Reset la position de départ pour le prochain swipe
         setTouchStart(null)
     }
 
@@ -76,11 +65,11 @@ const Album2023: React.FC = () => {
         <Header />
         <main className="album-page">
             <div className="main-wrap">
-                <h1>Souvenirs de l'édition 2023</h1>
+                <h1>{t('albums.2023.title')}</h1>
                 <div className="flyer">
                     <div>
-                        <p>La deuxième édition du festival OKAMI a rassemblé encore plus de festivaliers et gagné en énergie, offrant des moments encore plus forts de musique, de rencontres et de convivialité.</p>
-                        <p>Cet album retrace les temps forts du festival : les performances des artistes, les ateliers, les moments de partage et l’ambiance unique qui a marqué ces quelques jours. Une belle manière de revivre la magie de cette édition 2023.</p>
+                        <p>{t('albums.2023.description1')}</p>
+                        <p>{t('albums.2023.description2')}</p>
                     </div>
                     <img src="/affiche23.webp" alt="Affiche Okami 2023" loading="lazy" />
                 </div>
@@ -102,7 +91,7 @@ const Album2023: React.FC = () => {
 
                 {visibleCount < images.length && (
                     <div className="load-more">
-                        <Button onClick={loadMore} className="form-btn btn">Voir plus</Button>
+                        <Button onClick={loadMore} className="form-btn btn">{t('albums.loadMore')}</Button>
                     </div>
                 )}
 
@@ -113,9 +102,9 @@ const Album2023: React.FC = () => {
                             onTouchStart={handleTouchStart}
                             onTouchEnd={handleTouchEnd}
                         >
-                            <button className="lightbox-btn prev" onClick={handlePrev} aria-label="Photo précédente">‹</button>
+                            <button className="lightbox-btn prev" onClick={handlePrev} aria-label={t('albums.prevPhoto')}>‹</button>
                             <img src={images[selectedIndex]} alt={`Photo ${selectedIndex + 1}`} />
-                            <button className="lightbox-btn next" onClick={handleNext} aria-label="Photo suivante">›</button>
+                            <button className="lightbox-btn next" onClick={handleNext} aria-label={t('albums.nextPhoto')}>›</button>
                         </div>
                     </div>
                 )}

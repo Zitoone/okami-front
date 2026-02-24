@@ -5,8 +5,10 @@ import { RiSoundcloudLine, RiInstagramFill } from "react-icons/ri"
 import Button from "../components/Button"
 import type { Artist } from '../types/Artist'
 import { artistApi } from "../services/api"
+import { useTranslation } from 'react-i18next'
 
 const MusicProgram: React.FC = () => {
+    const { t } = useTranslation()
     const [artists, setArtists] = useState<Artist[]>([])
     const [openId, setOpenId] = useState<string | null>(null)
 
@@ -33,13 +35,13 @@ const MusicProgram: React.FC = () => {
         <main className="program-music-page">
             <div className="main-wrap">
                 <div>
-                    <h1>Musiciens & DJs 2026</h1>
-                    <p>Découvrez la sélection éclectique d'artistes qui feront vibrer les scènes Dolma et Selva. Des rythmes envoûtants des DJs aux performances live captivantes, chaque musicien apporte une énergie unique qui promet de transformer chaque instant en une expérience inoubliable. Préparez-vous à danser, à vous émerveiller et à vous connecter à travers la musique.</p>
+                    <h1>{t('programMusic.title')}</h1>
+                    <p>{t('programMusic.description')}</p>
                 </div>
 
             <div className="artist-cards">
                 {artists.length === 0 ? (
-                    <p style={{textAlign: 'center', padding: '2rem'}}>Notre programmation démantielle arrive bientôt ! 🎵</p>
+                    <p style={{textAlign: 'center', padding: '2rem'}}>{t('programMusic.comingSoon')}</p>
                 ) : (
                     artists.map((artist) => {
                 const isOpen = openId === artist._id
@@ -51,7 +53,7 @@ const MusicProgram: React.FC = () => {
                     {isOpen ? (
                         <div className="card-description">
                             <button onClick={(e) => { e.stopPropagation(); toggle(artist._id) }} aria-label="Fermer">X</button>
-                            <p>Aucune description disponible.</p>
+                            <p>{t('programMusic.noDescription')}</p>
                         </div>
                     ) : (
                         <>

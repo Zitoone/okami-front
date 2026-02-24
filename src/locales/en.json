@@ -20,8 +20,7 @@
   "siret": "SIRET: 91298256800012",
 
   "publicationDirector": "Publication Director",
-  "hosting": "Hosting",
-  "hostName": "?",
+  "hosting": "Hosting Vercel Inc.",
 
   "intellectualPropertyTitle": "Intellectual Property",
   "intellectualPropertyContent": "All content on this site – texts, images, logos, videos, design and code – is the property of the association Attrape rêve. ⚠️ Please do not copy or use this content without our written permission.",
@@ -88,9 +87,223 @@
   },
   "btn": {
     "submit": "Send",
-    "loading": "Sending..."
+    "loading": "Sending...",
+    "learnMore": "Learn more",
+    "flashback": "Flashback in pictures"
   },
-
+  "homepage": {
+    "hero": {
+      "title": "Welcome to the OKAMI Festival website",
+      "dates": "JUNE 3-7, 2026",
+      "subtitle": "Where music and nature meet",
+      "description": "Five days of unique experience in the heart of nature, lulled by the sound of the river and the vibrations of electronic music.",
+      "disclaimer": "Please note that this is not the official festival website, it was created for a training project.",
+      "officialSite": "🐺 ➡️ Official website"
+    },
+    "afterMovie": {
+      "title": "Relive the vibrant energy of the Okami Festival"
+    },
+    "spaces": {
+      "title": "Explore our sacred spaces",
+      "doma": {
+        "title": "DOMA Stage",
+        "description": "Come discover the main stage"
+      },
+      "selva": {
+        "title": "SELVA Stage",
+        "description": "Stage dedicated to downtempo, live, organic, ethnic music."
+      },
+      "healing": {
+        "title": "Wellness Space",
+        "description": "A sanctuary for your mind, body and soul"
+      },
+      "kidzone": {
+        "title": "Kidzone",
+        "description": "The children's universe for fun creative adventures"
+      },
+      "market": {
+        "title": "Artisan Market",
+        "description": "Carefully selected creative artisans"
+      },
+      "food": {
+        "title": "Bar and Catering",
+        "description": "2 bars and a space to eat throughout the festival"
+      }
+    },
+    "lineup": {
+      "title": "Line Up 2026",
+      "comingSoon": "Our amazing lineup is coming soon! 🎵"
+    },
+    "participate": {
+      "title": "Participate",
+      "description": "Get fully involved by joining our team of volunteers, our artisan market or our performers."
+    },
+    "editions": {
+      "title": "Through the editions",
+      "description": "Relive the highlights of previous editions through our aftermovies and photo galleries."
+    }
+  },
+  "program": {
+    "title": "Program 2026",
+    "description": "Enter the world of the Okami Festival, where each day is an invitation to wonder. Let yourself be surprised by shows that play with your senses, workshops where you create, laugh and discover, and circus performances that defy imagination. Two stages beat to the rhythm of concerts and DJ sets, to make your steps and hearts vibrate until the early morning. Between musical exploration and moments of relaxation in our healing village, every moment is a unique adventure. Here, music, magic and sharing come together to offer you much more than a festival... a real experience to live intensely.",
+    "music": "Musicians & DJs",
+    "healing": "Healing zone",
+    "shows": "Performers & shows",
+    "kidzone": "Kidzone",
+    "activities": "Workshops & activities"
+  },
+  "programMusic": {
+    "title": "Musicians & DJs 2026",
+    "description": "Discover the eclectic selection of artists who will make the Dolma and Selva stages vibrate. From the captivating rhythms of DJs to captivating live performances, each musician brings a unique energy that promises to transform every moment into an unforgettable experience. Get ready to dance, marvel and connect through music.",
+    "comingSoon": "Our amazing lineup is coming soon! 🎵",
+    "noDescription": "No description available."
+  },
   "form.successMsg":"🩷 Form successfully submitted, thank you! 💚",
-  "modale.close": "Close"
+  "modale.close": "Close",
+  "contact": {
+    "title": "Contact us",
+    "intro": "A question, information, or suggestion? You're in the right place! Fill out the contact form and our team will respond quickly by email. Thank you for helping us make the Okami Festival an ever more magical adventure 💫",
+    "name": "Name & surname",
+    "email": "Email",
+    "object": "Subject",
+    "message": "Message",
+    "rgpd": "I agree that my information will be processed in accordance with the privacy policy.",
+    "errorServer": "❌ Server error. The email service is temporarily unavailable. Contact us at info@okamifestival.com",
+    "errorGeneral": "❌ Error sending. Check your connection and try again.",
+    "successMessage": "Message sent, we will respond to you as soon as possible"
+  },
+  "participate": {
+    "title": "Participate",
+    "intro": "Join the adventure and bring your energy to the festival! Volunteers, exhibitors, performers or speakers… everyone has their place to create unforgettable moments.",
+    "volunteers": {
+      "title": "Volunteers",
+      "description": "Want to experience the festival from the inside? Become a volunteer and help make this event a success. Whether you're passionate about logistics, hospitality, communication or entertainment, we need you! In exchange for your time and energy, you'll benefit from privileged access to the festival, an enriching experience and unforgettable encounters. Join our team of volunteers and be part of this collective adventure!",
+      "openingSoon": "Applications will open in early January 2026! A registration form will be available here!",
+      "formBtn": "Registration form"
+    },
+    "market": {
+      "title": "Artisan exhibitors",
+      "description": "We only welcome passionate artisans and creators. It's an opportunity to present your works, your unique creations and meet a curious and enthusiastic audience. Join us to share your know-how and bring the festival universe to life through your talents.",
+      "apply": "To apply (before January 2026) it's here",
+      "email": "stand@okamifestival.com",
+      "food": "Food? We handle everything! For now, we don't take food trucks... but who knows, maybe one day we'll be tempted!"
+    },
+    "tickets": {
+      "description": "Want to live the experience to the fullest? Get your ticket and dive into 5 days of pure magic with your tribe ✨ Your energy and support make the festival's heart beat. So, what are you waiting for? 💫"
+    }
+  },
+  "albums": {
+    "title": "Memories of past editions",
+    "intro": "Since 2022, images and videos tell the story of each edition. Dive into the atmosphere and relive the highlights of the festival!",
+    "loadMore": "Load more",
+    "prevPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "2022": {
+      "title": "Memories of the 2022 edition",
+      "description": "The very first edition of OKAMI in 2022 created unique memories. 3 days that made the festival's heart beat and set the tone for an adventure that was only just beginning."
+    },
+    "2023": {
+      "title": "Memories of the 2023 edition",
+      "description1": "The second edition of the OKAMI festival brought together even more festival-goers and gained energy, offering even stronger moments of music, encounters and conviviality.",
+      "description2": "This album traces the highlights of the festival: artist performances, workshops, moments of sharing and the unique atmosphere that marked these few days. A beautiful way to relive the magic of this 2023 edition."
+    },
+    "2024": {
+      "title": "Memories of the 2024 edition",
+      "description1": "Last dance on the lands of Castelnau, cradle of our adventure and witness to so many unforgettable moments.",
+      "description2": "This is where it all began, where the first smiles were exchanged, where the music resonated to the stars.",
+      "description3": "We want to thank from the bottom of our hearts the owners, for their welcome, their trust and their unwavering support. Thanks to them, the magic was able to operate once again, bringing together souls, artists and volunteers around this same benevolent and vibrant energy.",
+      "description4": "Castelnau will remain forever engraved in our history"
+    },
+    "2025": {
+      "title": "Memories of 2025",
+      "description1": "2025 marks a new chapter for OKAMI: a new location, surprises around every corner and renewed energy that electrified the audience.",
+      "description2": "With its two vibrant stages, the expanding Kidzone and the Healing Zone offering a fabulous program, the festival offered unprecedented experiences and intense moments of sharing. Between captivating performances, musical discoveries and moments of relaxation, this edition created new memories that no one is ready to forget, inscribing OKAMI even more deeply in the hearts of its festival-goers.",
+      "visitSite": "Visit",
+      "visitSiteLink": "here",
+      "visitSiteEnd": "the first version of our site created that year"
+    }
+  },
+  "informations": {
+    "title": "Practical information",
+    "intro": "Find here all the necessary information to know everything about the Okami Festival. From details on ticket booking to special activities for children, including how to become a volunteer. If you can't find the answer to your question, write to us, we're here to help!",
+    "general": {
+      "title": "General information",
+      "edition": "The 5th edition of the OKAMI festival will take place from June 3 to 7, 2026 in Saint Christaud in Haute Garonne (31)",
+      "access": "Access to the site will be possible from Wednesday 2pm until Sunday midnight."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "tickets": {
+        "question": "What types of tickets are available?",
+        "title": "🎟️ Pass Prices 🎟️",
+        "intro": "Pass prices vary depending on the sales phases and the number of days chosen. Discover below the different options to fully experience the Okami Festival!",
+        "pass5days": "5-day pass:",
+        "phase1": "Phase 1: €110 - Sold out",
+        "phase2": "Phase 2: €135",
+        "phase3": "Phase 3: €155",
+        "passKids": "5-day CHILD pass under 15 years old:",
+        "kidsPrice": "€30",
+        "onlyPass5": "For a total immersion in the Okami universe, only 5-day passes are available for sale. Day passes will be offered on site only if capacity allows.",
+        "limited": "💡 Places are limited, so don't delay in booking your pass to experience an unforgettable moment!"
+      },
+      "resell": {
+        "question": "Where to resell your PASS if, unfortunately, an unforeseen event prevents you from coming?",
+        "intro": "🎟️ If you can't come… we'll miss you! 🥹",
+        "platform": "But don't panic, you can resell your PASS easily via our official secure resale platform:",
+        "warning": "💡 Buyers, be vigilant! Fraudsters can sometimes hide, so if in doubt, always contact the Okami Festival team via our site in the \"Contact us\" section. We are here to guarantee you a worry-free experience and protect you from unpleasant surprises."
+      },
+      "access": {
+        "question": "How to get to the festival site",
+        "address": "To get to the site, enter the following address in your GPS: 316 chemin de la Piche, 31310 Saint-Christaud.",
+        "gps": "⚠️ Small note: Google Maps can sometimes be a bit capricious, so we recommend using Waze for more accurate navigation!",
+        "train": "🚉 By public transport: Cazères train station is only 10 minutes by car from the festival.",
+        "carpool": "🤝 Carpooling is more fun and more economical! Don't forget to join our Okami Family group on Facebook to share your carpooling announcements and travel together in good spirits! 🌿"
+      },
+      "dogs": {
+        "question": "Are dogs allowed?",
+        "answer": "🐾 Dogs are not allowed on the festival site or in the parking/camping area for safety and comfort reasons for all participants. We thank you for your understanding and encourage you to plan accordingly to ensure a pleasant experience for everyone! 🌿"
+      },
+      "payment": {
+        "question": "How to consume at the festival?",
+        "intro": "Want a coffee at sunrise, a fresh juice after a yoga session, a good meal or a drink at the bar at dusk? Our food & drinks areas are there to delight you throughout the festival 🌞🌙 These areas are of course paid.",
+        "cashless": "💳 To facilitate your purchases at the festival, we use a cashless payment system. Here's how it works:",
+        "step1": "Before the festival, you can top up your cashless bracelet online via our secure platform.",
+        "step2": "On site, you can also top up your bracelet at recharge points located at different places on the site.",
+        "step3": "Simply use your bracelet to make your purchases at bars and food stands.",
+        "tip": "💡 Tip: Don't forget to check your bracelet balance regularly to fully enjoy the Okami Festival experience without interruption!"
+      },
+      "facilities": {
+        "question": "What facilities are available to ensure maximum comfort for festival-goers?",
+        "intro": "To guarantee a pleasant experience for all our festival-goers, we provide several essential facilities:",
+        "toilets": "🚻 Dry toilets and showers are installed at various locations on the site for your comfort.",
+        "recycling": "♻️ Recycling points and bins: We encourage waste sorting with clearly marked recycling points on the site.",
+        "bins": "🗑️ Bins: Bins are strategically placed to maintain the cleanliness of the festival.",
+        "water": "💧 Drinking water points: Water fountains are available to hydrate you throughout the day.",
+        "eco": "We invite you to respect these facilities and contribute to preserving our environment during the festival. Together, let's make the Okami Festival an eco-responsible and pleasant event for everyone! 🌿",
+        "camping": "⛺️ Camping & Parking: A large 6-hectare field is available for parking and camping, whether you come by tent, van, camper or other vehicle. 🌀 The space is organized by zones for more comfort:",
+        "families": "Families with children 👨👩👧👦",
+        "lateNight": "Late-night festival-goers 🎶",
+        "dogs": "People accompanied by their dogs 🐕 (dogs must be kept on a leash and are only allowed in the parking area — thank you for your responsibility 🙏)",
+        "tips": "☀️ Tips for a great stay: Whether you're in a tent or vehicle, think about setting up a shaded and comfortable area. 🌿 Bring water, something to hydrate, protect yourself from the sun and rain. Remember to bring earplugs for a peaceful night and everything that will make your experience even more enjoyable. We invite you to be autonomous, we take care of the rest with all our ❤️"
+      },
+      "accessibility": {
+        "question": "Are you a person with a disability?",
+        "intro": "Because inclusion is part of our values, we have put in place several measures to facilitate the reception of people with disabilities.",
+        "pmr": "✅ Showers and dry toilets adapted for people with reduced mobility are available on site.",
+        "wheelchair": "✅ Access to the stages is possible by wheelchair. Note: the site extends over two levels, and the climb may require the help of a companion for more comfort.",
+        "parking": "✅ A reserved space is provided at the entrance to the parking and camping areas, to simplify access to the festival.",
+        "freePass": "🎟️ PASSES are offered to companions upon presentation of proof.",
+        "contact": "📩 For any questions or specific needs, you can contact Angèle at 06 23 63 96 16."
+      },
+      "kidzone": {
+        "question": "What types of activities are offered in the Kid's zone?",
+        "title": "🎨 Welcome to the Kid's Zone 🌈",
+        "intro": "The perfect place to awaken children's curiosity and creativity from 3 years old!",
+        "activities": "Here, little ones can have fun and learn through initiatory workshops: sensory games, creative activities, educational discoveries and collective games — everything is designed to stimulate their imagination and team spirit.",
+        "shows": "🎭 Enchanting shows will also be offered to them, specially designed to nourish their development and wonder.",
+        "team": "✨ Everything will be led by passionate facilitators who will know how to transmit their enthusiasm and know-how with kindness.",
+        "conclusion": "A fun, joyful and enriching experience for our young festival-goers, where every moment is an invitation to grow and have fun!"
+      }
+    }
+  }
 }

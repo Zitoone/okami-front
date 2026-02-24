@@ -3,12 +3,13 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import albums from "../data/albums.json"
 import Button from "../components/Button"
+import { useTranslation } from "react-i18next"
 
 const Album2022: React.FC=()=>{
+    const { t } = useTranslation()
     const images = albums["okami_2022"]
     const [visibleCount, setVisibleCount] = useState(100)
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-    // Stocke la position X du début du swipe
     const [touchStart, setTouchStart] = useState<number | null>(null)
 
     const loadMore = () => {
@@ -29,32 +30,20 @@ const Album2022: React.FC=()=>{
         setSelectedIndex((selectedIndex + 1) % images.length)
     }
 
-    // Détecte le début du swipe et enregistre la position X de départ
     const handleTouchStart = (e: React.TouchEvent) => {
         setTouchStart(e.targetTouches[0].clientX)
     }
 
-    // Détecte la fin du swipe et calcule la direction
     const handleTouchEnd = (e: React.TouchEvent) => {
-        // Récupère la position X de fin du swipe (variable locale, pas state)
         const currentTouchEnd = e.changedTouches[0].clientX
-        
-        // Si pas de position de départ enregistrée, on annule
         if (touchStart === null) return
-
-        // Calcule la distance horizontale du swipe (positif = gauche, négatif = droite)
         const distance = touchStart - currentTouchEnd
-
-        // Si distance > 50px, c'est un swipe vers la gauche → image suivante
         if (distance > 50) {
             handleNext()
         }
-        // Si distance < -50px, c'est un swipe vers la droite → image précédente
         else if (distance < -50) {
             handlePrev()
         }
-        
-        // Reset la position de départ pour le prochain swipe
         setTouchStart(null)
     }
 
@@ -79,10 +68,10 @@ const Album2022: React.FC=()=>{
         
         <main className="album-page">
             <div className="main-wrap">     
-                <h1>Souvenirs de l'édition 2022</h1>
+                <h1>{t('albums.2022.title')}</h1>
                 <div className="flyer">
                     <div>
-                        <p>La toute première édition d’OKAMI en 2022 a créé des souvenirs uniques. 3 jours qui ont fait battre le cœur du festival et donné le ton d’une aventure qui ne fera que commencer.</p>
+                        <p>{t('albums.2022.description')}</p>
                     </div>    
                         <img src="/affiche22.webp" alt="Affiche Okami 2022" loading="lazy" />
                     
@@ -101,7 +90,7 @@ const Album2022: React.FC=()=>{
 
                 {visibleCount < images.length && (
                     <div className="load-more">
-                        <Button onClick={loadMore} className="form-btn btn">Voir plus</Button>
+                        <Button onClick={loadMore} className="form-btn btn">{t('albums.loadMore')}</Button>
                     </div>
                 )}
 
@@ -112,9 +101,9 @@ const Album2022: React.FC=()=>{
                             onTouchStart={handleTouchStart}
                             onTouchEnd={handleTouchEnd}
                         >
-                            <button className="lightbox-btn prev" onClick={handlePrev} aria-label="Photo précédente">‹</button>
+                            <button className="lightbox-btn prev" onClick={handlePrev} aria-label={t('albums.prevPhoto')}>‹</button>
                             <img src={images[selectedIndex]} alt={`Photo ${selectedIndex + 1}`} />
-                            <button className="lightbox-btn next" onClick={handleNext} aria-label="Photo suivante">›</button>
+                            <button className="lightbox-btn next" onClick={handleNext} aria-label={t('albums.nextPhoto')}>›</button>
                         </div>
                     </div>
                 )}

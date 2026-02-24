@@ -6,6 +6,7 @@ import CustomInput from "../components/CustomInput"
 import Button from "../components/Button"
 import Modal from "../components/Modal"
 import { emailApi } from "../services/api"
+import { useTranslation } from "react-i18next"
 
 type FormData = {
     name?: string
@@ -16,6 +17,7 @@ type FormData = {
 }
 
 const Contact: React.FC=()=>{
+    const { t } = useTranslation()
     const [formData, setFormData] = useState<FormData>({
         name:"",
         email:"",
@@ -33,7 +35,7 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
     setFormData({
         ...formData,
         [target.name]: 
-            target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value //Pour confirmer a TS que la checkbox est bien un input
+            target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value
     })
 }
     const handleSubmit= async (e: React.FormEvent) => {
@@ -46,11 +48,10 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
             setModal(true)
         } catch (error: any) {
             console.error("❌ Erreur :", error)
-            // Affiche un message d'erreur clair à l'utilisateur
             if (error.response?.status === 500) {
-                setError("❌ Erreur serveur. Le service d'envoi d'email est temporairement indisponible. Contactez-nous à info@okamifestival.com")
+                setError(t('contact.errorServer'))
             } else {
-                setError("❌ Erreur lors de l'envoi. Vérifiez votre connexion et réessayez.")
+                setError(t('contact.errorGeneral'))
             }
         } finally {
             setLoading(false)
@@ -61,34 +62,31 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
         <Header />
         <main className="contact-page">
             <div className="main-wrap">
-            <h1>Nous contacter</h1>
-            <p>Une question, une info, une suggestion ?
-Tu es au bon endroit !
-Remplis le formulaire de contact et notre équipe te répondra rapidement par email.
-Merci de nous aider à faire du Okami Festival une aventure toujours plus magique 💫</p>
+            <h1>{t('contact.title')}</h1>
+            <p>{t('contact.intro')}</p>
         
             <form onSubmit={handleSubmit}>
-                <CustomInput label="Nom & prénom" name="name" value={formData.name} onChange={(handleChange)} required={true} />
-                <CustomInput label="Email" name="email" value={formData.email} onChange={(handleChange)} required={true}  />
-                <CustomInput label="Objet" name="object" value={formData.object} onChange={(handleChange)} />
+                <CustomInput label={t('contact.name')} name="name" value={formData.name} onChange={(handleChange)} required={true} />
+                <CustomInput label={t('contact.email')} name="email" value={formData.email} onChange={(handleChange)} required={true}  />
+                <CustomInput label={t('contact.object')} name="object" value={formData.object} onChange={(handleChange)} />
                 <div className="input-container">
-                    <label htmlFor="message">Message</label>
+                    <label htmlFor="message">{t('contact.message')}</label>
                     <textarea name="message" value={formData.message} onChange={handleChange} required></textarea>
                 </div>
                 <div className="rgpd">
                     <input type="checkbox" name="isAgree" id="rgpd" checked={formData.isAgree} onChange={handleChange} required/>
-                    <label htmlFor="rgpd">J'accepte que mes informations soient traitées conformément à la politique de confidentialité.</label>
+                    <label htmlFor="rgpd">{t('contact.rgpd')}</label>
                 </div>
 
                 {error && <p role="alert" style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
 
                 <Button type="submit" className="form-btn btn" disabled={loading}>
-                    {loading ? 'Envoi en cours...' : 'Envoyer'}
+                    {loading ? t('btn.loading') : t('btn.submit')}
                 </Button>
 
                 {modal && (
                     <Modal
-                        text='Message envoyé, nous te répondrons dans les plus brefs délais'
+                        text={t('contact.successMessage')}
                         type="success"
                         onClose={()=>{
                             setModal(false)

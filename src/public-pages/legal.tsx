@@ -28,7 +28,11 @@ function Legal(){
             </dl>
             <dl>
                <dt>{t("legal.hosting")}</dt>
-               <dd>{t("legal.hostName")}</dd>
+                  <dd>
+                  340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis<br />
+                  https://vercel.com
+                  </dd>
+
             </dl>
 
             <h2>{t("legal.personalDataTitle")}</h2>

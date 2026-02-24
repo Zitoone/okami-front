@@ -1,15 +1,17 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Card from "../components/Card"
+import { useTranslation } from "react-i18next"
 
 const Souvenir: React.FC=()=>{
+    const { t } = useTranslation()
     return (
         <>
         <Header />
         <main className="souvenirs-page">
             <div className="main-wrap">
-                <h1>Souvenirs des éditions passées</h1>
-                <p>Depuis 2022, des images et vidéos vous racontent l’histoire de chaque édition. Plongez dans l’ambiance et revivez les moments forts du festival !</p>
+                <h1>{t('albums.title')}</h1>
+                <p>{t('albums.intro')}</p>
             
                 <div className="editions-cards">
                     <Card 

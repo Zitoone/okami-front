@@ -1,21 +1,24 @@
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Card from '../components/Card'
+import { useTranslation } from 'react-i18next'
 
 const Program: React.FC=()=>{
+    const { t } = useTranslation()
+    
     return(
         <>
         <Header />
         <main className="program-page">
             <div className="main-wrap">
-                <h1>Programme 2026</h1>
-                <p>Entrez dans l’univers de l’Okami Festival, là où chaque journée est une invitation à l’émerveillement. Laissez-vous surprendre par des spectacles qui jouent avec vos sens, des ateliers où l’on crée, rit et découvre, et des performances circassiennes qui défient l’imagination. Deux scènes battent au rythme des concerts et des DJ sets, pour faire vibrer vos pas et vos cœurs jusqu’au petit matin. Entre exploration musicale et moments de détente dans notre village healing, chaque instant est une aventure unique. Ici, la musique, la magie et le partage se rencontrent pour vous offrir bien plus qu’un festival… une véritable expérience à vivre intensément.</p>
+                <h1>{t('program.title')}</h1>
+                <p>{t('program.description')}</p>
                 <div className='program-cards'>
-                    <Card url={'/program/music'} title="Musiciens & DJs" image='/DJs.webp' className='program-card' />
-                    <Card url={'/program/healing'} title="Healing zone" className='program-card' image='/healing2.webp'/>
-                    <Card url={'/program/shows'} title="Performers & spectacles" className='program-card' image='performer.webp' /> 
-                    <Card url={'/program/kidzone'} title="Kidzone" className='program-card' image='kid2024.webp'/>
-                    <Card url={'/program/activities'} title="Ateliers & activités" className='program-card' image='activite.webp' />
+                    <Card url={'/program/music'} title={t('program.music')} image='/DJs.webp' className='program-card' />
+                    <Card url={'/program/healing'} title={t('program.healing')} className='program-card' image='/healing2.webp'/>
+                    <Card url={'/program/shows'} title={t('program.shows')} className='program-card' image='performer.webp' /> 
+                    <Card url={'/program/kidzone'} title={t('program.kidzone')} className='program-card' image='kid2024.webp'/>
+                    <Card url={'/program/activities'} title={t('program.activities')} className='program-card' image='activite.webp' />
                 </div>
             </div>
         </main>

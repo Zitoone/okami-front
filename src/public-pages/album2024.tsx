@@ -3,12 +3,13 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import albums from "../data/albums.json"
 import Button from "../components/Button"
+import { useTranslation } from "react-i18next"
 
 const Album2024: React.FC = () => {
+    const { t } = useTranslation()
     const images = albums["okami_2024"]
     const [visibleCount, setVisibleCount] = useState(100)
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-    // Stocke la position X du début du swipe
     const [touchStart, setTouchStart] = useState<number | null>(null)
 
     const loadMore = () => {
@@ -29,37 +30,25 @@ const Album2024: React.FC = () => {
         setSelectedIndex((selectedIndex +1) % images.length)
     }
 
-    // Détecte le début du swipe et enregistre la position X de départ
     const handleTouchStart = (e: React.TouchEvent) => {
         setTouchStart(e.targetTouches[0].clientX)
     }
 
-    // Détecte la fin du swipe et calcule la direction
     const handleTouchEnd = (e: React.TouchEvent) => {
-        // Récupère la position X de fin du swipe (variable locale, pas state)
         const currentTouchEnd = e.changedTouches[0].clientX
-        
-        // Si pas de position de départ enregistrée, on annule
         if (touchStart === null) return
-
-        // Calcule la distance horizontale du swipe (positif = gauche, négatif = droite)
         const distance = touchStart - currentTouchEnd
-
-        // Si distance > 50px, c'est un swipe vers la gauche → image suivante
         if (distance > 50) {
             handleNext()
         }
-        // Si distance < -50px, c'est un swipe vers la droite → image précédente
         else if (distance < -50) {
             handlePrev()
         }
-        
-        // Reset la position de départ pour le prochain swipe
         setTouchStart(null)
     }
 
     useEffect(() => {
-        if (selectedIndex === null) return // lightbox fermée
+        if (selectedIndex === null) return
 
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === "ArrowLeft") handlePrev()
@@ -76,14 +65,13 @@ const Album2024: React.FC = () => {
         <Header />
         <main className="album-page">
             <div className="main-wrap">
-                <h1>Souvenirs de l'édition 2024</h1>
+                <h1>{t('albums.2024.title')}</h1>
                 <div className="flyer">
                     <div>
-                    <p>Dernière danse sur les terres de Castelnau, berceau de notre aventure et témoin de tant de moments inoubliables.</p>
-                    <p>C’est ici que tout a commencé, que les premiers sourires se sont échangés, que la musique a résonné jusque dans les étoiles.</p>
-                    <p>Nous tenons à remercier du fond du cœur les propriétaires, pour leur accueil, leur confiance et leur soutien indéfectible.
-                    Grâce à eux, la magie a pu opérer une fois encore, réunissant âmes, artistes et bénévoles autour de cette même énergie bienveillante et vibrante.</p>
-                    <p>Castelnau restera à jamais gravé dans notre histoire</p>
+                    <p>{t('albums.2024.description1')}</p>
+                    <p>{t('albums.2024.description2')}</p>
+                    <p>{t('albums.2024.description3')}</p>
+                    <p>{t('albums.2024.description4')}</p>
                     </div>
                     <img src="/affiche24.webp" alt="Affiche Okami 2024" loading="lazy" />
                 </div>    
@@ -105,7 +93,7 @@ const Album2024: React.FC = () => {
 
             {visibleCount < images.length && (
                 <div className="load-more">
-                    <Button onClick={loadMore} className="form-btn btn">Voir plus</Button>
+                    <Button onClick={loadMore} className="form-btn btn">{t('albums.loadMore')}</Button>
                 </div>
             )}
 
@@ -116,9 +104,9 @@ const Album2024: React.FC = () => {
                         onTouchStart={handleTouchStart}
                         onTouchEnd={handleTouchEnd}
                     >
-                        <button className="lightbox-btn prev" onClick={handlePrev} aria-label="Photo précédente">‹</button>
+                        <button className="lightbox-btn prev" onClick={handlePrev} aria-label={t('albums.prevPhoto')}>‹</button>
                         <img src={images[selectedIndex]} alt={`Photo ${selectedIndex + 1}`} />
-                        <button className="lightbox-btn next" onClick={handleNext} aria-label="Photo suivante">›</button>
+                        <button className="lightbox-btn next" onClick={handleNext} aria-label={t('albums.nextPhoto')}>›</button>
                     </div>
                 </div>       
         )}
@@ -130,4 +118,3 @@ const Album2024: React.FC = () => {
 }
 
 export default Album2024
-
